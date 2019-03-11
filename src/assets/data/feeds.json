@@ -1,0 +1,246 @@
+{
+  "categories": [
+    {
+      "id": 1,
+      "title": " Distilling",
+      "description": "Get new articles everyday on how to improve your distilling skills.",
+      "icon": "wine",
+      "items": [
+        {
+          "id": 1,
+          "title": "The Whiskey Wash",
+          "description": "It’s an exciting time to be into whiskey. The United States is seeing phenomenal growth in craft distilleries producing quality young spirits. Historic Scotch producers are in a phase of expansion and rebirth. Younger drinkers are swapping rye for vodka in their cocktail shakers. The Whiskey Wash was born to keep pace with the explosion of energy and innovation in the category, and to track the rise of the new whiskey lifestyle.",
+          "url": "http://thewhiskeywash.com/feed/"
+        },
+        {
+          "id": 2,
+          "title": "Learn To Moonshine",
+          "description": "We love helping others learn how to make moonshine, whiskey, rum, vodka and many other types of liquor.",
+          "url": "http://learntomoonshine.com/feed"
+        },
+        {
+          "id": 3,
+          "title": "Old Harbor Distilling",
+          "description": "Fathom something greater.",
+          "url": "http://oldharbordistilling.com/feed"
+        },
+        {
+          "id": 4,
+          "title": "Distillery Trail",
+          "description": "Distillery Directory...Tales from the trail. Pass it on.",
+          "url": "http://www.distillerytrail.com/feed/"
+        },
+        {
+          "id": 5,
+          "title": "Mile Hi Distilling",
+          "description": "We are your one stop shop for all your distilling and moonshine still supplies.",
+          "url": "https://milehidistilling.com/blog/feed/"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Precious Metals",
+      "description": "Get daily articles on various precious metals to invest in or buy for protection against economic uncertainty",
+      "icon": "construct",
+      "items": [
+        {
+          "id": 1,
+          "title": "King News World",
+          "description": "The Gold Market.",
+          "url": "http://kingworldnews.com/feed/"
+        },
+        {
+          "id": 2,
+          "title": "Silver Doctors",
+          "description": "Gold, Silver and Finance News.",
+          "url": "https://www.silverdoctors.com/feed/"
+        },
+        {
+          "id": 3,
+          "title": "Think Copper",
+          "description": "ThinkCopper.org is a place where industry members can go to find in-depth conversations about copper news, applications and innovations.",
+          "url": "http://thinkcopper.org/feed/"
+        },
+        {
+          "id": 4,
+          "title": "Gold Review",
+          "description": "Silver & Gold News Headlines from around the world.",
+          "url": "http://www.goldreview.com/feed/"
+        }        
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Survivalism",
+      "description": "Get news each and everyday on how best to protect yourself and family in turbulent times.",
+      "icon": "flash",
+      "items": [
+        {
+          "id": 1,
+          "title": "Survival Blog",
+          "description": "The Daily Web Log for Prepared Individuals Living in Uncertain Times.",
+          "url": "https://survivalblog.com/feed/"
+        },
+        {
+          "id": 2,
+          "title": "OffGrid Survival",
+          "description": "Wilderness & Urban Survival Skills.",
+          "url": "http://feeds.feedburner.com/offgridsurvival/BIdI"
+        },
+        {
+          "id": 3,
+          "title": "SHTF Plan",
+          "description": "When it hits the fan, don't say we didn't warn you.",
+          "url": "http://www.shtfplan.com/feed"
+        }        
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Politics and Economy",
+      "description": "Stay ahead of the competition and figure out what's going on in the economy and the political world before other people do",
+      "icon": "cash",
+      "items": [
+        {
+          "id": 1,
+          "title": "Zerohedge",
+          "description": "On a long enough time line, the survival rate for everyone drops to zero.",
+          "url": "http://feeds.feedburner.com/zerohedge/feed?format=xml"
+        },
+        {
+          "id": 2,
+          "title": "Drudge Report",
+          "description": "Those in power have everything to lose by individuals who march to their own rules.",
+          "url": "http://feeds.feedburner.com/DrudgeReportFeed"
+        },
+        {
+          "id": 3,
+          "title": "The Economic Collapse",
+          "description": "Are You Prepared For The Coming Economic Collapse And The Next Great Depression?.",
+          "url": "http://theeconomiccollapseblog.com/feed"
+        },
+        {
+          "id": 4,
+          "title": "RT Business",
+          "description": "Question More.",
+          "url": "https://www.rt.com/rss/business/"
+        }        
+      ]
+    },
+    {
+      "id": 5,
+      "title": "Recipes",
+      "description": "Get never ending updates on new recipes to develop your moonshine, essential oils and much more",
+      "icon": "beaker",
+      "items": [
+        {
+          "id": 1,
+          "title": "Ole Smoky Tennessee Moonshine Recipes",
+          "description": "Shine Responsibly.",
+          "url": "http://olesmoky.com/default/feed/index/type/rss"
+        },
+        {
+          "id": 2,
+          "title": "Frugally Sustainable",
+          "description": "A resource for all things frugal and sustainable: Herbs and Remedies.",
+          "url": "http://frugallysustainable.com/category/herbs-remedies/feed/"
+        },
+        {
+          "id": 3,
+          "title": "Aroma Talk",
+          "description": "Brought to you by Aroma Web.",
+          "url": "http://www.aromatalk.com/aromatalk/rss.xml"
+        },
+        {
+          "id": 4,
+          "title": "Mash Recipes",
+          "description": "The Distillery Network's very own.",
+          "url": "http://www.mash.recipes/recipes/feed/"
+        },
+        {
+          "id": 5,
+          "title": "New Deal Distillery",
+          "description": "Pioneers in Craft Distilling.",
+          "url": "http://www.newdealdistillery.com/category/new-deal-cocktail-recipes/feed/"
+        }                 
+      ]
+    },
+    {
+      "id": 6,
+      "title": "Moonshine Culture",
+      "description": "Get never ending updates on new recipes to develop your moonshine, essential oils and much more",
+      "icon": "people",
+      "items": [
+        {
+          "id": 1,
+          "title": "Liquor Barn",
+          "description": "Largest selection of wine, spirits and beers offered by liquor Barn Kentucky.",
+          "url": "http://www.theliquorbarn.com/rss.php?action=newblogs&type=rss"
+        },
+        {
+          "id": 2,
+          "title": "Bourbon Blog",
+          "description": "The enthusiast's resource for all things spirited.",
+          "url": "http://www.bourbonblog.com/feed/"
+        },
+        {
+          "id": 3,
+          "title": "Heritage Road",
+          "description": "Daredevils. Moonshiners. Women. TV. All of them had a role in creating the phenomenon of NASCAR, a sport that is all-American in more ways than you think. Host Rich Phillips, voice of Texas Motor Speedway, takes you behind the scenes and under the hood as he traces the history of stock car racing from its moonshine-running roots, to its current position at the forefront of technical innovation",
+          "url": "http://heritagepodcast.com/category/episodes/feed"
+        }, 
+        {
+          "id": 4,
+          "title": "Distillery Trail",
+          "description": "Tales from the Trail. Pass it on",
+          "url": "http://www.distillerytrail.com/feed/"
+        }           
+      ]
+    },
+ {
+      "id": 7,
+      "title": "Podcasts",
+      "description": "Radio podcasts on all things moonshine, survivalism, distilling and much more!",
+      "icon": "radio",
+      "items": [
+        {
+          "id": 1,
+          "title": "Make it a double",
+          "description": "Booze, Spirits, History, Mixology and the People and Stories that make it great! We seek to entertain, educate and further our curiosity in the stories, people and drinks which we love to indulge in.",
+          "url": "http://feeds.feedburner.com/podbean/pbvt"
+        },
+        {
+          "id": 2,
+          "title": "The Essential Oil Revolution",
+          "description": "Each week, Samantha Lee Wright interviews the world’s most innovative and inspiring experts on essential oils, health, fitness, spirituality, and so much more. Episodes are jam packed full of practical advice, DIY recipes and healthy living tips",
+          "url": "http://revolutionoils.libsyn.com/rss"
+        },
+        {
+          "id": 3,
+          "title": "The Survivalist Prepper Podcast",
+          "description": "Where Survivalists And Preppers Prepare To Survive.",
+          "url": "http://survivalistprepper.net/feed/podcast/"
+        },
+        {
+          "id": 4,
+          "title": "The Speakeasy",
+          "description": "Learn from some of the world's leading experts in mixology, bar history, distillation and brewing about how we enjoy imbibing today.",
+          "url": "https://simplecast.com/podcasts/1693/rss"
+        }, 
+        {
+          "id": 5,
+          "title": "Bouborn Pursuit",
+          "description": "Bourbon Pursuit interviews icons in the bourbon industry. They tell their story on how they got in the bourbon industry. Guests include master distillers, taster, production managers, marketing, coopers, and more.",
+          "url": "http://bourbonpursuit.libsyn.com/rss"
+        },
+        {
+          "id": 6,
+          "title": "The Ole Timey Country Down Home Red State Update Podcast",
+          "description": " If you like sophisticated satire, nuanced political humor, and redneck shitkicking hillbilly country comedy Hee-Haw moonshine outhouse Blue Collar donkey cartoon face, this is the podcast for you.",
+          "url": "http://redstateupdate.libsyn.com/rss"
+        }                                                           
+      ]
+    }                        
+  ]
+}

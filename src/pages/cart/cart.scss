@@ -1,0 +1,68 @@
+page-cart {
+    ion-label {
+        white-space: normal;
+    }
+    .item-ios ion-avatar img {
+        max-width: 3.6rem;
+        max-height: 3.6rem;
+        border-radius: 0;
+    }
+    .item-md ion-avatar img {
+        max-width: 4rem;
+        max-height: 4rem;
+        border-radius: 0;
+    }
+.item-ios.item-block .item-inner {
+    padding-right: 8px;
+    border-bottom: 0px solid #c8c7cc;
+}
+
+    .total {
+        margin: 0px;
+        padding: 0;
+        font-size: 22px;
+        border: none;
+    }
+    .top {
+        text-align: center;
+        font-family: fantasy;
+        font-size: 22px;
+    }
+    .add {
+        color: #ccc;
+        font-size: 17px;
+        padding: 11px;
+        line-height: 25px;
+    }
+    .footer {
+        padding: 0px;
+        min-height: 0px;
+    }
+    
+    .footer-b1 {
+        color: #4958b2;
+        background: #f2f2f2;
+        text-transform: none;
+    }
+    .grid {
+        padding: 0px;
+    }
+    .cartButton {
+        background: #EC644B;
+        text-transform: none;
+    }
+    .send {
+        padding-left: 10px
+    }
+    .totalHeader {
+        margin: 0px;
+        padding: 0
+    }
+    .item-md.item-block .item-inner {
+        padding-right: 8px;
+        border-bottom: 0px solid #dedede;
+    }
+    .top {
+        padding: 0 15px;
+    }
+}

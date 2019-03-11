@@ -1,0 +1,136 @@
+page-one-product {
+    .bg-image{
+        background-image: url(../assets/images/vintagepaper.jpg);
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+
+    ion-card {
+        position: relative;
+        height: 130px;
+        width: 100% !important; 
+        background-color: transparent;   
+    }
+    ion-card img {
+        display: block;
+        width: auto;
+        background-color: transparent;
+    }
+    .gallery-title {
+        position: absolute;
+        left: 0;
+        right: 0;
+        padding: 10px;
+        background-color: rgba(37, 37, 37, 0.5)!important;
+        bottom: 0;
+        min-height: 45px;
+        border-bottom: 1px solid transparent !important;
+        ion-icon {
+            position: absolute;
+            right: 10px;
+            top: 20px;
+            color: theme-colors('textColors', 'primary');
+            font-size: icon-size('icon-small');
+        }
+    }
+    ion-row {
+        display: block;
+        &[responsive-md] [width-25] {
+            width: 50%;
+            display: block;
+            float: left;
+        }
+    }
+    .zoom-in {
+        -webkit-animation: zoomIn 500ms;
+        -moz-animation: zoomIn 500ms;
+        -o-animation: zoomIn 500ms;
+        animation: zoomIn 500ms;
+    }
+    .frame {
+        width: 100%;
+    }
+    .pimage {
+        max-height: 100%;
+        max-width: 100%;
+        width: auto;
+        height: auto;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        padding: 5px;
+        left: 0;
+        right: 0;
+        margin: auto;
+    }
+    ion-label {
+        white-space: normal;
+    }
+    .item-ios ion-avatar img {
+        max-width: 3.6rem;
+        max-height: 3.6rem;
+        border-radius: 0;
+    }
+    .item-md ion-avatar img {
+        max-width: 4rem;
+        max-height: 4rem;
+        border-radius: 0;
+    }
+.item-ios.item-block .item-inner {
+    padding-right: 8px;
+    border-bottom: 0px solid #c8c7cc;
+}
+
+    .total {
+        margin: 0px;
+        padding: 0;
+        font-size: 22px;
+        border: none;
+    }
+    .top {
+        text-align: center;
+        font-family: fantasy;
+        font-size: 22px;
+    }
+    .add {
+        color: #ccc;
+        font-size: 17px;
+        padding: 11px;
+        line-height: 25px;
+    }
+    .footer {
+        padding: 0px;
+        min-height: 0px;
+    }
+    
+    .footer-b1 {
+        margin: 0px;
+        height: 50px;
+        color: #4958b2;
+        background: #f2f2f2;
+        text-transform: none;
+    }
+    .grid {
+        padding: 0px;
+    }
+    .cartButton {
+        margin: 0px;
+        height: 50px;
+        background: #EC644B;
+        text-transform: none;
+    }
+    .send {
+        padding-left: 10px
+    }
+    .totalHeader {
+        margin: 0px;
+        padding: 0
+    }
+    .item-md.item-block .item-inner {
+        padding-right: 8px;
+        border-bottom: 0px solid #dedede;
+    }
+    .top {
+        padding: 0 15px;
+    }
+}

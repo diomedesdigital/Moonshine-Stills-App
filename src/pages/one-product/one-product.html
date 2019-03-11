@@ -1,0 +1,94 @@
+<!--
+  Generated template for the OneProductPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{product.title}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding class="bg-image">
+            <ion-card style="margin: 0px 0px 0px 0px;   height: 100%;    box-shadow: none;">
+                <div class="frame">
+                    <img class="pimage" src="{{image}}" />
+                </div>
+            </ion-card>
+<ion-scroll scrollX='true' style=" height: 200px">
+    <ion-grid style="    background: #ede6d4;padding: 0px">
+        <ion-row nowrap>
+            <ion-col col-4 style="padding: 5px;background: #ede6d4;" *ngFor=" let image of product.images; let i=index " (click)="selectImage(image)">
+                <ion-card style="margin: 0px 0px 0px 0px;    width: calc(100%);">
+                <div class="frame">
+                    <img class="pimage" src="{{image.src}}" />
+                </div>
+<!--                     <div class="name">
+                        {{item.name}}
+                    </div>
+                    <div class="price">
+                        <span style="float: left">${{item.price}}</span><span style="text-decoration: line-through;float: right">$2,599</span>
+                    </div>
+                    <div class="reviewsBlock">
+                        <ion-icon class="reviews" name="star"> {{item.rating}} <i>({{item.reviews}})</i></ion-icon>
+                    </div> -->
+                </ion-card>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-scroll>
+    <ion-list style="margin-top: -50px;margin-bottom: 0px">
+        <ion-item style="background-color: #f4f4f4;border-top: 1px solid #ccc;height: 25px;border-bottom: 1px solid #ccc;">
+            <ion-note item-left>
+                <span style="color: #5e5e5e;font-size: 24px;">${{product.selectedVariant.price}}</span>
+                <span style="color: #2d9a4d;"> In Stock</span>
+        
+            </ion-note>
+            <ion-note item-right style="color:#548eec;">
+                <button ion-button icon-only clear>
+                    <ion-icon style="color: #ff8585;" name="heart"></ion-icon>
+                </button>
+            </ion-note>
+        </ion-item>
+    </ion-list>
+
+  <div style="text-align: justify;" padding [innerHTML]="product.description">
+  </div>
+<!-- <ion-slides style="height: 25%" autoplay='4000' zoom ='true' speed='500' loop='true' initialSlide='0' pager='true' >
+
+  <ion-slide *ngFor=" let image of product.images; let i=index ">
+                <div class="frame">
+                    <img class="pimage" src="{{image.src}}" />
+                </div>
+  </ion-slide>
+
+</ion-slides> -->
+
+<!--                 <div style="text-overflow: ellipsis;padding: 4%;font-size: 14px;overflow: hidden;color: #656565; white-space: nowrap;   background: rgba(41, 71, 119, 0.17); ">
+                    {{item.attrs.title}}
+                </div>
+                <div style="text-overflow: ellipsis;overflow: hidden;white-space: nowrap;padding: 4%;font-size: 14px; color: #656565;  ">
+                    <span style="float: left">Price</span><span style="float: right">${{item.variants[0].price}}</span>
+                </div> -->
+</ion-content>
+<ion-footer>
+    <ion-toolbar style="padding: 0px;min-height: 0px;">
+        <ion-grid style="padding: 0px;">
+            <ion-row style="padding: 0px;">
+                <ion-col style="padding: 0px;" width-100>
+                    <button class="footer-b1" ion-button (click)="addToCart()" full>Add to Cart
+                        <ion-icon style="padding-left:10px" name="md-cart"></ion-icon></button>
+                </ion-col>
+<!--                 <ion-col style="padding: 0px;" width-50>
+                    <button class="footer-b1" ion-button (click)="checkout()" full>Buy Now
+                        <ion-icon style="padding-left:10px" name="md-send"></ion-icon>
+                    </button>
+                </ion-col> -->
+            </ion-row>
+        </ion-grid>
+    </ion-toolbar>
+</ion-footer>

@@ -1,0 +1,44 @@
+<ion-grid>
+    <ion-card [ngClass]="animateClass" *ngFor=" let item of items ">
+        <ion-grid>
+            <ion-row>
+                <ion-col col-3>
+                    <div class="frame">
+                        <img class="pimage" src="{{item.image.src}}" />
+                    </div>
+                </ion-col>
+                <ion-col col-9>
+                    <ion-item>
+                        <h2>{{item.title}}</h2>
+                        <p>Price: <span>{{item.price}}</span></p>
+                    </ion-item>
+                    <div>
+                        <ion-grid>
+                            <ion-row>
+                                <ion-col width-20 class="add">Qty</ion-col>
+                                <ion-col width-20>
+                                    <button ion-button small outline (click)="add(item)" block>
+                                        <ion-icon name="add"></ion-icon>
+                                    </button>
+                                </ion-col>
+                                <ion-col width-20>
+                                    <button ion-button small outline full block color="dark">{{item.quantity}}</button>
+                                </ion-col>
+                                <ion-col width-20>
+                                    <button ion-button small outline (click)="sub(item)" block>
+                                        <ion-icon name="remove"></ion-icon>
+                                    </button>
+                                </ion-col>
+                                <ion-col width-20>
+                                    <button ion-button small color="danger" (click)="removeItem(item)" block>
+                                        <ion-icon style="color:white" name="md-trash"></ion-icon>
+                                    </button>
+                                </ion-col>
+                            </ion-row>
+                        </ion-grid>
+                    </div>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </ion-card>
+</ion-grid>

@@ -1,0 +1,81 @@
+{
+  "_from": "cordova-custom-config@^3.2.0",
+  "_id": "cordova-custom-config@3.3.0",
+  "_inBundle": false,
+  "_integrity": "sha1-WK/aY9TeuMbUE7OM8L2alIrEBg0=",
+  "_location": "/cordova-custom-config",
+  "_phantomChildren": {
+    "plist": "1.2.0"
+  },
+  "_requested": {
+    "type": "range",
+    "registry": true,
+    "raw": "cordova-custom-config@^3.2.0",
+    "name": "cordova-custom-config",
+    "escapedName": "cordova-custom-config",
+    "rawSpec": "^3.2.0",
+    "saveSpec": null,
+    "fetchSpec": "^3.2.0"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/cordova-custom-config/-/cordova-custom-config-3.3.0.tgz",
+  "_shasum": "58afda63d4deb8c6d413b38cf0bd9a948ac4060d",
+  "_spec": "cordova-custom-config@^3.2.0",
+  "_where": "/Users/yomi/Desktop/Moonshine Project/ion2-FullApp_1.4 2 copy",
+  "author": {
+    "name": "Dave Alden"
+  },
+  "bugs": {
+    "url": "https://github.com/dpa99c/cordova-custom-config/issues"
+  },
+  "bundleDependencies": false,
+  "cordova": {
+    "id": "cordova-custom-config",
+    "platforms": [
+      "android",
+      "ios"
+    ]
+  },
+  "cordova_name": "cordova-custom-config",
+  "dependencies": {
+    "colors": "^1.1.2",
+    "elementtree": "^0.1.6",
+    "lodash": "^4.3.0",
+    "plist": "^1.2.0",
+    "shelljs": "^0.7.0",
+    "tostr": "^0.1.0",
+    "xcode": "^0.8.9"
+  },
+  "deprecated": false,
+  "description": "Cordova/Phonegap plugin to update platform configuration files based on preferences and config-file data defined in config.xml.",
+  "devDependencies": {
+    "got": "^6.5.0",
+    "jshint": "^2.6.0"
+  },
+  "homepage": "https://github.com/dpa99c/cordova-custom-config#readme",
+  "issue": "https://github.com/dpa99c/cordova-custom-config/issues",
+  "keywords": [
+    "ecosystem:cordova",
+    "cordova",
+    "cordova-android",
+    "cordova-ios",
+    "phonegap",
+    "config",
+    "configuration",
+    "plist",
+    "manifest"
+  ],
+  "license": "MIT",
+  "name": "cordova-custom-config",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dpa99c/cordova-custom-config.git"
+  },
+  "scripts": {
+    "test": "jshint hooks"
+  },
+  "version": "3.3.0"
+}

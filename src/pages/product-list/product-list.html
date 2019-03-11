@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      {{title}}
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <ion-row>
+        <ion-col col-6 col-sm-3 *ngFor=" let item of allItems; let i=index "  >
+            <ion-card style="margin: 0px 0px 0px 0px;   height: 220px;" (click)="openProduct(item)">
+                <div class="frame">
+                    <img class="pimage" src="{{item.attrs.images[0].src}}" />
+                </div>
+                <div style="text-overflow: ellipsis;padding: 4%;font-size: 14px;overflow: hidden;color: #656565; white-space: nowrap;   background: rgba(41, 71, 119, 0.17); ">
+                    {{item.attrs.title}}
+                </div>
+                <div style="text-overflow: ellipsis;overflow: hidden;white-space: nowrap;padding: 4%;font-size: 14px; color: #656565;  ">
+                    <span style="float: left">Price</span><span style="float: right">${{item.variants[0].price}}</span>
+                </div>
+            </ion-card>
+        </ion-col>
+    </ion-row>
+</ion-content>

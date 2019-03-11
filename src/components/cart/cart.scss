@@ -1,0 +1,42 @@
+cart {
+    .card-content-md {
+        padding: 5px;
+    }
+    .card-md,
+    .card-ios {
+        margin: 10px 10px 10px 10px;
+        border-radius: 0px;
+        ize: 1.4rem;
+        background: #fff;
+        border-top: 3px solid #387ef5;
+        box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+    }
+    span {
+        text-transform: none;
+        float: right;
+        color: #979797;
+    }
+    .item-md p {
+        text-transform: uppercase;
+        font-size: 1.2rem;
+    }
+    .frame {
+        height: 100%;
+        width: 100%;
+        /*can be anything*/
+        position: relative;
+    }
+    .pimage {
+        max-height: 100%;
+        max-width: 100%;
+        width: auto;
+        height: auto;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        padding: 5px;
+        left: 0;
+        right: 0;
+        margin: auto;
+    }
+}

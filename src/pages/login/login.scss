@@ -1,0 +1,126 @@
+page-login {
+
+  .bg-image{
+		background-image: linear-gradient(to bottom, #b87333, #503f4e, #313131);
+		background-size: cover;
+		background-repeat: no-repeat;
+		background-position: center;
+  }
+  div {
+    text-align: center;
+
+    .top {
+      height: 40vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      img {
+        width: 80vw;
+      }
+    }
+
+    .bottom {
+      height: 60vh;
+
+      .buttons {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      p {
+        color: #fff;
+        font-size: 1.1em;
+      }
+
+      p.activated,
+      p:active {
+        color: $primary;
+      }
+
+      button {
+        width: 70vw;
+        margin-top: 0.5em;
+      }
+
+      button.facebook {
+        background: $facebook;
+      }
+
+      button.facebook.activated,
+      button.facebook:active {
+        background: $facebook-active;
+      }
+
+      button.google {
+        background: $google;
+      }
+
+      button.google.activated,
+      button.google:active {
+        background: $google-active;
+      }
+
+      button.secondary {
+        background: $secondary;
+      }
+
+      button.secondary.activated,
+      button.secondary:active {
+        background: $secondary-active;
+      }
+
+      button.dark {
+        background: $dark;
+      }
+
+      button.dark.activated,
+      button.dark:active {
+        background: $dark-active;
+      }
+
+      .form {
+        background: rgba(0, 0, 0, 0.3);
+        width: 100%;
+        height: 100%;
+
+        p {
+          width: 70vw;
+          margin-left: auto;
+          margin-right: auto;
+        }
+
+        ion-list {
+          padding: 0;
+          margin: 0 0 0.75em;
+
+          ion-item {
+            background: transparent;
+            color: $primary;
+
+            ion-label {
+              text-align: left;
+              width: 24vw;
+            }
+
+            ion-input {
+              color: #fff;
+            }
+          }
+        }
+
+        button.clear {
+          margin: 0;
+          width: auto !important;
+          background: transparent !important;
+        }
+
+        button.clear.activated {
+          color: $primary;
+        }
+      }
+    }
+  }
+}

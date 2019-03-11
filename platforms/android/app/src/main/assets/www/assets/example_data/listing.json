@@ -1,0 +1,67 @@
+{
+    "banner_image": "./assets/images/listing/600x300banner1.png",
+    "banner_title": "",
+    "populars": [
+        {
+            "title": "2 Gallon",
+            "image": "./assets/images/listing/300x300AirSports.png",
+            "url": "https://moonshinestills.com/products/2-gallon-copper-moonshine-still"
+        },
+        {
+            "title": "6 Gallon Upgraded",
+            "image": "./assets/images/listing/300x300WaterSports.png",
+            "url": "https://moonshinestills.com/products/6-gallon-high-quality-completely-built-copper-moonshine-liquor-still-with-upgraded-thumper-and-worm?lshst=collection"            
+        },
+        {
+            "title": "10 Gallon Upgraded",
+            "image": "./assets/images/listing/300x300BeachSports.png",
+            "url": "https://moonshinestills.com/products/10-gallon-completely-built-copper-moonshine-liquor-still-with-upgraded-thumper-and-worm?lssrc=popular&lshst=collection"            
+        },
+        {
+            "title": "30 Gallon",
+            "image": "./assets/images/listing/300x300ExtremeSports.png",
+             "url": "https://moonshinestills.com/products/tdn-30-gallon-copper-moonshine-still-complete?lshst=collection"           
+        },
+        {
+            "title": "30 Gallon Flame Flow",
+            "image": "./assets/images/listing/300x300AthleticSports.png",
+            "url": "https://moonshinestills.com/products/copy-of-amazing-20-gallon-flameflow-technology-copper-moonshine-still?lshst=collection"            
+        },
+        {
+            "title": "6 Gallon Flame Flow",
+            "image": "./assets/images/listing/300x300CombatSports.png",
+            "url": "https://moonshinestills.com/products/6-gallon-flameflo-technology-copper-moonshine-still?lshst=collection"            
+        }
+    ],
+    "categories": [
+        {
+            "title": "Moonshine Distilling",
+            "image": "./assets/images/listing/200x200basquet.png"
+        },
+        {
+            "title": "Precious Metals",
+            "image": "./assets/images/listing/200x200boxeo.png"
+        },
+        {
+            "title": "Survivalist News",
+            "image": "./assets/images/listing/200x200crossfit.png"
+        },
+        {
+            "title": "Politics and Economy",
+            "image": "./assets/images/listing/200x200futbol.png"
+        },
+        {
+            "title": "Moonshine Recipes",
+            "image": "./assets/images/listing/200x200running.png"
+        },
+        {
+            "title": "Moonshine Culture",
+            "image": "./assets/images/listing/200x200swimming.png"
+        },
+        {
+            "title": "Moonshine Podcasts",
+            "image": "./assets/images/listing/200x200yoga.png"
+        }
+
+    ]
+}

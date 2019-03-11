@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Articles</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="article-page">
+<ion-list>
+  <button ion-item *ngFor="let item of items" (click)="itemTapped($event, item)">
+  <ion-avatar item-left>
+    <img *ngIf="item.featured_image_urls && item.featured_image_urls.thumbnail" [src]="item.featured_image_urls.thumbnail">
+  </ion-avatar>
+  <h2 [innerHTML]="item.title.rendered"></h2>
+  <p [innerHTML]="item.excerpt.rendered"></p>
+  </button>
+
+</ion-list>
+  <ion-infinite-scroll (ionInfinite)="loadMore($event)">
+ <ion-infinite-scroll-content> </ion-infinite-scroll-content>
+</ion-infinite-scroll>
+</ion-content>

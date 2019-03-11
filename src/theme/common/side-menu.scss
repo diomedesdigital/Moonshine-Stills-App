@@ -1,0 +1,61 @@
+ion-menu {
+	.menu-content
+	{
+		background-image: linear-gradient(to bottom, #b87333, #503f4e, #313131);
+		background-size: cover;
+		background-repeat: no-repeat;
+		background-position: center;
+	}
+
+	.menu-list
+	{
+		margin-top: 20vh;
+
+		.item
+		{
+			background-color: transparent;
+			padding-right: 32px;
+
+			&:first-child
+			{
+				border-top: solid 1px rgba($white-d, 0.15);
+			}
+
+			&:last-child
+			{
+				border-bottom: solid 1px rgba($white-d, 0.15);
+			}
+
+			.item-inner
+			{
+				border-bottom: 1px solid rgba($white-d, 0.15);
+				font-size: 1.8rem;
+				font-weight: 400;
+				letter-spacing: 1px;
+				color: $theme-color-2;
+			}
+
+			.item-icon
+			{
+				color: $theme-color-2;
+				font-size: 3.4rem;
+			}
+
+			&.activated
+			{
+  			background-color: $theme-color-1;
+  			transition-duration: 0ms;
+
+				.item-inner
+				{
+					color: $white;
+				}
+
+				.item-icon
+				{
+					color: $white;
+				}
+			}
+		}
+	}
+}

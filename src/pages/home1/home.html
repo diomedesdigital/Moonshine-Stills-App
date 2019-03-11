@@ -1,0 +1,30 @@
+
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      <div style="text-align: center;"><img style="max-width: 130px;" src="./assets/images/header_logo_white.png"></div>
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <img style="width: 100%;" *ngFor=" let item of collections; let i=index " (click)="openCollection(item)" src="{{item.attrs.image.src}}" />
+</ion-content>
+<!-- 
+<ion-menu [content]="content">
+    <ion-list style="margin: 0px;">
+        <ion-item style="">
+            <ion-thumbnail item-left>
+                <img style="padding: 10px;" src="https://randomuser.me/api/portraits/men/51.jpg">
+            </ion-thumbnail>
+            <h2 style="text-transform: capitalize;">Noah Petersen</h2>
+        </ion-item>
+    </ion-list>
+        <ion-list>
+            <button ion-item *ngFor="let p of pages" (click)="openPage(p)">
+                {{p.attrs.title}}
+            </button>
+        </ion-list>
+
+</ion-menu>
+<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav> -->

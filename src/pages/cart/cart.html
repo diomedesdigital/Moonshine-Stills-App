@@ -1,0 +1,42 @@
+<ion-header>
+    <ion-navbar>
+        <!--         <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button> -->
+        <ion-title>Cart</ion-title>
+        <ion-buttons *ngIf="amount > 0" end royal>
+                <button class="footer-b1" ion-button (click)="checkout()" full>Checkout
+                        <ion-icon style="padding-left:10px" name="md-send"></ion-icon>
+                </button>
+        </ion-buttons>
+    </ion-navbar>
+    <div class="top">
+                <ion-item class="totalHeader">
+                    <ion-note item-left class="total">
+                        Total
+                    </ion-note>
+                    <ion-note item-right class="total">
+                        ${{amount}}
+                    </ion-note>
+                </ion-item>
+    </div>
+</ion-header>
+<ion-content>
+    <cart></cart>
+</ion-content>
+<!-- <ion-footer>
+    <ion-toolbar style="padding: 0px;min-height: 0px;">
+        <ion-grid style="padding: 0px;">
+            <ion-row style="padding: 0px;">
+                <ion-col style="padding: 0px;" width-50>
+                    <button class="footer-b1" ion-button (click)="emptyCart()" full>Empty Cart</button>
+                </ion-col>
+                <ion-col style="padding: 0px;" width-50>
+                    <button class="footer-b1" ion-button (click)="checkout()" full>Checkout
+                        <ion-icon style="padding-left:10px" name="md-send"></ion-icon>
+                    </button>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </ion-toolbar>
+</ion-footer> -->

@@ -1,0 +1,22 @@
+<ion-header>
+	<ion-navbar>
+		<ion-buttons start>
+			<button ion-button menuToggle>
+				<ion-icon name="menu"></ion-icon>
+			</button>
+		</ion-buttons>
+		<ion-title >{{'VIDEOS' | translate}}</ion-title>
+	</ion-navbar>
+</ion-header>
+
+<ion-content padding class="bg-image">
+	<ion-list *ngFor="let video of videos" (click)="loadVideo(video)">
+		<ion-item text-wrap padding class="txt-color" >
+			<ion-thumbnail item-left *ngIf="video.snippet.thumbnails.default.url">
+				<img [src]="video.snippet.thumbnails.default.url">
+			</ion-thumbnail>
+			<h2>{{video.snippet.title}}</h2>
+		</ion-item>
+	</ion-list>
+</ion-content>
+

@@ -1,0 +1,54 @@
+<ion-header>
+	<ion-navbar>
+		<button ion-button menuToggle>
+      		<ion-icon name="menu"></ion-icon>
+    	</button>
+    	<ion-title>
+			Mash Output Calculator
+    	</ion-title>
+	</ion-navbar>
+</ion-header>
+
+<ion-content padding class="bg-image">
+	  <!--<div align="center">
+    <ion-card>
+      <img src="./assets/images/Calculation.jpg"/>
+    </ion-card>
+</div>-->
+	<div align="center"><h3>Fill out the form below</h3></div>&nbsp;&nbsp;
+	<ion-item center class="card-color">
+		<p><strong>ABV - Alcohol By Volume (can be found on mash package)</strong></p>
+		<p><strong>Gallons - Total amount of gallons being used in moonshine still</strong></p>
+	</ion-item>
+
+    <ion-list >
+	    <ion-item class="card-color">
+			<ion-label fixed>ABV</ion-label>
+	        <ion-input type="number" [(ngModel)]="firstNumber"></ion-input>
+	    </ion-item>
+	    <ion-item class="card-color">
+	        <ion-label fixed>Total Gallons</ion-label>
+	        <ion-input type="number" [(ngModel)]="secondNumber"></ion-input>
+	    </ion-item>
+	</ion-list>
+
+	<button ion-button full (click)="addThemFunction()">Calculate</button>
+
+	<ion-card class="card-color">
+	    <ion-card-header>
+	    	Calculator Results:
+	    </ion-card-header>
+	    <ion-card-content>
+	    	<p><strong>Alcohol By Volume is... {{firstNumber}}%</strong> 
+	        </p>
+	        <!-- {{firstNumber.valueAsNumber}} -->
+	        <p><strong>Total Gallons is... {{secondNumber}}</strong>
+	        </p>
+	        <!--	        <p>Expected Output is... {{getInstantTotal()}}
+	        </p>-->
+	        <p><strong>Expected Mash Output is... {{total}} Gallons</strong>
+	        </p>
+	    </ion-card-content>
+	</ion-card>
+
+</ion-content>

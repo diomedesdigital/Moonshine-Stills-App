@@ -1,0 +1,39 @@
+{
+  "_from": "cordova-android-play-services-gradle-release",
+  "_id": "cordova-android-play-services-gradle-release@1.2.0",
+  "_inBundle": false,
+  "_integrity": "sha1-DKPuch9BzZeHua6CPmOjtKr/Cag=",
+  "_location": "/cordova-android-play-services-gradle-release",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "cordova-android-play-services-gradle-release",
+    "name": "cordova-android-play-services-gradle-release",
+    "escapedName": "cordova-android-play-services-gradle-release",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/cordova-android-play-services-gradle-release/-/cordova-android-play-services-gradle-release-1.2.0.tgz",
+  "_shasum": "0ca3ee721f41cd9787b9ae823e63a3b4aaff09a8",
+  "_spec": "cordova-android-play-services-gradle-release",
+  "_where": "/Users/yomi/Desktop/Moonshine Project/ion2-FullApp_1.4 2 copy",
+  "author": {
+    "name": "Dave Alden"
+  },
+  "bundleDependencies": false,
+  "dependencies": {
+    "xml2js": "~0.4.19"
+  },
+  "deprecated": false,
+  "description": "Cordova/Phonegap plugin to align various versions of the Play Services library specified by other plugins to a specific version",
+  "devDependencies": {},
+  "license": "MIT",
+  "name": "cordova-android-play-services-gradle-release",
+  "version": "1.2.0"
+}

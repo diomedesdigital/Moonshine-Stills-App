@@ -1,0 +1,50 @@
+<ion-header class="listing-header">
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+      <!--<label>Menu</label>-->
+    </button>
+    <ion-buttons end>
+    <button ion-button large menuToggle ="chatMenu">
+      <ion-icon name="cart"></ion-icon>
+      <!--<label>Chat</label>-->
+    </button> 
+    </ion-buttons>   
+    <ion-title>
+      <!--<div class="header-logo" align="center">
+       <preload-image [ratio]="{w:583, h:100}" src="./assets/images/header_logo_white.png" align="center"></preload-image>
+      </div>-->
+      Welcome!
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="listing-content">
+  <background-image class="image-heading" [src]="listing.banner_image">
+    <ion-row class="heading-row">
+      <ion-col no-padding width-100>
+        <h2 class="main-title">{{listing.banner_title}}</h2>
+      </ion-col>
+    </ion-row>
+  </background-image>
+  <h4 class="categories-title">Popular Products</h4>
+  <ion-scroll scrollX="true" class="horizontal-categories">
+    <ion-row class="categories-row">
+      <ion-col width-30 class="horizontal-item"  *ngFor="let popular of listing.populars">
+        <preload-image [ratio]="{w:1, h:1}" [src]="popular.image" title="popular.title"></preload-image><!--<a class="categories" href="{{popular.url}}" onclick="window.open(this.href, '_system', 'location=yes'); return false;">{{popular.title}}</a>--> 
+      </ion-col>
+    </ion-row>
+  </ion-scroll>
+  <h4 class="categories-title">Browse categories</h4>
+  <ion-row class="grid-categories">
+    <ion-col width-50 class="category-item" *ngFor="let category of listing.categories">
+      <background-image class="category-heading" [src]="category.image" (click)="goToFeed(category)">
+        <ion-row class="heading-row">
+          <ion-col no-padding width-100>
+            <h2 class="category-title">{{category.title}}</h2>
+          </ion-col>
+        </ion-row>
+      </background-image>
+    </ion-col>
+  </ion-row>
+</ion-content>
