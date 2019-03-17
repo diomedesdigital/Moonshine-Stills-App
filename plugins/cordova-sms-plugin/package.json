@@ -1,28 +1,28 @@
 {
-  "_from": "cordova-sms-plugin",
-  "_id": "cordova-sms-plugin@0.1.11",
+  "_from": "cordova-sms-plugin@^0.1.11",
+  "_id": "cordova-sms-plugin@0.1.13",
   "_inBundle": false,
-  "_integrity": "sha1-Lat6Qyw+6LvXxK3ILUBdDjQxMt8=",
+  "_integrity": "sha512-xlzH7gluZsE7RbZkYJfb/vpU/n+ZwVicS0OFByH19xJqLLHnSbT8+rS/cv8Q8bB3L7RNw+7J79cKnG9fFVxGEQ==",
   "_location": "/cordova-sms-plugin",
   "_phantomChildren": {},
   "_requested": {
-    "type": "tag",
+    "type": "range",
     "registry": true,
-    "raw": "cordova-sms-plugin",
+    "raw": "cordova-sms-plugin@^0.1.11",
     "name": "cordova-sms-plugin",
     "escapedName": "cordova-sms-plugin",
-    "rawSpec": "",
+    "rawSpec": "^0.1.11",
     "saveSpec": null,
-    "fetchSpec": "latest"
+    "fetchSpec": "^0.1.11"
   },
   "_requiredBy": [
     "#USER",
     "/"
   ],
-  "_resolved": "https://registry.npmjs.org/cordova-sms-plugin/-/cordova-sms-plugin-0.1.11.tgz",
-  "_shasum": "2dab7a432c3ee8bbd7c4adc82d405d0e343132df",
-  "_spec": "cordova-sms-plugin",
-  "_where": "/Users/yomi/Desktop/Moonshine Project/ion2-FullApp_1.4 2",
+  "_resolved": "https://registry.npmjs.org/cordova-sms-plugin/-/cordova-sms-plugin-0.1.13.tgz",
+  "_shasum": "45a1f74e26bbf91093fdc4d69527f7af33071c4d",
+  "_spec": "cordova-sms-plugin@^0.1.11",
+  "_where": "/Users/ahsankhan/Desktop/application",
   "author": {
     "name": "Didier Baquier"
   },
@@ -64,5 +64,5 @@
     "type": "git",
     "url": "git+https://github.com/cordova-sms/cordova-sms-plugin.git"
   },
-  "version": "0.1.11"
+  "version": "0.1.13"
 }

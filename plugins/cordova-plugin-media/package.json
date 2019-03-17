@@ -1,42 +1,48 @@
 {
-  "_from": "cordova-plugin-media@5.0.2",
-  "_id": "cordova-plugin-media@5.0.2",
+  "_from": "cordova-plugin-media@^3.0.1",
+  "_id": "cordova-plugin-media@3.0.1",
   "_inBundle": false,
-  "_integrity": "sha1-M0V2nAfmpGpxyX4btDTazKXI2As=",
+  "_integrity": "sha1-XkbnbPp31O0oqHWYywco5Ourbyc=",
   "_location": "/cordova-plugin-media",
   "_phantomChildren": {},
   "_requested": {
-    "type": "version",
+    "type": "range",
     "registry": true,
-    "raw": "cordova-plugin-media@5.0.2",
+    "raw": "cordova-plugin-media@^3.0.1",
     "name": "cordova-plugin-media",
     "escapedName": "cordova-plugin-media",
-    "rawSpec": "5.0.2",
+    "rawSpec": "^3.0.1",
     "saveSpec": null,
-    "fetchSpec": "5.0.2"
+    "fetchSpec": "^3.0.1"
   },
   "_requiredBy": [
     "#USER",
     "/"
   ],
-  "_resolved": "https://registry.npmjs.org/cordova-plugin-media/-/cordova-plugin-media-5.0.2.tgz",
-  "_shasum": "3345769c07e6a46a71c97e1bb434dacca5c8d80b",
-  "_spec": "cordova-plugin-media@5.0.2",
-  "_where": "/Users/yomi/Desktop/Moonshine Project/ion2-FullApp_1.4 2",
+  "_resolved": "https://registry.npmjs.org/cordova-plugin-media/-/cordova-plugin-media-3.0.1.tgz",
+  "_shasum": "5e46e76cfa77d4ed28a87598cb0728e4ebab6f27",
+  "_spec": "cordova-plugin-media@^3.0.1",
+  "_where": "/Users/ahsankhan/Desktop/application",
   "author": {
     "name": "Apache Software Foundation"
   },
   "bugs": {
-    "url": "https://issues.apache.org/jira/browse/CB"
+    "url": "https://github.com/apache/cordova-plugin-media/issues"
   },
   "bundleDependencies": false,
   "cordova": {
     "id": "cordova-plugin-media",
     "platforms": [
       "android",
-      "browser",
+      "amazon-fireos",
+      "ubuntu",
       "ios",
-      "windows"
+      "blackberry10",
+      "wp7",
+      "wp8",
+      "windows8",
+      "windows",
+      "tizen"
     ]
   },
   "deprecated": false,
@@ -50,9 +56,6 @@
         "cordova-android": ">=6.1.0"
       },
       "4.0.0": {
-        "cordova-android": ">=6.3.0"
-      },
-      "6.0.0": {
         "cordova": ">100"
       }
     }
@@ -63,9 +66,15 @@
     "media",
     "ecosystem:cordova",
     "cordova-android",
-    "cordova-browser",
+    "cordova-amazon-fireos",
+    "cordova-ubuntu",
     "cordova-ios",
-    "cordova-windows"
+    "cordova-blackberry10",
+    "cordova-wp7",
+    "cordova-wp8",
+    "cordova-windows8",
+    "cordova-windows",
+    "cordova-tizen"
   ],
   "license": "Apache-2.0",
   "name": "cordova-plugin-media",
@@ -78,5 +87,5 @@
     "test": "npm run jshint"
   },
   "types": "./types/index.d.ts",
-  "version": "5.0.2"
+  "version": "3.0.1"
 }

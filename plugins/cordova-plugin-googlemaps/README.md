@@ -1,168 +1,272 @@
-# Cordova GoogleMaps plugin for iOS and Android (version 2.1.0)
+# Cordova GoogleMaps plugin for Android, iOS and Browser v2.5.2
 
-This plugin is a thin wrapper for [Google Maps Android API](https://developers.google.com/maps/documentation/android/) and [Google Maps SDK for iOS](https://developers.google.com/maps/documentation/ios/).
+| Download | Build test (master branch)|
+|----------|---------------------------|
+| [![](https://img.shields.io/npm/dm/cordova-plugin-googlemaps.svg)](https://npm-stat.com/charts.html?package=cordova-plugin-googlemaps) |[![](https://travis-ci.org/mapsplugin/cordova-plugin-googlemaps.svg?branch=master)](https://travis-ci.org/mapsplugin/cordova-plugin-googlemaps/branches) |
 
-Both [PhoneGap](http://phonegap.com/) and [Apache Cordova](http://cordova.apache.org/) are supported.
+  This plugin displays Google Maps in your application.
+  This plugin uses these libraries for each platforms:
+
+  - Android : [Google Maps Android API](https://developers.google.com/maps/documentation/android/)
+  - iOS : [Google Maps SDK for iOS](https://developers.google.com/maps/documentation/ios/)
+  - Browser : [Google Maps JavaScript API v3](https://developers.google.com/maps/documentation/javascript/)
+
+  Both [PhoneGap](http://phonegap.com/) and [Apache Cordova](http://cordova.apache.org/) are supported.
+
+<table>
+<tr>
+<td>
+<h3>Android, iOS</h3>
+<img src="https://raw.githubusercontent.com/mapsplugin/cordova-plugin-googlemaps-doc/master/v2.3.0/hello-world/image1.gif"  height="300">
+</td>
+<td>
+<h3>Browser</h3>
+<img src="https://raw.githubusercontent.com/mapsplugin/cordova-plugin-googlemaps/master/images/browser_demo.gif" height="300">
+</td>
+</tr>
+</table>
 
 -----
+
+## Guides
+
+  - [How to generate API keys?](https://github.com/mapsplugin/cordova-plugin-googlemaps-doc/blob/master/v2.3.0/api_key/README.md)
+  - [Hello, World](https://github.com/mapsplugin/cordova-plugin-googlemaps-doc/blob/master/v2.3.0/hello-world/README.md)
+  - [Hello, World (with PhoneGap Build)](https://github.com/mapsplugin/cordova-plugin-googlemaps-doc/blob/master/v2.3.0/hello-world-phonegap-build/README.md)
+  - [Trouble shootings](https://github.com/mapsplugin/cordova-plugin-googlemaps-doc/tree/master/troubleshootings/README.md)
 
 ## Quick install
 
-*Stable version(npm)*
-```
-$> cordova plugin add cordova-plugin-googlemaps \
-    --variable API_KEY_FOR_ANDROID="..." \
-    --variable API_KEY_FOR_IOS="..."
-```
+  - *Stable version(npm)*
+    ```
+    $> cordova plugin add cordova-plugin-googlemaps \
+        --variable API_KEY_FOR_ANDROID="..." \
+        --variable API_KEY_FOR_IOS="..."
+    ```
 
-*Develop version (current multiple_maps branch)*
-```bash
-$> cordova plugin add https://github.com/mapsplugin/cordova-plugin-googlemaps#multiple_maps \
-    --variable API_KEY_FOR_ANDROID="..." \
-    --variable API_KEY_FOR_IOS="..."
-```
+  - *Development version(beta version)*
+    ```
+    $> cordova plugin add https://github.com/mapsplugin/cordova-plugin-googlemaps#multiple_maps \
+        --variable API_KEY_FOR_ANDROID="..." \
+        --variable API_KEY_FOR_IOS="..."
+    ```
 
-If you re-install the plugin, please always remove the plugin first, then remove the SDK
+## PhoneGap Build settings
 
-```bash
-$> cordova plugin rm cordova-plugin-googlemaps
+  ```xml
+  <widget ...>
+    <plugin name="cordova-plugin-googlemaps">
+      <variable name="API_KEY_FOR_ANDROID" value="(api key)" />
+      <variable name="API_KEY_FOR_IOS" value="(api key)" />
+    </plugin>
 
-$> cordova plugin rm com.googlemaps.ios
+    <!--
+      You need to specify cli-7.1.0 or greater version.
+      https://build.phonegap.com/current-support
+    -->
+    <preference name="phonegap-version" value="cli-8.0.0" />
+  </widget>
+  ```
 
-$> cordova plugin add cordova-plugin-googlemaps \
-    --variable API_KEY_FOR_ANDROID="..." \
-    --variable API_KEY_FOR_IOS="..." \
-    --no-fetch
-```
+## Install optional variables
 
-#### If you can't reinstall the plugin, try like this:
+  - ![](https://raw.githubusercontent.com/mapsplugin/cordova-plugin-googlemaps/master/images/icon-android.png) **PLAY_SERVICES_VERSION = (15.0.1)**<br>
+    The Google Play Services SDK version.
+    _You need to specify the same version number with all other plugins._
+    Check out the latest version [here](https://developers.google.com/android/guides/releases).
 
-```
-$> npm cache clean
+  - ![](https://raw.githubusercontent.com/mapsplugin/cordova-plugin-googlemaps/master/images/icon-android.png) **ANDROID_SUPPORT_V4_VERSION = (27.1.1)**<br>
+    This plugin requires the Android support library v4.
+    _The minimum version is 24.1.0._
+    Check out the latest version [here](https://developer.android.com/topic/libraries/support-library/revisions.html).
 
-$> cordova platform rm android ios
+  - ![](https://raw.githubusercontent.com/mapsplugin/cordova-plugin-googlemaps/master/images/icon-ios.png) **LOCATION_WHEN_IN_USE_DESCRIPTION**<br>
+    This message is displayed when your application requests **LOCATION PERMISSION for only necessary times**.
 
-// Add the SDK plugin at first with --nofetch option
-$> cordova plugin add https://github.com/mapsplugin/cordova-plugin-googlemaps-sdk --nofetch
+  - ![](https://raw.githubusercontent.com/mapsplugin/cordova-plugin-googlemaps/master/images/icon-ios.png) **LOCATION_ALWAYS_USAGE_DESCRIPTION**<br>
+    This message is displayed when your application requests **LOCATION PERMISSION for always**.
 
-$> cordova plugin add cordova-plugin-googlemaps --nofetch
+---------------------------------------------------------------------------------------------------------
 
-$> cordova platform add android ios
-```
+## Browser platform
 
-### Configuration
+  We support browser platform now!
+  You can develop your application with browser, then run it!
+  At the end of development, you can upload the html files to your server, or run it on Android or iOS devices.
 
-You can also configure the following variables to customize the iOS location plist entries
+  ```
+  $> cordova run browser
+  ```
 
-- `LOCATION_WHEN_IN_USE_DESCRIPTION` for `NSLocationWhenInUseUsageDescription` (defaults to "Show your location on the map")
-- `LOCATION_ALWAYS_USAGE_DESCRIPTION` for `NSLocationAlwaysUsageDescription` (defaults t "Trace your location on the map")
+  If you use [ionic framework](https://ionicframework.com/), it supports `live-reload`.
 
-Example using the Cordova CLI
+  ```
+  $> ionic cordova run browser -l
+  ```
 
-```bash
-$> cordova plugin rm cordova-plugin-googlemaps
+  If you want to use `live-reload`, but you don't want to use other framework or without framework,
+  [cordova-plugin-browsersync](https://www.npmjs.com/package/cordova-plugin-browsersync) is useful.
 
-$> cordova plugin rm com.googlemaps.ios
+  ```
+  $> cordova plugin add cordova-plugin-browsersync
 
-$> cordova plugin add cordova-plugin-googlemaps \
-    --variable API_KEY_FOR_ANDROID="..." \
-    --variable API_KEY_FOR_IOS="..." \
-    --variable LOCATION_WHEN_IN_USE_DESCRIPTION="My custom when in use message" \
-    --variable LOCATION_ALWAYS_USAGE_DESCRIPTION="My custom always usage message"
-```
+  $> cordova run (browser/android/ios) -- --live-reload
+  ```
 
-Example using config.xml
-```xml
-<plugin name="cordova-plugin-googlemaps" spec="2.0.0">
-    <variable name="API_KEY_FOR_ANDROID" value="YOUR_ANDROID_API_KEY_IS_HERE" />
-    <variable name="API_KEY_FOR_IOS" value="YOUR_IOS_API_KEY_IS_HERE" />
-    <variable name="LOCATION_WHEN_IN_USE_DESCRIPTION" value="My custom when in use message" />
-    <variable name="LOCATION_ALWAYS_USAGE_DESCRIPTION" value="My custom always usage message" />
-</plugin>
-```
+### API key
+
+  In the browser platform, the maps plugin uses [Google Maps JavaScript API v3](https://developers.google.com/maps/documentation/javascript/)
+
+  You need to set **two API keys for Google Maps JavaScript API v3**.
+
+  ```js
+  // If your app runs this program on browser,
+  // you need to set `API_KEY_FOR_BROWSER_RELEASE` and `API_KEY_FOR_BROWSER_DEBUG`
+  // before `plugin.google.maps.Map.getMap()`
+  //
+  //   API_KEY_FOR_BROWSER_RELEASE for `https:` protocol
+  //   API_KEY_FOR_BROWSER_DEBUG for `http:` protocol
+  //
+  plugin.google.maps.environment.setEnv({
+    'API_KEY_FOR_BROWSER_RELEASE': '(YOUR_API_KEY_IS_HERE)',
+    'API_KEY_FOR_BROWSER_DEBUG': ''
+  });
+
+  // Create a Google Maps native view under the map_canvas div.
+  var map = plugin.google.maps.Map.getMap(div);
+
+  ```
+
+### Why **two API keys**?
+
+  `JavaScript` code is `text code`. Even if you do obfuscation, it's still readable finally.
+  In order to protect your API key, you need to set `Key restriction` for these keys.
+
+  ![](https://raw.githubusercontent.com/mapsplugin/cordova-plugin-googlemaps/master/images/api_key_restrictions.png)
+
+  If you don't set API key, the maps plugin still work with `development mode`.
+
+  ```js
+  plugin.google.maps.environment.setEnv({
+    'API_KEY_FOR_BROWSER_RELEASE': '(YOUR_API_KEY_IS_HERE)',
+    'API_KEY_FOR_BROWSER_DEBUG': '' // If key is empty or unset,
+                                    // the maps plugin runs under the development mode.
+  });
+  ```
+  <img src="https://raw.githubusercontent.com/mapsplugin/cordova-plugin-googlemaps/master/images/development_mode.png" width="300">
+
+### Which browser supported?
+
+  Modern browsers should work without any problem.
+
+  ![](https://raw.githubusercontent.com/mapsplugin/cordova-plugin-googlemaps/master/images/modern_browsers.png)
+
+  Internet Explorer 11 might work. We don't confirm all features, but basic features work.
+
+### Behavior differences
+
+  `Google Maps JavaScript API v3` is completely different ecosystem with `Google Maps Android API` and `Google Maps SDK for iOS`.
+
+  `Google Maps JavaScript API v3` :
+  - **can't** draw 3D building,
+  - **does't work** if offline,
+  - **can't** map rotation,
+  - etc...
+
+  In the browser platform, the maps plugin works almost the same behaviors as native platforms(Android, and iOS),
+  but not exactly the same behaviors.
+  So don't expect too much.
+
+### Touch mechanism difference
+
+  As you may know, [this plugin displays native Google Maps view under the browser in Android and iOS](#how-does-this-plugin-work-android-ios).
+  However this plugin displays as `normal HTML element` in browser platform.
+
+  Because of this, touch behavior is different.
+  The maps plugin does not hook the touch position, do not set `background: transparent`, ... etc.
+  But if you use this plugin as normal behavior, you don't need to consider about this.
+
+---------------------------------------------------------------------------------------------------------
+
+## Please support this plugin activity.
+
+  In order to keep this plugin as free, please consider to donate little amount for this project.
+
+  [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=SQPLZJ672HJ9N&lc=US&item_name=cordova%2dgooglemaps%2dplugin&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_SM%2egif%3aNonHosted)
+
+---------------------------------------------------------------------------------------------------------
 
 ## Release Notes
+  - **v2.5.2**
+    - Fix: (Android/iOS/Browser) MarkerCluster.remove() causes null pointer error.
+    - Fix: (iOS) touch problem
+    - Fix: (Android) setMyLocationEnabled(false) does not work
 
-- [v2.0-stable](https://github.com/mapsplugin/cordova-plugin-googlemaps-doc/blob/master/v2.0.0/ReleaseNotes/v2.0-stable/README.md)
+  - **v2.5.1**
+    - Fix: (Android/iOS/Browser) Marker cluster does not work when you zoom in.
+    - Fix: (iOS) HTML click detection is incorrect.
+    - Fix: (Android/iOS) Clicking on POI with an apostrophe in its name causes a SyntaxError.
+    - Fix: (Browser) Can not set icon color for marker cluster icons.
 
-- `plugin.google.maps.geometry.poly` namespace is added.
+  - **v2.5.0**
+    - Add: (Android/iOS/Browser) Support `promise` for `TileOverlayOptions.getTile`. You must return new URL in 5 seconds.
+      ```js
+      var tileOverlay = map.addTileOverlay({
+        getTile: function(x, y, zoom) {
+          return new Promise(function(resolve, reject) {
+            somethingAsync(function(url) {
+              resolve(url);
+            });
+          });
+        }
+      });
+      ```
 
-- `HtmlInfoWindow` follows the marker smoothly.
+    - Add: (Android/iOS/Browser) `BaseClass.onThrottled()/addThrottledEventListener()/hasEventListener()` are added.
+      ```js
+      var marker = map.addMarker({ ... });
+      marker.onThrottled('position_changed', function(latLng) {
+        console.log(latLng);
+      }, 1000);
+      ```
 
-- The code of `external service` removed. Please use the [Launch Navigator Cordova/Phonegap Plugin](https://github.com/dpa99c/phonegap-launch-navigator) instead.
+    - Add: (Android/iOS/Browser) `TileOverlayOptions.getTile` can return **base64 encoded image(png,gif,jpeg)**.
+    - Fix: (Android) Can not load icon image file for Marker after external link opened.
+    - Fix: (Browser) `MapOptions.styles` does not work.
+    - Fix: (Android) `map.setOptions()` asks location permission always even options do no include `myLocation` and/or `myLocationButton` options.
+    - Update: (Android) Set `transparent` backgroundColor at `onResume()` because some other plugins change background color.
+    - Update: (Android/iOS) Improve accuracy of touch detection on geodesic polyline.
+    - Update: (iOS) Remove "NSData+Base64" library. No longer necessary.
+    - Update: (js) ionic 4 hides Google Maps view.
+    - Fix: (Browser) `MarkerCluster.remove()` does not work on browser platform.
+    - Fix: (Android/iOS/Browser) App crashes (or error) if no panorama available.
+    - Fix: (Android/iOS/Browser) `INFO_CLICK` does not work on marker cluster.
+    - Fix: (iOS) Can not click on HtmlInfoWindow.
 
-- The calculation of DOM element hierarchy was fixed.
+---------------------------------------------------------------------------------------------------------
 
-- [@ionic-native/google-maps@4.3.3](https://www.npmjs.com/package/@ionic-native/google-maps) was released.
+## Demos
 
-## Quick demo
+
+[Demo (Browser)](https://mapsplugin.github.io/HelloGoogleMap/)
 
 ![](https://github.com/mapsplugin/cordova-plugin-googlemaps-doc/raw/master/v1.4.0/top/demo.gif)
 
-```html
-<script type="text/javascript">
-var map;
-document.addEventListener("deviceready", function() {
-  var div = document.getElementById("map_canvas");
 
-  // Initialize the map view
-  map = plugin.google.maps.Map.getMap(div);
-
-  // Wait until the map is ready status.
-  map.addEventListener(plugin.google.maps.event.MAP_READY, onMapReady);
-}, false);
-
-function onMapReady() {
-  var button = document.getElementById("button");
-  button.addEventListener("click", onButtonClick);
-}
-
-function onButtonClick() {
-
-  // Move to the position with animation
-  map.animateCamera({
-    target: {lat: 37.422359, lng: -122.084344},
-    zoom: 17,
-    tilt: 60,
-    bearing: 140,
-    duration: 5000
-  }, function() {
-
-    // Add a maker
-    map.addMarker({
-      position: {lat: 37.422359, lng: -122.084344},
-      title: "Welecome to \n" +
-             "Cordova GoogleMaps plugin for iOS and Android",
-      snippet: "This plugin is awesome!",
-      animation: plugin.google.maps.Animation.BOUNCE
-    }, function(marker) {
-
-      // Show the info window
-      marker.showInfoWindow();
-
-      // Catch the click event
-      marker.on(plugin.google.maps.event.INFO_CLICK, function() {
-
-        // To do something...
-        alert("Hello world!");
-
-      });
-    });
-  });
-}
-</script>
-```
-
------
+---------------------------------------------------------------------------------------------------------
 
 ## Documentation
 
-[All documentations are here!!](https://github.com/mapsplugin/cordova-plugin-googlemaps-doc/blob/master/v2.0.0/README.md)
+![](https://github.com/mapsplugin/cordova-plugin-googlemaps/blob/master/images/documentations.png?raw=true)
+
+[All documentations are here!!](https://github.com/mapsplugin/cordova-plugin-googlemaps-doc/blob/master/v2.3.0/README.md)
+
+https://github.com/mapsplugin/cordova-plugin-googlemaps-doc/blob/master/v2.3.0/README.md
 
 **Quick examples**
 <table>
 <tr>
-  <td><a href="https://github.com/mapsplugin/cordova-plugin-googlemaps-doc/blob/master/v2.0.0/class/Map/README.md"><img src="https://github.com/mapsplugin/cordova-plugin-googlemaps/raw/master/images/map.png?raw=true"><br>Map</a></td>
+  <td><a href="https://github.com/mapsplugin/cordova-plugin-googlemaps-doc/blob/master/v2.3.0/class/Map/README.md"><img src="https://github.com/mapsplugin/cordova-plugin-googlemaps/raw/master/images/map.png?raw=true"><br>Map</a></td>
   <td><pre>
 var options = {
   camera: {
@@ -173,18 +277,18 @@ var options = {
 var map = plugin.google.maps.Map.getMap(mapDiv, options)</pre></td>
 </tr>
 <tr>
-  <td><a href="https://github.com/mapsplugin/cordova-plugin-googlemaps-doc/blob/master/v2.0.0/class/Marker/README.md"><img src="https://github.com/mapsplugin/cordova-plugin-googlemaps/blob/master/images/marker.png?raw=true"><br>Marker</a></td>
+  <td><a href="https://github.com/mapsplugin/cordova-plugin-googlemaps-doc/blob/master/v2.3.0/class/Marker/README.md"><img src="https://github.com/mapsplugin/cordova-plugin-googlemaps/blob/master/images/marker.png?raw=true"><br>Marker</a></td>
   <td><pre>
-map.addMarker({
+var marker = map.addMarker({
   position: {lat: ..., lng: ...},
   title: "Hello Cordova Google Maps for iOS and Android",
   snippet: "This plugin is awesome!"
-}, function(marker) { ... })</pre></td>
+})</pre></td>
 </tr>
 <tr>
-  <td><a href="https://github.com/mapsplugin/cordova-plugin-googlemaps-doc/blob/master/v2.0.0/class/MarkerCluster/README.md"><img src="https://github.com/mapsplugin/cordova-plugin-googlemaps/blob/master/images/markercluster.png?raw=true"><br>MarkerCluster</a></td>
+  <td><a href="https://github.com/mapsplugin/cordova-plugin-googlemaps-doc/blob/master/v2.3.0/class/MarkerCluster/README.md"><img src="https://github.com/mapsplugin/cordova-plugin-googlemaps/blob/master/images/markercluster.png?raw=true"><br>MarkerCluster</a></td>
   <td><pre>
-map.addMarkerCluster({
+var markerCluster = map.addMarkerCluster({
   //maxZoomLevel: 5,
   boundsDraw: true,
   markers: dummyData(),
@@ -194,10 +298,10 @@ map.addMarkerCluster({
       {min: 1000, max: 2000, url: "./img/purple.png", anchor: {x: 24, y: 24}},
       {min: 2000, url: "./img/red.png",anchor: {x: 32,y: 32}}
   ]
-}, function(markerCluster) { ... });</pre></td>
+});</pre></td>
 </tr>
 <tr>
-  <td><a href="https://github.com/mapsplugin/cordova-plugin-googlemaps-doc/blob/master/v2.0.0/class/HtmlInfoWindow/README.md"><img src="https://github.com/mapsplugin/cordova-plugin-googlemaps/blob/master/images/htmlInfoWindow.png?raw=true"><br>HtmlInfoWindow</a></td>
+  <td><a href="https://github.com/mapsplugin/cordova-plugin-googlemaps-doc/blob/master/v2.3.0/class/HtmlInfoWindow/README.md"><img src="https://github.com/mapsplugin/cordova-plugin-googlemaps/blob/master/images/htmlInfoWindow.png?raw=true"><br>HtmlInfoWindow</a></td>
   <td><pre>
 var html = "&lt;img src='./House-icon.png' width='64' height='64' &gt;" +
            "&lt;br&gt;" +
@@ -207,59 +311,69 @@ htmlInfoWindow.open(marker);
 </pre></td>
 </tr>
 <tr>
-  <td><a href="https://github.com/mapsplugin/cordova-plugin-googlemaps-doc/blob/master/v2.0.0/class/Circle/README.md"><img src="https://github.com/mapsplugin/cordova-plugin-googlemaps/blob/master/images/circle.png?raw=true"><br>Circle</a></td>
+  <td><a href="https://github.com/mapsplugin/cordova-plugin-googlemaps-doc/blob/master/v2.3.0/class/Circle/README.md"><img src="https://github.com/mapsplugin/cordova-plugin-googlemaps/blob/master/images/circle.png?raw=true"><br>Circle</a></td>
   <td><pre>
-map.addCircle({
+var circle = map.addCircle({
   'center': {lat: ..., lng: ...},
   'radius': 300,
   'strokeColor' : '#AA00FF',
   'strokeWidth': 5,
   'fillColor' : '#880000'
-}, function(circle) { ... });</pre></td>
+});</pre></td>
 </tr>
 <tr>
-  <td><a href="https://github.com/mapsplugin/cordova-plugin-googlemaps-doc/blob/master/v2.0.0/class/Polyline/README.md"><img src="https://github.com/mapsplugin/cordova-plugin-googlemaps/blob/master/images/polyline.png?raw=true"><br>Polyline</a></td>
+  <td><a href="https://github.com/mapsplugin/cordova-plugin-googlemaps-doc/blob/master/v2.3.0/class/Polyline/README.md"><img src="https://github.com/mapsplugin/cordova-plugin-googlemaps/blob/master/images/polyline.png?raw=true"><br>Polyline</a></td>
   <td><pre>
-map.addPolyline({
+var polyline = map.addPolyline({
   points: AIR_PORTS,
   'color' : '#AA00FF',
   'width': 10,
   'geodesic': true
-}, function(polyline) { ... });</pre></td>
+});</pre></td>
 </tr>
 <tr>
-  <td><a href="https://github.com/mapsplugin/cordova-plugin-googlemaps-doc/blob/master/v2.0.0/class/Polygon/README.md"><img src="https://github.com/mapsplugin/cordova-plugin-googlemaps/blob/master/images/polygon.png?raw=true"><br>Polygon</a></td>
+  <td><a href="https://github.com/mapsplugin/cordova-plugin-googlemaps-doc/blob/master/v2.3.0/class/Polygon/README.md"><img src="https://github.com/mapsplugin/cordova-plugin-googlemaps/blob/master/images/polygon.png?raw=true"><br>Polygon</a></td>
   <td><pre>
-map.addPolygon({
+var polygon = map.addPolygon({
   'points': GORYOKAKU_POINTS,
   'strokeColor' : '#AA00FF',
   'strokeWidth': 5,
   'fillColor' : '#880000'
-}, function(polygon) { ... });</pre></td>
+});</pre></td>
 </tr>
 <tr>
-  <td><a href="https://github.com/mapsplugin/cordova-plugin-googlemaps-doc/blob/master/v2.0.0/class/GroundOverlay/README.md"><img src="https://github.com/mapsplugin/cordova-plugin-googlemaps/blob/master/images/groundoverlay.png?raw=true"><br>GroundOverlay</a></td>
+  <td><a href="https://github.com/mapsplugin/cordova-plugin-googlemaps-doc/blob/master/v2.3.0/class/GroundOverlay/README.md"><img src="https://github.com/mapsplugin/cordova-plugin-googlemaps/blob/master/images/groundoverlay.png?raw=true"><br>GroundOverlay</a></td>
   <td><pre>
-map.addPolygon({
-  'points': GORYOKAKU_POINTS,
-  'strokeColor' : '#AA00FF',
-  'strokeWidth': 5,
-  'fillColor' : '#880000'
-}, function(polygon) { ... });</pre></td>
+var groundOverlay = map.addGroundOverlay({
+  'url': "./newark_nj_1922.jpg",
+  'bounds': [
+    {"lat": 40.712216, "lng": -74.22655},
+    {"lat": 40.773941, "lng": -74.12544}
+  ],
+  'opacity': 0.5
+});
+</pre></td>
 </tr>
 <tr>
-  <td><a href="https://github.com/mapsplugin/cordova-plugin-googlemaps-doc/blob/master/v2.0.0/class/TileOverlay/README.md"><img src="https://github.com/mapsplugin/cordova-plugin-googlemaps/blob/master/images/tileoverlay.png?raw=true"><br>TileOverlay</a></td>
+  <td><a href="https://github.com/mapsplugin/cordova-plugin-googlemaps-doc/blob/master/v2.3.0/class/TileOverlay/README.md"><img src="https://github.com/mapsplugin/cordova-plugin-googlemaps/blob/master/images/tileoverlay.png?raw=true"><br>TileOverlay</a></td>
   <td><pre>
-map.addTileOverlay({
+var tileOverlay = map.addTileOverlay({
   debug: true,
   opacity: 0.75,
   getTile: function(x, y, zoom) {
     return "../images/map-for-free/" + zoom + "_" + x + "-" + y + ".gif"
   }
-}, function(tileOverlay) { ... });</pre></td>
+});</pre></td>
 </tr>
 <tr>
-  <td><a href="https://github.com/mapsplugin/cordova-plugin-googlemaps-doc/blob/master/v2.0.0/class/Geocoder/README.md"><img src="https://github.com/mapsplugin/cordova-plugin-googlemaps/blob/master/images/geocoder.png?raw=true"><br>Geocoder</a></td>
+  <td><a href="https://github.com/mapsplugin/cordova-plugin-googlemaps-doc/blob/master/v2.3.0/class/KmlOverlay/README.md"><img src="https://github.com/mapsplugin/cordova-plugin-googlemaps/blob/multiple_maps/images/kmloverlay.png?raw=true"><br>KmlOverlay</a></td>
+  <td><pre>
+map.addKmlOverlay({
+  'url': 'polygon.kml'
+}, function(kmlOverlay) { ... });</pre></td>
+</tr>
+<tr>
+  <td><a href="https://github.com/mapsplugin/cordova-plugin-googlemaps-doc/blob/master/v2.3.0/class/Geocoder/README.md"><img src="https://github.com/mapsplugin/cordova-plugin-googlemaps/blob/master/images/geocoder.png?raw=true"><br>Geocoder</a></td>
   <td><pre>
 plugin.google.maps.Geocoder.geocode({
   // US Capital cities
@@ -269,7 +383,7 @@ plugin.google.maps.Geocoder.geocode({
 }, function(mvcArray) { ... });</pre></td>
 </tr>
 <tr>
-  <td><a href="https://github.com/mapsplugin/cordova-plugin-googlemaps-doc/blob/master/v2.0.0/class/utilities/geometry/poly/README.md"><img src="https://github.com/mapsplugin/cordova-plugin-googlemaps/blob/master/images/poly.png?raw=true"><br>poly utility</a></td>
+  <td><a href="https://github.com/mapsplugin/cordova-plugin-googlemaps-doc/blob/master/v2.3.0/class/utilities/geometry/poly/README.md"><img src="https://github.com/mapsplugin/cordova-plugin-googlemaps/blob/master/images/poly.png?raw=true"><br>poly utility</a></td>
   <td><pre>
 var GORYOKAKU_POINTS = [
   {lat: 41.79883, lng: 140.75675},
@@ -282,7 +396,7 @@ marker.setIcon(contain ? "blue" : "red");
 </pre></td>
 </tr>
 <tr>
-  <td><a href="https://github.com/mapsplugin/cordova-plugin-googlemaps-doc/tree/master/v2.0.0/class/utilities/geometry/encoding/README.md"><img src="https://github.com/mapsplugin/cordova-plugin-googlemaps/blob/master/images/encode.png?raw=true"><br>encode utility</a></td>
+  <td><a href="https://github.com/mapsplugin/cordova-plugin-googlemaps-doc/tree/master/v2.3.0/class/utilities/geometry/encoding/README.md"><img src="https://github.com/mapsplugin/cordova-plugin-googlemaps/blob/master/images/encode.png?raw=true"><br>encode utility</a></td>
   <td><pre>
 var GORYOKAKU_POINTS = [
   {lat: 41.79883, lng: 140.75675},
@@ -294,39 +408,72 @@ var encodedPath = plugin.google.maps.geometry.
 </pre></td>
 </tr>
 <tr>
-  <td><a href="https://github.com/mapsplugin/cordova-plugin-googlemaps-doc/blob/master/v2.0.0/class/utilities/geometry/spherical/README.md"><img src="https://github.com/mapsplugin/cordova-plugin-googlemaps/blob/master/images/spherical.png?raw=true"><br>spherical utility</a></td>
+  <td><a href="https://github.com/mapsplugin/cordova-plugin-googlemaps-doc/blob/master/v2.3.0/class/utilities/geometry/spherical/README.md"><img src="https://github.com/mapsplugin/cordova-plugin-googlemaps/blob/master/images/spherical.png?raw=true"><br>spherical utility</a></td>
   <td><pre>
 var heading = plugin.google.maps.geometry.spherical.computeHeading(
                         markerA.getPosition(), markerB.getPosition());
 label.innerText = "heading : " + heading.toFixed(0) + "&deg;";
 </pre></td>
 </tr>
+<tr>
+  <td><a href="https://github.com/mapsplugin/cordova-plugin-googlemaps-doc/blob/master/v2.3.0/class/locationservice/README.md"><img src="https://github.com/mapsplugin/cordova-plugin-googlemaps/blob/master/images/locationService.png?raw=true"><br>Location service</a></td>
+  <td><pre>
+plugin.google.maps.LocationService.getMyLocation(function(result) {
+  alert(["Your current location:\n",
+      "latitude:" + location.latLng.lat.toFixed(3),
+      "longitude:" + location.latLng.lng.toFixed(3),
+      "speed:" + location.speed,
+      "time:" + location.time,
+      "bearing:" + location.bearing].join("\n"));
+});
+</pre></td>
+</tr>
+
+<tr>
+  <td><a href="https://github.com/mapsplugin/cordova-plugin-googlemaps-doc/blob/master/v2.3.0/class/StreetView/README.md"><img src="https://github.com/mapsplugin/cordova-plugin-googlemaps/raw/master/images/streetview.png?raw=true"><br>StreetView</a></td>
+  <td><pre>
+var div = document.getElementById("pano_canvas1");
+var panorama = plugin.google.maps.StreetView.getPanorama(div, {
+  camera: {
+    target: {lat: 42.345573, lng: -71.098326}
+  }
+});</pre></td>
+</tr>
 </table>
 
 
------
+---------------------------------------------------------------------------------------------------------
 
-### How different between Google Maps JavaScript API v3?
+### What is the difference between this plugin and Google Maps JavaScript API v3?
 
-This plugin displays the map view of native(Java and Objective-C) features, which is **faster** than Google Maps JavaScript API v3.
+Google Maps JavaScript API v3 works on any platforms,
+but it does not work if device is **offline**.
 
-And the native map view works even if the device is **offline**.
+This plugin uses three different APIs:
+- Android : [Google Maps Android API](https://developers.google.com/maps/documentation/android/)
+- iOS : [Google Maps SDK for iOS](https://developers.google.com/maps/documentation/ios/)
+- Browser : [Google Maps JavaScript API v3](https://developers.google.com/maps/documentation/javascript/)
 
-This plugin provides the features of the native map view to JS developers.
+In Android and iOS applications, this plugin displays native Google Maps views, which is **faster** than Google Maps JavaScript API v3.
+And it even works if the device is **offline**.
 
-You can write your code `similar like` the Google Maps JavaScript API v3.
+In Browser platform, this plugin displays JS map views (Google Maps JavaScript API v3).
+It should work as PWA (progressive web application), but the device has to be **online**.
 
-**Features compare table**
+In order to work for all platforms, this plugin provides **own API** instead of each original APIs.
+You can write your code `similar to` the Google Maps JavaScript API v3.
 
-|                | Google Maps JavaScript API v3     | Cordova-Plugin-GoogleMaps             |
-|----------------|-----------------------------------|---------------------------------------|
-|Rendering system| JavaScript + HTML                 | JavaScript + Native APIs              |
-|Offline map     | Not possible                      | Possible (only you displayed area)    |
-|3D View         | Not possible                      | Possible                              |
-|Platform        | All browsers                      | Android and iOS app only              |
-|Tile image      | Bitmap                            | Vector                                |
+**Feature comparison table**
 
-**Class compare table**
+|                | Google Maps JavaScript API v3     | Cordova-Plugin-GoogleMaps(Android,iOS)| Cordova-Plugin-GoogleMaps(Browser)    |
+|----------------|-----------------------------------|---------------------------------------|---------------------------------------|
+|Rendering system| JavaScript + HTML                 | JavaScript + Native API's             | JavaScript                            |
+|Offline map     | Not possible                      | Possible (only your displayed area)   | Not possible                          |
+|3D View         | Not possible                      | Possible                              | Not possible                          |
+|Platform        | All browsers                      | Android and iOS applications only     | All browsers                          |
+|Tile image      | Bitmap                            | Vector                                | Bitmap                                |
+
+**Class comparison table**
 
 | Google Maps JavaScript API v3     | Cordova-Plugin-GoogleMaps             |
 |-----------------------------------|---------------------------------------|
@@ -346,55 +493,45 @@ You can write your code `similar like` the Google Maps JavaScript API v3.
 | google.maps.geometry.encoding     | plugin.google.maps.geometry.encoding  |
 | google.maps.geometry.poly         | plugin.google.maps.geometry.poly      |
 | (not available)                   | MarkerCluster                         |
-| google.maps.KmlLayer              | KMLLayer (v1.4.5 is available)        |
-| google.maps.StreetView            | (not available)                       |
+| google.maps.KmlLayer              | KmlOverlay                            |
+| (not available)                   | LocationService                       |
+| google.maps.StreetView            | StreetView :sparkles:                 |
 | google.maps.Data                  | (not available)                       |
 | google.maps.DirectionsService     | (not available)                       |
 | google.maps.DistanceMatrixService | (not available)                       |
-| google.maps.FusionTablesLayer     | (not available)                       |
 | google.maps.TransitLayer          | (not available)                       |
 | google.maps.places.*              | (not available)                       |
 | google.maps.visualization.*       | (not available)                       |
 
-### How does this plugin work?
+### How does this plugin work (Android, iOS)?
 
-This plugin generates native map views, and put them **under the browser**.
+This plugin generates native map views, and puts them **under the browser**.
 
-The map views are not an HTML element. It means they are not kind of `<div>` or something.
-But you can specify the size, position of the map view using `<div>`.
+The map views are not HTML elements. This means that they are not a `<div>` or anything HTML related.
+But you can specify the size and position of the map view using its containing `<div>`.
 
-This plugin changes the background as `transparent` of your app.
-Then the plugin detects your finger tap position which is for: `native map` or `html element`.
+This plugin changes the background to `transparent` in your application.
+Then the plugin detects your touch position, which is either meant for the `native map` or an `html element`
+(which can be on top of your map, or anywhere else on the screen).
 
 ![](https://github.com/mapsplugin/cordova-plugin-googlemaps-doc/raw/master/v1.4.0/class/Map/mechanism.png)
 
-The benefit of this plugin is able to detect which HTML elements are over the map or not automatically.
+The benefit of this plugin is the ability to automatically detect which HTML elements are over the map or not.
 
-In the below image, you tap on the header div, which is over the map view.
-This plugin detects your tap is for the header div or the map view, then pass the mouse event.
+For instance, in the image below, say you tap on the header div (which is over the map view).
+The plugin will detect whether your tap is for the header div or for the map view and then pass the touch event appropriately.
 
-It means **you can use the native Google Maps views similar like HTML element**.
+This means **you can use the native Google Maps views similar to HTML elements**.
 
 ![](https://raw.githubusercontent.com/mapsplugin/cordova-plugin-googlemaps/master/images/touch.png)
 
----
 
+---------------------------------------------------------------------------------------------------------
 ## Official Communities
+- Google+ : (managed by @wf9a5m75)
 
-- Google+ : @wf9a5m75
   https://plus.google.com/communities/117427728522929652853
 
-- Gitter : @Hirbod
+- Gitter : (managed by @Hirbod)
+
   https://gitter.im/nightstomp/cordova-plugin-googlemaps
-
----
-
-## Buy me a beer
-
-I have been spend **tons of time for this plugin project, but even though the plugin is still FREE!!**.
-
-I appreciate if you donate some amount to help this project from this button.
-
-[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=SQPLZJ672HJ9N&lc=US&item_name=cordova%2dgooglemaps%2dplugin&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_SM%2egif%3aNonHosted)
-
-The donated amount is used for buying testing machine (such as iPhone, Android) or new software.

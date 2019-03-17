@@ -1,11 +1,10 @@
 import { BuildContext, DeepLinkConfigEntry } from '../util/interfaces';
 export declare class IonicEnvironmentPlugin {
     private context;
-    private writeToDisk;
-    constructor(context: BuildContext, writeToDisk: boolean);
+    constructor(context: BuildContext);
     apply(compiler: any): void;
     private initializeWebpackFileSystemCaches(webpackFileSystem);
 }
-export declare function convertDeepLinkConfigToWebpackFormat(parsedDeepLinkConfigs: Map<string, DeepLinkConfigEntry>): {
+export declare function convertDeepLinkConfigToWebpackFormat(parsedDeepLinkConfigs: DeepLinkConfigEntry[]): {
     [index: string]: string;
 };

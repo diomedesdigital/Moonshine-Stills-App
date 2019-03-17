@@ -10,18 +10,19 @@ Follows the [Cordova Plugin spec](https://cordova.apache.org/docs/en/latest/plug
 ## Installation
 
 
-This requires phonegap 5.0+ ( current stable v3.0.0 )
+This requires phonegap 7.1.0+ ( current stable v8.0.0 )
 
     phonegap plugin add phonegap-plugin-barcodescanner
-
-Older versions of phonegap can still install via the __deprecated__ id ( stale v2.0.1 )
-
-    phonegap plugin add com.phonegap.plugins.barcodescanner
 
 It is also possible to install via repo url directly ( unstable )
 
     phonegap plugin add https://github.com/phonegap/phonegap-plugin-barcodescanner.git
 
+Optional variables:
+This plugin requires the Android support library v4. The minimum version is `24.1.0`. Default value is `27.+`.  Check out the latest version [here](https://developer.android.com/topic/libraries/support-library/revisions.html).
+```
+phonegap plugin add phonegap-plugin-barcodescanner --variable ANDROID_SUPPORT_V4_VERSION="27.1.1"
+```
 ### Supported Platforms
 
 - Android
@@ -42,26 +43,13 @@ Note: Windows 10 applications can not be build for `AnyCPU` architecture, which 
 cordova run windows -- --archs=x86
 ```
 
-Note: Since iOS 10 it's mandatory to add a `NSCameraUsageDescription` in the info.plist.
-
-`NSCameraUsageDescription` describes the reason that the app accesses the user’s camera.
-When the system prompts the user to allow access, this string is displayed as part of the dialog box.
-
-To add this entry you can pass the following variable on plugin install.
-
-```
-cordova plugin add phonegap-plugin-barcodescanner --variable CAMERA_USAGE_DESCRIPTION="To scan barcodes"
-```
-
 ### PhoneGap Build Usage
 
 Add the following to your config.xml:
 
 ```
 <!-- add a version here, otherwise PGB will use whatever the latest version of the package on npm is -->
-<plugin name="phonegap-plugin-barcodescanner">
-  <param name="CAMERA_USAGE_DESCRIPTION" value="To scan barcodes." />
-</plugin>
+<plugin name="phonegap-plugin-barcodescanner" />
 ```
 On PhoneGap Build if you're using a version of cordova-android of 4 or less, ensure you're building with gradle:
 ```
@@ -82,15 +70,15 @@ The following barcode types are currently supported:
 | EAN_8         |    ✔    |  ✔  |     ✔    |        ✔        |       ✔       |
 | EAN_13        |    ✔    |  ✔  |     ✔    |        ✔        |       ✔       |
 | CODE_39       |    ✔    |  ✔  |     ✔    |        ✔        |       ✔       |
-| CODE_93       |    ✔    |  ✖  |     ✔    |        ✔        |       ✖       |
+| CODE_93       |    ✔    |  ✔  |     ✔    |        ✔        |       ✖       |
 | CODE_128      |    ✔    |  ✔  |     ✔    |        ✔        |       ✔       |
 | CODABAR       |    ✔    |  ✖  |     ✔    |        ✔        |       ✖       |
 | ITF           |    ✔    |  ✔  |     ✔    |        ✔        |       ✔       |
 | RSS14         |    ✔    |  ✖  |     ✔    |        ✔        |       ✖       |
-| PDF417        |    ✔    |  ✖  |     ✔    |        ✔        |       ✖       |
+| PDF417        |    ✔    |  ✔  |     ✔    |        ✔        |       ✖       |
 | RSS_EXPANDED  |    ✔    |  ✖  |     ✖    |        ✖        |       ✖       |
 | MSI           |    ✖    |  ✖  |     ✔    |        ✔        |       ✖       |
-| AZTEC         |    ✖    |  ✖  |     ✔    |        ✔        |       ✔       |
+| AZTEC         |    ✖    |  ✔  |     ✔    |        ✔        |       ✔       |
 
 `success` and `fail` are callback functions. Success is passed an object with data, type and cancelled properties. Data is the text representation of the barcode data, type is the type of barcode detected and cancelled is whether or not the user cancelled the scan.
 
@@ -142,6 +130,21 @@ A full example could be:
             alert("encoding failed: " + fail);
           }
         );
+```
+
+## iOS quirks ##
+
+Since iOS 10 it's mandatory to add a `NSCameraUsageDescription` in the `Info.plist`.
+
+`NSCameraUsageDescription` describes the reason that the app accesses the user's camera.
+When the system prompts the user to allow access, this string is displayed as part of the dialog box. If you didn't provide the usage description, the app will crash before showing the dialog. Also, Apple will reject apps that access private data but don't provide an usage description.
+
+To add this entry you can use the `edit-config` tag in the `config.xml` like this:
+
+```
+<edit-config target="NSCameraUsageDescription" file="*-Info.plist" mode="merge">
+    <string>To scan barcodes</string>
+</edit-config>
 ```
 
 ## Windows quirks ##

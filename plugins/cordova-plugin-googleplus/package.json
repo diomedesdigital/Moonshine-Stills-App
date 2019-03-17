@@ -1,7 +1,8 @@
 {
   "_from": "git+https://github.com/EddyVerbruggen/cordova-plugin-googleplus.git",
-  "_id": "cordova-plugin-googleplus@5.2.1",
+  "_id": "cordova-plugin-googleplus@7.0.0",
   "_inBundle": false,
+  "_integrity": "sha1-uFVo202rsVl0hMLb6ok2u/vbLF0=",
   "_location": "/cordova-plugin-googleplus",
   "_phantomChildren": {},
   "_requested": {
@@ -10,15 +11,15 @@
     "rawSpec": "git+https://github.com/EddyVerbruggen/cordova-plugin-googleplus.git",
     "saveSpec": "git+https://github.com/EddyVerbruggen/cordova-plugin-googleplus.git",
     "fetchSpec": "https://github.com/EddyVerbruggen/cordova-plugin-googleplus.git",
-    "gitCommittish": null
+    "gitCommittish": "master"
   },
   "_requiredBy": [
     "#USER",
     "/"
   ],
-  "_resolved": "git+https://github.com/EddyVerbruggen/cordova-plugin-googleplus.git#3d98492cd60289d9238807ec494cacb229f253a2",
+  "_resolved": "git+https://github.com/EddyVerbruggen/cordova-plugin-googleplus.git#f30ff4e4a743803101d01e99f524cad45d465db2",
   "_spec": "git+https://github.com/EddyVerbruggen/cordova-plugin-googleplus.git",
-  "_where": "/Users/yomi/Desktop/Moonshine Project/ion2-FullApp_1.4 2 copy",
+  "_where": "/Users/ahsankhan/Desktop/application",
   "bundleDependencies": false,
   "cordova_name": "Google SignIn",
   "deprecated": false,
@@ -52,5 +53,5 @@
     "ios"
   ],
   "repo": "https://github.com/EddyVerbruggen/cordova-plugin-googleplus.git",
-  "version": "5.2.1"
+  "version": "7.0.0"
 }

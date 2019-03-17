@@ -1,21 +1,22 @@
 {
-  "_from": "cordova-custom-config@^3.2.0",
+  "_from": "cordova-custom-config@^3.3.0",
   "_id": "cordova-custom-config@3.3.0",
   "_inBundle": false,
   "_integrity": "sha1-WK/aY9TeuMbUE7OM8L2alIrEBg0=",
   "_location": "/cordova-custom-config",
   "_phantomChildren": {
-    "plist": "1.2.0"
+    "util-deprecate": "1.0.2",
+    "xmldom": "0.1.27"
   },
   "_requested": {
     "type": "range",
     "registry": true,
-    "raw": "cordova-custom-config@^3.2.0",
+    "raw": "cordova-custom-config@^3.3.0",
     "name": "cordova-custom-config",
     "escapedName": "cordova-custom-config",
-    "rawSpec": "^3.2.0",
+    "rawSpec": "^3.3.0",
     "saveSpec": null,
-    "fetchSpec": "^3.2.0"
+    "fetchSpec": "^3.3.0"
   },
   "_requiredBy": [
     "#USER",
@@ -23,8 +24,8 @@
   ],
   "_resolved": "https://registry.npmjs.org/cordova-custom-config/-/cordova-custom-config-3.3.0.tgz",
   "_shasum": "58afda63d4deb8c6d413b38cf0bd9a948ac4060d",
-  "_spec": "cordova-custom-config@^3.2.0",
-  "_where": "/Users/yomi/Desktop/Moonshine Project/ion2-FullApp_1.4 2 copy",
+  "_spec": "cordova-custom-config@^3.3.0",
+  "_where": "/Users/ahsankhan/Desktop/application",
   "author": {
     "name": "Dave Alden"
   },

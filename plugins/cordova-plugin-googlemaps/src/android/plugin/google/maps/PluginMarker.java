@@ -47,6 +47,7 @@ public class PluginMarker extends MyPlugin implements MyPluginInterface  {
   protected final HashMap<String, Integer> iconCacheKeys = new HashMap<String, Integer>();
   private static final Paint paint = new Paint();
   private final HashMap<String, Integer> semaphoreAsync = new HashMap<String, Integer>();
+  private boolean _clearDone = false;
 
   protected interface ICreateMarkerCallback {
     void onSuccess(Marker marker);
@@ -93,6 +94,7 @@ public class PluginMarker extends MyPlugin implements MyPluginInterface  {
   @Override
   protected void clear() {
     synchronized (semaphoreAsync) {
+      _clearDone = false;
 
       cordova.getThreadPool().submit(new Runnable() {
         @Override
@@ -153,7 +155,6 @@ public class PluginMarker extends MyPlugin implements MyPluginInterface  {
                   !objectId.startsWith("marker_imageSize") &&
                   !objectId.startsWith("marker_icon_")) {
                 Marker marker = (Marker) pluginMap.objects.remove(objectId);
-                marker.setIcon(null);
                 marker.setTag(null);
                 marker.remove();
                 marker = null;
@@ -165,6 +166,7 @@ public class PluginMarker extends MyPlugin implements MyPluginInterface  {
           }
 
           synchronized (semaphoreAsync) {
+            _clearDone = true;
             semaphoreAsync.notify();
           }
 
@@ -172,9 +174,12 @@ public class PluginMarker extends MyPlugin implements MyPluginInterface  {
       });
 
       try {
-        semaphoreAsync.wait(5);
+        if (!_clearDone) {
+          semaphoreAsync.wait(1000);
+        }
       } catch (InterruptedException e) {
-        e.printStackTrace();
+        // ignore
+        //e.printStackTrace();
       }
     }
 
@@ -192,13 +197,30 @@ public class PluginMarker extends MyPlugin implements MyPluginInterface  {
     // Create an instance of Marker class
 
     JSONObject opts = args.getJSONObject(1);
-    final String markerId = "marker_" + callbackContext.hashCode();
+    final String markerId = "marker_" + args.getString(2);
     final JSONObject result = new JSONObject();
-    result.put("id", markerId);
+    result.put("__pgmId", markerId);
 
     _create(markerId, opts, new ICreateMarkerCallback() {
       @Override
       public void onSuccess(Marker marker) {
+        if (icons.containsKey(markerId)) {
+          Bitmap icon = icons.get(markerId);
+          try {
+            result.put("width", icon.getWidth() / density);
+            result.put("height", icon.getHeight() / density);
+          } catch (Exception e) {
+            e.printStackTrace();
+          }
+        } else {
+          try {
+            result.put("width", 24);
+            result.put("height", 42);
+          } catch (Exception e) {
+            e.printStackTrace();
+          }
+        }
+
         callbackContext.success(result);
       }
 
@@ -289,8 +311,7 @@ public class PluginMarker extends MyPlugin implements MyPluginInterface  {
 
               // Prepare the result
               final JSONObject result = new JSONObject();
-              result.put("id", markerId);
-
+              result.put("__pgmId", markerId);
 
               // Load icon
               if (opts.has("icon")) {
@@ -301,48 +322,58 @@ public class PluginMarker extends MyPlugin implements MyPluginInterface  {
                 Object value = opts.get("icon");
                 if (JSONObject.class.isInstance(value)) {
                   JSONObject iconProperty = (JSONObject) value;
-                  if (iconProperty.has("label")) {
-                    JSONObject label = iconProperty.getJSONObject("label");
-                    if (label != null && label.get("color") instanceof JSONArray) {
-                      label.put("color", PluginUtil.parsePluginColor(label.getJSONArray("color")));
-                      iconProperty.put("label", label);
-                    }
-                  }
-                  bundle = PluginUtil.Json2Bundle(iconProperty);
+                  if (iconProperty.has("url") && JSONArray.class.isInstance(iconProperty.get("url"))) {
 
-                  // The `anchor` of the `icon` property
-                  if (iconProperty.has("anchor")) {
-                    value = iconProperty.get("anchor");
-                    if (JSONArray.class.isInstance(value)) {
-                      JSONArray points = (JSONArray) value;
-                      double[] anchorPoints = new double[points.length()];
-                      for (int i = 0; i < points.length(); i++) {
-                        anchorPoints[i] = points.getDouble(i);
-                      }
-                      bundle.putDoubleArray("anchor", anchorPoints);
-                    } else if (value instanceof JSONObject && ((JSONObject) value).has("x") && ((JSONObject) value).has("y")) {
-                      double[] anchorPoints = new double[2];
-                      anchorPoints[0] = ((JSONObject) value).getDouble("x");
-                      anchorPoints[1] = ((JSONObject) value).getDouble("y");
-                      bundle.putDoubleArray("anchor", anchorPoints);
-                    }
-                  }
+                    float[] hsv = new float[3];
+                    JSONArray arrayRGBA = iconProperty.getJSONArray("url");
+                    Color.RGBToHSV(arrayRGBA.getInt(0), arrayRGBA.getInt(1), arrayRGBA.getInt(2), hsv);
+                    bundle = new Bundle();
+                    bundle.putFloat("iconHue", hsv[0]);
 
-                  // The `infoWindowAnchor` property for infowindow
-                  if (opts.has("infoWindowAnchor")) {
-                    value = opts.get("infoWindowAnchor");
-                    if (JSONArray.class.isInstance(value)) {
-                      JSONArray points = (JSONArray) value;
-                      double[] anchorPoints = new double[points.length()];
-                      for (int i = 0; i < points.length(); i++) {
-                        anchorPoints[i] = points.getDouble(i);
+                  } else {
+                    if (iconProperty.has("label")) {
+                      JSONObject label = iconProperty.getJSONObject("label");
+                      if (label != null && label.get("color") instanceof JSONArray) {
+                        label.put("color", PluginUtil.parsePluginColor(label.getJSONArray("color")));
+                        iconProperty.put("label", label);
                       }
-                      bundle.putDoubleArray("infoWindowAnchor", anchorPoints);
-                    } else if (value instanceof JSONObject && ((JSONObject) value).has("x") && ((JSONObject) value).has("y")) {
-                      double[] anchorPoints = new double[2];
-                      anchorPoints[0] = ((JSONObject) value).getDouble("x");
-                      anchorPoints[1] = ((JSONObject) value).getDouble("y");
-                      bundle.putDoubleArray("infoWindowAnchor", anchorPoints);
+                    }
+                    bundle = PluginUtil.Json2Bundle(iconProperty);
+
+                    // The `anchor` of the `icon` property
+                    if (iconProperty.has("anchor")) {
+                      value = iconProperty.get("anchor");
+                      if (JSONArray.class.isInstance(value)) {
+                        JSONArray points = (JSONArray) value;
+                        double[] anchorPoints = new double[points.length()];
+                        for (int i = 0; i < points.length(); i++) {
+                          anchorPoints[i] = points.getDouble(i);
+                        }
+                        bundle.putDoubleArray("anchor", anchorPoints);
+                      } else if (value instanceof JSONObject && ((JSONObject) value).has("x") && ((JSONObject) value).has("y")) {
+                        double[] anchorPoints = new double[2];
+                        anchorPoints[0] = ((JSONObject) value).getDouble("x");
+                        anchorPoints[1] = ((JSONObject) value).getDouble("y");
+                        bundle.putDoubleArray("anchor", anchorPoints);
+                      }
+                    }
+
+                    // The `infoWindowAnchor` property for infowindow
+                    if (opts.has("infoWindowAnchor")) {
+                      value = opts.get("infoWindowAnchor");
+                      if (JSONArray.class.isInstance(value)) {
+                        JSONArray points = (JSONArray) value;
+                        double[] anchorPoints = new double[points.length()];
+                        for (int i = 0; i < points.length(); i++) {
+                          anchorPoints[i] = points.getDouble(i);
+                        }
+                        bundle.putDoubleArray("infoWindowAnchor", anchorPoints);
+                      } else if (value instanceof JSONObject && ((JSONObject) value).has("x") && ((JSONObject) value).has("y")) {
+                        double[] anchorPoints = new double[2];
+                        anchorPoints[0] = ((JSONObject) value).getDouble("x");
+                        anchorPoints[1] = ((JSONObject) value).getDouble("y");
+                        bundle.putDoubleArray("infoWindowAnchor", anchorPoints);
+                      }
                     }
                   }
 
@@ -571,6 +602,11 @@ public class PluginMarker extends MyPlugin implements MyPluginInterface  {
     String markerId = args.getString(0);
     String animation = args.getString(1);
     final Marker marker = this.getMarker(markerId);
+    Log.d(TAG, "--->setAnimation: markerId = " + markerId + ", animation = " + animation);
+    if (marker == null) {
+      callbackContext.error("marker is null");
+      return;
+    }
 
     this.setMarkerAnimation_(marker, animation, new PluginAsyncInterface() {
 
@@ -987,7 +1023,7 @@ public class PluginMarker extends MyPlugin implements MyPluginInterface  {
     options.noCaching = noCaching;
     final int taskId = options.hashCode();
 
-    AsyncLoadImageInterface onComplete = new AsyncLoadImageInterface() {
+    final AsyncLoadImageInterface onComplete = new AsyncLoadImageInterface() {
       @Override
       public void onPostExecute(AsyncLoadImage.AsyncLoadImageResult result) {
         iconLoadingTasks.remove(taskId);
@@ -1107,9 +1143,14 @@ public class PluginMarker extends MyPlugin implements MyPluginInterface  {
       }
     };
 
-    AsyncLoadImage task = new AsyncLoadImage(cordova, webView, options, onComplete);
-    task.execute();
-    iconLoadingTasks.put(taskId, task);
+    cordova.getActivity().runOnUiThread(new Runnable() {
+      @Override
+      public void run() {
+        AsyncLoadImage task = new AsyncLoadImage(cordova, webView, options, onComplete);
+        task.execute();
+        iconLoadingTasks.put(taskId, task);
+      }
+    });
   }
 
 

@@ -1,28 +1,28 @@
 {
-  "_from": "onesignal-cordova-plugin",
-  "_id": "onesignal-cordova-plugin@2.3.1",
+  "_from": "onesignal-cordova-plugin@^2.3.1",
+  "_id": "onesignal-cordova-plugin@2.4.6",
   "_inBundle": false,
-  "_integrity": "sha512-J7GCCXx7fwY5QzCRuPHaQ1+AoiWHdW78XYeHoyIbzezvl901To5eUVEYm/boznsa3sEcQRPfeZxa5s1XERTYCA==",
+  "_integrity": "sha512-g8N10TBgkZtrSup5VxaWMTHRP8X6CfguM+kZHMgJ1aBdLBBTMgEMbunxxRjblqMJ6WyYNS3u510x66BYlJnPBg==",
   "_location": "/onesignal-cordova-plugin",
   "_phantomChildren": {},
   "_requested": {
-    "type": "tag",
+    "type": "range",
     "registry": true,
-    "raw": "onesignal-cordova-plugin",
+    "raw": "onesignal-cordova-plugin@^2.3.1",
     "name": "onesignal-cordova-plugin",
     "escapedName": "onesignal-cordova-plugin",
-    "rawSpec": "",
+    "rawSpec": "^2.3.1",
     "saveSpec": null,
-    "fetchSpec": "latest"
+    "fetchSpec": "^2.3.1"
   },
   "_requiredBy": [
     "#USER",
     "/"
   ],
-  "_resolved": "https://registry.npmjs.org/onesignal-cordova-plugin/-/onesignal-cordova-plugin-2.3.1.tgz",
-  "_shasum": "b6c3c8b8d78f0f7f565cbe13bdc1c0e9c8bbb5c5",
-  "_spec": "onesignal-cordova-plugin",
-  "_where": "/Users/yomi/Desktop/Moonshine Project/ion2-FullApp_1.4 2 copy",
+  "_resolved": "https://registry.npmjs.org/onesignal-cordova-plugin/-/onesignal-cordova-plugin-2.4.6.tgz",
+  "_shasum": "ab4994ad44c97f10fbc0e97a5752335cec94b045",
+  "_spec": "onesignal-cordova-plugin@^2.3.1",
+  "_where": "/Users/ahsankhan/Desktop/application",
   "author": {
     "name": "Josh Kasten & Brad Hesse"
   },
@@ -92,5 +92,5 @@
     "type": "git",
     "url": "git+https://github.com/onesignal/OneSignal-Cordova-SDK.git"
   },
-  "version": "2.3.1"
+  "version": "2.4.6"
 }

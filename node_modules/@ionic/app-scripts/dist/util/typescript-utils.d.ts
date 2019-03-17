@@ -17,7 +17,4 @@ export declare function getNgModuleClassName(filePath: string, fileContent: stri
 export declare function getNgModuleDecorator(fileName: string, sourceFile: SourceFile): Decorator;
 export declare function getNgModuleObjectLiteralArg(decorator: Decorator): ObjectLiteralExpression;
 export declare function findObjectLiteralElementByName(properties: NodeArray<ObjectLiteralElement>, identifierToLookFor: string): ObjectLiteralElement;
-export declare function appendNgModuleDeclaration(filePath: string, fileContent: string, declaration: string): string;
-export declare function appendNgModuleProvider(filePath: string, fileContent: string, declaration: string): string;
-export declare function appendNgModuleExports(filePath: string, fileContent: string, declaration: string): string;
-export declare const NG_MODULE_DECORATOR_TEXT = "NgModule";
+export declare function appendNgModuleDeclaration(filePath: string, fileContent: string, declaration: string, type?: string): string;

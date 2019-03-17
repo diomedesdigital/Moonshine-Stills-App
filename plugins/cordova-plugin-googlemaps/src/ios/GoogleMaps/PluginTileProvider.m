@@ -91,16 +91,17 @@ NSDictionary *debugAttributes;
 
 
       }];
-      dispatch_semaphore_wait(self.semaphore, dispatch_time(DISPATCH_TIME_NOW, 10 * 1000 * 1000 * 1000)); // Maximum wait 10sec
+      dispatch_semaphore_wait(self.semaphore, dispatch_time(DISPATCH_TIME_NOW, (uint64_t)(10 * NSEC_PER_SEC))); // Maximum wait 10sec
 
   }
   NSString *urlStr = nil;
   @synchronized (self.tileUrlMap) {
     urlStr = [self.tileUrlMap objectForKey:urlKey];
     [self.tileUrlMap removeObjectForKey:urlKey];
-  }  NSString *originalUrlStr = urlStr;
+  }
+  NSString *originalUrlStr = urlStr;
 
-  if (urlStr == nil || [urlStr isEqualToString:@"(null)"]) {
+  if (urlStr == nil || [urlStr containsString:@"(null)"]) {
     //-------------------------
     // No image tile
     //-------------------------
@@ -114,8 +115,23 @@ NSDictionary *debugAttributes;
      } else {
        [receiver receiveTileWithX:x y:y zoom:zoom image:kGMSTileLayerNoTile];
      }
+    return;
   }
 
+  if ([urlStr rangeOfString:@"data:image/"].location != NSNotFound &&
+      [urlStr rangeOfString:@";base64,"].location != NSNotFound) {
+
+    NSArray *tmp = [urlStr componentsSeparatedByString:@","];
+    NSData *decodedData = [[NSData alloc] initWithBase64EncodedString:[tmp objectAtIndex:1] options:0];
+
+    UIImage *image = [[UIImage alloc] initWithData:decodedData];
+    if (image.size.width != self.tileSize || image.size.height != self.tileSize) {
+      image = [image resize:self.tileSize height:self.tileSize];
+    }
+    [receiver receiveTileWithX:x y:y zoom:zoom image:image];
+    return;
+  }
+  
   NSRange range = [urlStr rangeOfString:@"http"];
   if (range.location == 0) {
       //-------------------------
@@ -124,6 +140,7 @@ NSDictionary *debugAttributes;
       [self downloadImageWithX:x y:y zoom:zoom url:[NSURL URLWithString:urlStr] receiver:receiver];
       return;
   }
+  urlStr = [urlStr stringByReplacingOccurrencesOfString:@"file://" withString:@""];
 
   range = [urlStr rangeOfString:@"://"];
   if (range.location == NSNotFound) {
@@ -205,6 +222,7 @@ NSDictionary *debugAttributes;
 
   }
 
+
 }
 
 - (UIImage*)drawDebugInfoWithImage:(UIImage*)image x:(NSInteger)x y:(NSUInteger)y  zoom:(NSUInteger)zoom url:(NSString *)url {
@@ -252,30 +270,34 @@ NSDictionary *debugAttributes;
     NSCachedURLResponse *cachedResponse = [[NSURLCache sharedURLCache] cachedResponseForRequest:req];
     if (cachedResponse != nil) {
       UIImage *image = [[UIImage alloc] initWithData:cachedResponse.data];
-      if (self.isDebug) {
-        image = [self drawDebugInfoWithImage:image
-                                           x:x
-                                           y:y
-                                           zoom:zoom
-                                           url: url.absoluteString];
+      if (image) {
+        if (self.isDebug) {
+          image = [self drawDebugInfoWithImage:image
+                                             x:x
+                                             y:y
+                                             zoom:zoom
+                                             url: url.absoluteString];
+        }
+        [receiver receiveTileWithX:x y:y zoom:zoom image:image];
+        return;
       }
-      [receiver receiveTileWithX:x y:y zoom:zoom image:image];
-      return;
     }
 
     NSString *uniqueKey = url.absoluteString;
     NSData *cache = [self.imgCache objectForKey:uniqueKey];
     if (cache != nil) {
       UIImage *image = [[UIImage alloc] initWithData:cache];
-      if (self.isDebug) {
-        image = [self drawDebugInfoWithImage:image
-                                           x:x
-                                           y:y
-                                           zoom:zoom
-                                           url: url.absoluteString];
+      if (image) {
+        if (self.isDebug) {
+          image = [self drawDebugInfoWithImage:image
+                                             x:x
+                                             y:y
+                                             zoom:zoom
+                                             url: url.absoluteString];
+        }
+        [receiver receiveTileWithX:x y:y zoom:zoom image:image];
+        return;
       }
-      [receiver receiveTileWithX:x y:y zoom:zoom image:image];
-      return;
     }
 
     //-------------------------------------------------------------
@@ -286,6 +308,7 @@ NSDictionary *debugAttributes;
     NSURLSession *session = [NSURLSession sessionWithConfiguration:sessionConfiguration];
     NSURLSessionDataTask *getTask = [session dataTaskWithRequest:req
                              completionHandler:^(NSData *data, NSURLResponse *res, NSError *error) {
+                               [session finishTasksAndInvalidate];
                                if ( !error ) {
                                  [self.imgCache setObject:data forKey:uniqueKey cost:data.length];
                                  UIImage *image = [UIImage imageWithData:data];

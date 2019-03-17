@@ -1,28 +1,28 @@
 {
-  "_from": "cordova-plugin-x-toast",
-  "_id": "cordova-plugin-x-toast@2.6.0",
+  "_from": "cordova-plugin-x-toast@^2.6.0",
+  "_id": "cordova-plugin-x-toast@2.7.2",
   "_inBundle": false,
-  "_integrity": "sha1-R3i+y2HjbIlRCRoHWFDCje2PVqU=",
+  "_integrity": "sha512-nx4LaBkJyEk1MknkLC0/U904A42WX/1/OZUeUyXkKRtChShsoTdbWlvEqHKzPbELzf2bEMnXd1CI70WRv+a4hA==",
   "_location": "/cordova-plugin-x-toast",
   "_phantomChildren": {},
   "_requested": {
-    "type": "tag",
+    "type": "range",
     "registry": true,
-    "raw": "cordova-plugin-x-toast",
+    "raw": "cordova-plugin-x-toast@^2.6.0",
     "name": "cordova-plugin-x-toast",
     "escapedName": "cordova-plugin-x-toast",
-    "rawSpec": "",
+    "rawSpec": "^2.6.0",
     "saveSpec": null,
-    "fetchSpec": "latest"
+    "fetchSpec": "^2.6.0"
   },
   "_requiredBy": [
     "#USER",
     "/"
   ],
-  "_resolved": "https://registry.npmjs.org/cordova-plugin-x-toast/-/cordova-plugin-x-toast-2.6.0.tgz",
-  "_shasum": "4778becb61e36c8951091a075850c28ded8f56a5",
-  "_spec": "cordova-plugin-x-toast",
-  "_where": "/Users/yomi/Desktop/Moonshine Project/ion2-FullApp_1.4 2",
+  "_resolved": "https://registry.npmjs.org/cordova-plugin-x-toast/-/cordova-plugin-x-toast-2.7.2.tgz",
+  "_shasum": "2f8ca705bc2664832298b348cb17204cda79c17f",
+  "_spec": "cordova-plugin-x-toast@^2.6.0",
+  "_where": "/Users/ahsankhan/Desktop/application",
   "author": {
     "name": "Eddy Verbruggen",
     "email": "eddyverbruggen@gmail.com",
@@ -69,5 +69,5 @@
     "type": "git",
     "url": "git+https://github.com/EddyVerbruggen/Toast-PhoneGap-Plugin.git"
   },
-  "version": "2.6.0"
+  "version": "2.7.2"
 }

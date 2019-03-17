@@ -1,19 +1,19 @@
 {
-  "_from": "cordova-plugin-audioinput",
+  "_from": "cordova-plugin-audioinput@^0.3.0",
   "_id": "cordova-plugin-audioinput@0.3.0",
   "_inBundle": false,
   "_integrity": "sha1-Wmc33luOaVf6Qg/21NjOu2Z8dQA=",
   "_location": "/cordova-plugin-audioinput",
   "_phantomChildren": {},
   "_requested": {
-    "type": "tag",
+    "type": "range",
     "registry": true,
-    "raw": "cordova-plugin-audioinput",
+    "raw": "cordova-plugin-audioinput@^0.3.0",
     "name": "cordova-plugin-audioinput",
     "escapedName": "cordova-plugin-audioinput",
-    "rawSpec": "",
+    "rawSpec": "^0.3.0",
     "saveSpec": null,
-    "fetchSpec": "latest"
+    "fetchSpec": "^0.3.0"
   },
   "_requiredBy": [
     "#USER",
@@ -21,8 +21,8 @@
   ],
   "_resolved": "https://registry.npmjs.org/cordova-plugin-audioinput/-/cordova-plugin-audioinput-0.3.0.tgz",
   "_shasum": "5a6737de5b8e6957fa420ff6d4d8cebb667c7500",
-  "_spec": "cordova-plugin-audioinput",
-  "_where": "/Users/yomi/Desktop/Moonshine Project/ion2-FullApp_1.4 2 copy",
+  "_spec": "cordova-plugin-audioinput@^0.3.0",
+  "_where": "/Users/ahsankhan/Desktop/application",
   "author": {
     "name": "Edin Mujkanovic"
   },

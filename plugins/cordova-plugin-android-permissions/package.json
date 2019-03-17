@@ -1,28 +1,28 @@
 {
-  "_from": "cordova-plugin-android-permissions",
-  "_id": "cordova-plugin-android-permissions@1.0.0",
+  "_from": "cordova-plugin-android-permissions@^0.10.0",
+  "_id": "cordova-plugin-android-permissions@0.10.0",
   "_inBundle": false,
-  "_integrity": "sha1-nnwRa+Zo6336QUkbE9jUfalUgUk=",
+  "_integrity": "sha1-xicm8ySMTGHR8ekkL5zbXr8KcRo=",
   "_location": "/cordova-plugin-android-permissions",
   "_phantomChildren": {},
   "_requested": {
-    "type": "tag",
+    "type": "range",
     "registry": true,
-    "raw": "cordova-plugin-android-permissions",
+    "raw": "cordova-plugin-android-permissions@^0.10.0",
     "name": "cordova-plugin-android-permissions",
     "escapedName": "cordova-plugin-android-permissions",
-    "rawSpec": "",
+    "rawSpec": "^0.10.0",
     "saveSpec": null,
-    "fetchSpec": "latest"
+    "fetchSpec": "^0.10.0"
   },
   "_requiredBy": [
     "#USER",
     "/"
   ],
-  "_resolved": "https://registry.npmjs.org/cordova-plugin-android-permissions/-/cordova-plugin-android-permissions-1.0.0.tgz",
-  "_shasum": "9e7c116be668eb7dfa41491b13d8d47da9548149",
-  "_spec": "cordova-plugin-android-permissions",
-  "_where": "/Users/yomi/Desktop/Moonshine Project/ion2-FullApp_1.4 2",
+  "_resolved": "https://registry.npmjs.org/cordova-plugin-android-permissions/-/cordova-plugin-android-permissions-0.10.0.tgz",
+  "_shasum": "c62726f3248c4c61d1f1e9242f9cdb5ebf0a711a",
+  "_spec": "cordova-plugin-android-permissions@^0.10.0",
+  "_where": "/Users/ahsankhan/Desktop/application",
   "author": {
     "name": "Jason Yang"
   },
@@ -33,9 +33,7 @@
   "cordova": {
     "id": "cordova-plugin-android-permissions",
     "platforms": [
-      "android",
-      "ios",
-      "browser"
+      "android"
     ]
   },
   "deprecated": false,
@@ -49,9 +47,7 @@
   "homepage": "https://github.com/NeoLSN/cordova-plugin-android-permission#readme",
   "keywords": [
     "ecosystem:cordova",
-    "cordova-android",
-    "cordova-browser",
-    "cordova-ios"
+    "cordova-android"
   ],
   "license": "BSD",
   "name": "cordova-plugin-android-permissions",
@@ -59,5 +55,5 @@
     "type": "git",
     "url": "git+https://github.com/NeoLSN/cordova-plugin-android-permission.git"
   },
-  "version": "1.0.0"
+  "version": "0.10.0"
 }

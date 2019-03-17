@@ -23,7 +23,7 @@ The Facebook plugin for [Apache Cordova](http://cordova.apache.org/) allows you 
 ## Compatibility
 
   * Cordova >= 5.0.0
-  * cordova-android >= 4.0
+  * cordova-android >= 4.0 (see Android Guide for cordova-android >= 7)
   * cordova-ios >= 3.8
   * cordova-browser >= 3.6
   * Phonegap build (use phonegap-version >= cli-5.2.0, android-minSdkVersion>=15, and android-build-tool=gradle), see [example here](https://github.com/yoav-zibin/phonegap-tictactoe/blob/gh-pages/www/config.xml)
@@ -109,7 +109,11 @@ Share Dialog:
 		share_feedWeb: true, // iOS only
 	}
 
-For iOS, the default dialog mode is [`FBSDKShareDialogModeAutomatic`](https://developers.facebook.com/docs/reference/ios/current/constants/FBSDKShareDialogMode/). You can share that by adding a specific dialog mode parameter. The available share dialog modes are: `share_sheet`, `share_feedBrowser`, `share_native` and `share_feedWeb`. [Read more about share dialog modes](https://developers.facebook.com/docs/reference/ios/current/constants/FBSDKShareDialogMode/)
+#### iOS
+
+The default dialog mode is [`FBSDKShareDialogModeAutomatic`](https://developers.facebook.com/docs/reference/ios/current/constants/FBSDKShareDialogMode/). You can share that by adding a specific dialog mode parameter. The available share dialog modes are: `share_sheet`, `share_feedBrowser`, `share_native` and `share_feedWeb`. [Read more about share dialog modes](https://developers.facebook.com/docs/reference/ios/current/constants/FBSDKShareDialogMode/)
+
+`caption`, `description` and `picture` were deprecated in Facebok API [v2.9](https://developers.facebook.com/docs/graph-api/changelog/version2.9#gapi-deprecate) and therefore not supported anymore on iOS 
 
 Game request:
 

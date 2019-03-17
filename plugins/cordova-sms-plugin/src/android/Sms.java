@@ -24,10 +24,14 @@ public class Sms extends CordovaPlugin {
 	public final String ACTION_SEND_SMS = "send";
 
 	public final String ACTION_HAS_PERMISSION = "has_permission";
+	
+	public final String ACTION_REQUEST_PERMISSION = "request_permission";
 
 	private static final String INTENT_FILTER_SMS_SENT = "SMS_SENT";
 
 	private static final int SEND_SMS_REQ_CODE = 0;
+
+	private static final int REQUEST_PERMISSION_REQ_CODE = 1;
 
 	private CallbackContext callbackContext;
 
@@ -38,15 +42,25 @@ public class Sms extends CordovaPlugin {
 		this.callbackContext = callbackContext;
 		this.args = args;
 		if (action.equals(ACTION_SEND_SMS)) {
-			if (hasPermission()) {
+			boolean isIntent = false;
+			try {
+				isIntent = args.getString(2).equalsIgnoreCase("INTENT");
+			} catch (NullPointerException npe) {
+				// It might throw a NPE, but it doesn't matter.
+			}
+			if (isIntent || hasPermission()) {
 				sendSMS();
 			} else {
-				requestPermission();
+				requestPermission(SEND_SMS_REQ_CODE);
 			}
 			return true;
 		}
 		else if (action.equals(ACTION_HAS_PERMISSION)) {
 			callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, hasPermission()));
+			return true;
+		}
+		else if (action.equals(ACTION_REQUEST_PERMISSION)) {
+			requestPermission(REQUEST_PERMISSION_REQ_CODE);
 			return true;
 		}
 		return false;
@@ -56,8 +70,8 @@ public class Sms extends CordovaPlugin {
 		return cordova.hasPermission(android.Manifest.permission.SEND_SMS);
 	}
 
-	private void requestPermission() {
-		cordova.requestPermission(this, SEND_SMS_REQ_CODE, android.Manifest.permission.SEND_SMS);
+	private void requestPermission(int requestCode) {
+		cordova.requestPermission(this, requestCode, android.Manifest.permission.SEND_SMS);
 	}
 
 	public void onRequestPermissionResult(int requestCode, String[] permissions, int[] grantResults) throws JSONException {
@@ -67,7 +81,11 @@ public class Sms extends CordovaPlugin {
 				return;
 			}
 		}
-		sendSMS();
+		if (requestCode == SEND_SMS_REQ_CODE) {
+			sendSMS();
+			return;
+		}
+		callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, true));
 	}
 
 	private boolean sendSMS() {

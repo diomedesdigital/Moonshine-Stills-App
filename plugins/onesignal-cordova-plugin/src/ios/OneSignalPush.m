@@ -97,7 +97,9 @@ void initOneSignalObject(NSDictionary* launchOptions, const char* appId, int dis
     NSDictionary *iOSSettings = initialLaunchFired ? @{kOSSettingsKeyAutoPrompt : @(autoPrompt),
                                                        kOSSettingsKeyInFocusDisplayOption : @(displayOption),
                                                        kOSSettingsKeyInAppLaunchURL : @(inAppLaunchURL),
-                                                       @"kOSSettingsKeyInOmitNoAppIdLogging": @(fromColdStart)} : @{};
+                                                       @"kOSSettingsKeyInOmitNoAppIdLogging": @(fromColdStart)} : @{@"kOSSettingsKeyInOmitNoAppIdLogging": @(fromColdStart),
+                                                                                                                          kOSSettingsKeyAutoPrompt : @false
+                                                                                                                        };
     
     [OneSignal initWithLaunchOptions:launchOptions appId:appIdStr handleNotificationReceived:^(OSNotification* _notif) {
         notification = _notif;
@@ -226,6 +228,10 @@ static Class delegateClass = nil;
 - (void)registerForPushNotifications:(CDVInvokedUrlCommand*)command {
     [OneSignal registerForPushNotifications];
 }
+    
+- (void)setLocationShared:(CDVInvokedUrlCommand *)command {
+   [OneSignal setLocationShared:command.arguments[0]];
+}
 
 - (void)promptForPushNotificationsWithUserResponse:(CDVInvokedUrlCommand*)command {
    promptForPushNotificationsWithUserResponseCallbackId = command.callbackId;
@@ -336,6 +342,32 @@ static Class delegateClass = nil;
     } withFailure:^(NSError *error) {
         failureCallback(logoutEmailCallbackId, error.userInfo);
     }];
+}
+
+- (void)userProvidedPrivacyConsent:(CDVInvokedUrlCommand *)command {
+    CDVPluginResult* commandResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsBool:!OneSignal.requiresUserPrivacyConsent];
+    commandResult.keepCallback = @1;
+    [pluginCommandDelegate sendPluginResult:commandResult callbackId:command.callbackId];
+}
+    
+- (void)setRequiresUserPrivacyConsent:(CDVInvokedUrlCommand *)command {
+    if (command.arguments.count >= 1)
+        [OneSignal setRequiresUserPrivacyConsent:[command.arguments[0] boolValue]];
+}
+
+- (void)provideUserConsent:(CDVInvokedUrlCommand *)command {
+    if (command.arguments.count >= 1)
+        [OneSignal consentGranted:[command.arguments[0] boolValue]];
+}
+
+- (void)setExternalUserId:(CDVInvokedUrlCommand *)command {
+    NSString *externalId = command.arguments[0];
+    
+    [OneSignal setExternalUserId:externalId];
+}
+
+- (void)removeExternalUserId:(CDVInvokedUrlCommand *)command {
+    [OneSignal removeExternalUserId];
 }
 
 @end

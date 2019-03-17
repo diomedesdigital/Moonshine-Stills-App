@@ -1,65 +1,62 @@
 {
-  "_from": "cordova-plugin-camera@4.0.2",
-  "_id": "cordova-plugin-camera@4.0.2",
+  "_from": "cordova-plugin-camera@^2.4.1",
+  "_id": "cordova-plugin-camera@2.4.1",
   "_inBundle": false,
-  "_integrity": "sha1-MJQQkn70Ctxr69Sw6R3yyMZE84o=",
+  "_integrity": "sha1-GV404S22TxxJ52T31OPyYao9lME=",
   "_location": "/cordova-plugin-camera",
   "_phantomChildren": {},
   "_requested": {
-    "type": "version",
+    "type": "range",
     "registry": true,
-    "raw": "cordova-plugin-camera@4.0.2",
+    "raw": "cordova-plugin-camera@^2.4.1",
     "name": "cordova-plugin-camera",
     "escapedName": "cordova-plugin-camera",
-    "rawSpec": "4.0.2",
+    "rawSpec": "^2.4.1",
     "saveSpec": null,
-    "fetchSpec": "4.0.2"
+    "fetchSpec": "^2.4.1"
   },
   "_requiredBy": [
     "#USER",
     "/"
   ],
-  "_resolved": "https://registry.npmjs.org/cordova-plugin-camera/-/cordova-plugin-camera-4.0.2.tgz",
-  "_shasum": "309410927ef40adc6bebd4b0e91df2c8c644f38a",
-  "_spec": "cordova-plugin-camera@4.0.2",
-  "_where": "/Users/yomi/Desktop/Moonshine Project/ion2-FullApp_1.4 2",
+  "_resolved": "https://registry.npmjs.org/cordova-plugin-camera/-/cordova-plugin-camera-2.4.1.tgz",
+  "_shasum": "195e34e12db64f1c49e764f7d4e3f261aa3d94c1",
+  "_spec": "cordova-plugin-camera@^2.4.1",
+  "_where": "/Users/ahsankhan/Desktop/application",
   "author": {
     "name": "Apache Software Foundation"
   },
   "bugs": {
-    "url": "https://issues.apache.org/jira/browse/CB"
+    "url": "https://github.com/apache/cordova-plugin-camera/issues"
   },
   "bundleDependencies": false,
   "cordova": {
     "id": "cordova-plugin-camera",
     "platforms": [
+      "firefoxos",
       "android",
+      "amazon-fireos",
+      "ubuntu",
       "ios",
+      "blackberry10",
+      "wp7",
+      "wp8",
+      "windows8",
       "browser",
-      "windows",
-      "osx"
+      "windows"
     ]
   },
   "deprecated": false,
   "description": "Cordova Camera Plugin",
   "devDependencies": {
     "dmd-plugin-cordova-plugin": "^0.1.0",
-    "eslint": "^4.3.0",
-    "eslint-config-semistandard": "^11.0.0",
-    "eslint-config-standard": "^10.2.1",
-    "eslint-plugin-import": "^2.3.0",
-    "eslint-plugin-node": "^5.0.0",
-    "eslint-plugin-promise": "^3.5.0",
-    "eslint-plugin-standard": "^3.0.1",
     "husky": "^0.10.1",
-    "jsdoc-to-markdown": "^1.2.0"
+    "jsdoc-to-markdown": "^1.2.0",
+    "jshint": "^2.6.0"
   },
   "engines": {
     "cordovaDependencies": {
       "3.0.0": {
-        "cordova-android": ">=6.3.0"
-      },
-      "5.0.0": {
         "cordova": ">100"
       }
     }
@@ -69,11 +66,17 @@
     "cordova",
     "camera",
     "ecosystem:cordova",
+    "cordova-firefoxos",
     "cordova-android",
+    "cordova-amazon-fireos",
+    "cordova-ubuntu",
     "cordova-ios",
+    "cordova-blackberry10",
+    "cordova-wp7",
+    "cordova-wp8",
+    "cordova-windows8",
     "cordova-browser",
-    "cordova-windows",
-    "cordova-osx"
+    "cordova-windows"
   ],
   "license": "Apache-2.0",
   "name": "cordova-plugin-camera",
@@ -82,11 +85,11 @@
     "url": "git+https://github.com/apache/cordova-plugin-camera.git"
   },
   "scripts": {
-    "eslint": "node node_modules/eslint/bin/eslint www && node node_modules/eslint/bin/eslint src && node node_modules/eslint/bin/eslint tests",
     "gen-docs": "jsdoc2md --template \"jsdoc2md/TEMPLATE.md\" \"www/**/*.js\" --plugin \"dmd-plugin-cordova-plugin\" > README.md",
+    "jshint": "node node_modules/jshint/bin/jshint www && node node_modules/jshint/bin/jshint src && node node_modules/jshint/bin/jshint tests",
     "precommit": "npm run gen-docs && git add README.md",
-    "test": "npm run eslint"
+    "test": "npm run jshint"
   },
   "types": "./types/index.d.ts",
-  "version": "4.0.2"
+  "version": "2.4.1"
 }

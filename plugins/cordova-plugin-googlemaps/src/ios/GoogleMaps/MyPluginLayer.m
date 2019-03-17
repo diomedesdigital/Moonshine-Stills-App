@@ -8,12 +8,26 @@
 
 #import "MyPluginLayer.h"
 
-BOOL hasCordovaStatusBar = NO;  // YES if the app has cordova-plugin-statusbar
+@implementation OverflowCSS : NSObject
+  BOOL cropX;
+  BOOL cropY;
+  CGRect rect;
+@end
+
+
+@implementation CGDOMRect : NSObject
+  CGFloat left;
+  CGFloat right;
+  CGFloat top;
+  CGFloat bottom;
+@end
 
 @implementation MyPluginLayer
 
 - (id)initWithWebView:(UIView *)webView {
     self.executeQueue = [NSOperationQueue new];
+    self._lockObject = [[NSObject alloc] init];
+    self.CACHE_FIND_DOM = [NSMutableDictionary dictionary];
 
     self = [super initWithFrame:[webView frame]];
     self.webView = webView;
@@ -33,8 +47,7 @@ BOOL hasCordovaStatusBar = NO;  // YES if the app has cordova-plugin-statusbar
 
     self.pluginScrollView = [[MyPluginScrollView alloc] initWithFrame:[self.webView frame]];
 
-    self.pluginScrollView.debugView.webView = self.webView;
-    self.pluginScrollView.debugView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    self.pluginScrollView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 
     self.pluginScrollView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     UIView *uiview = self.webView;
@@ -43,19 +56,35 @@ BOOL hasCordovaStatusBar = NO;  // YES if the app has cordova-plugin-statusbar
 
     [self addSubview:self.pluginScrollView];
     [self addSubview:self.webView];
-
-
-    self.redrawTimer = [NSTimer scheduledTimerWithTimeInterval:0.1
-                                target:self
-                                selector:@selector(resizeTask:)
-                                userInfo:nil
-                                repeats:YES];
-
-    hasCordovaStatusBar = NSClassFromString(@"CDVStatusBar") != nil;
+//    dispatch_queue_t q_background = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0);
+//
+//    dispatch_async(q_background, ^{
+//      [self startRedrawTimer];
+//    });
 
     return self;
 }
 
+- (void)startRedrawTimer {
+  @synchronized(self._lockObject) {
+    if (!self.redrawTimer) {
+
+      self.redrawTimer = [NSTimer scheduledTimerWithTimeInterval:0.1
+                                  target:self
+                                  selector:@selector(resizeTask:)
+                                  userInfo:nil
+                                  repeats:YES];
+    }
+  }
+}
+- (void)stopRedrawTimer {
+  @synchronized(self._lockObject) {
+    if (self.redrawTimer) {
+      [self.redrawTimer invalidate];
+      self.redrawTimer = nil;
+    }
+  }
+}
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
   CGPoint offset = self.webView.scrollView.contentOffset;
@@ -69,21 +98,17 @@ BOOL hasCordovaStatusBar = NO;  // YES if the app has cordova-plugin-statusbar
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
   CGPoint offset = self.webView.scrollView.contentOffset;
   self.pluginScrollView.contentOffset = offset;
-
-  if (self.pluginScrollView.debugView.debuggable) {
-      [self.pluginScrollView.debugView setNeedsDisplay];
-  }
 }
 - (void)clearHTMLElements {
-    @synchronized(self.pluginScrollView.debugView.HTMLNodes) {
+    @synchronized(self.pluginScrollView.HTMLNodes) {
       NSMutableDictionary *domInfo;
       NSString *domId;
-      NSArray *keys=[self.pluginScrollView.debugView.HTMLNodes allKeys];
+      NSArray *keys=[self.pluginScrollView.HTMLNodes allKeys];
       NSArray *keys2;
       int i, j;
       for (i = 0; i < [keys count]; i++) {
         domId = [keys objectAtIndex:i];
-        domInfo = [self.pluginScrollView.debugView.HTMLNodes objectForKey:domId];
+        domInfo = [self.pluginScrollView.HTMLNodes objectForKey:domId];
         if (domInfo) {
             keys2 = [domInfo allKeys];
             for (j = 0; j < [keys2 count]; j++) {
@@ -91,7 +116,7 @@ BOOL hasCordovaStatusBar = NO;  // YES if the app has cordova-plugin-statusbar
             }
             domInfo = nil;
         }
-        [self.pluginScrollView.debugView.HTMLNodes removeObjectForKey:domId];
+        [self.pluginScrollView.HTMLNodes removeObjectForKey:domId];
       }
     }
 
@@ -104,24 +129,26 @@ BOOL hasCordovaStatusBar = NO;  // YES if the app has cordova-plugin-statusbar
         NSMutableDictionary *domInfo, *size;
         NSString *domId;
 
-        @synchronized(self.pluginScrollView.debugView.HTMLNodes) {
+        @synchronized(self._lockObject) {
 
-          NSArray *keys=[self.pluginScrollView.debugView.HTMLNodes allKeys];
-          NSArray *keys2;
-          int i, j;
-          for (i = 0; i < [keys count]; i++) {
-            domId = [keys objectAtIndex:i];
-            domInfo = [self.pluginScrollView.debugView.HTMLNodes objectForKey:domId];
-            if (domInfo) {
-                keys2 = [domInfo allKeys];
-                for (j = 0; j < [keys2 count]; j++) {
-                    [domInfo removeObjectForKey:[keys2 objectAtIndex:j]];
-                }
-                domInfo = nil;
+          if (self.pluginScrollView.HTMLNodes != nil) {
+            NSArray *keys=[self.pluginScrollView.HTMLNodes allKeys];
+            NSArray *keys2;
+            int i, j;
+            for (i = 0; i < [keys count]; i++) {
+              domId = [keys objectAtIndex:i];
+              domInfo = [self.pluginScrollView.HTMLNodes objectForKey:domId];
+              if (domInfo) {
+                  keys2 = [domInfo allKeys];
+                  for (j = 0; j < [keys2 count]; j++) {
+                      [domInfo removeObjectForKey:[keys2 objectAtIndex:j]];
+                  }
+                  domInfo = nil;
+              }
+              [self.pluginScrollView.HTMLNodes removeObjectForKey:domId];
             }
-            [self.pluginScrollView.debugView.HTMLNodes removeObjectForKey:domId];
           }
-          self.pluginScrollView.debugView.HTMLNodes = nil;
+          self.pluginScrollView.HTMLNodes = nil;
 
           NSMutableDictionary *newBuffer = [[NSMutableDictionary alloc] init];
           for (domId in elementsDic) {
@@ -138,74 +165,67 @@ BOOL hasCordovaStatusBar = NO;  // YES if the app has cordova-plugin-statusbar
             size = nil;
           }
 
-          self.pluginScrollView.debugView.HTMLNodes = newBuffer;
+          self.pluginScrollView.HTMLNodes = newBuffer;
         }
     }];
 
 }
-- (void)addMapView:(GoogleMapsViewController *)mapCtrl {
+- (void)addPluginOverlay:(PluginViewController *)pluginViewCtrl {
 
-  dispatch_async(dispatch_get_main_queue(), ^{
-
+  [[NSOperationQueue mainQueue] addOperationWithBlock:^{
       // Hold the mapCtrl instance with mapId.
-      [self.pluginScrollView.debugView.mapCtrls setObject:mapCtrl forKey:mapCtrl.mapId];
+      [self.pluginScrollView.mapCtrls setObject:pluginViewCtrl forKey:pluginViewCtrl.overlayId];
+
+      //When showing this plugin multiple times, a UIView from other plugin might be overlayed on
+      //top of this plugin so we must switch the view with the view that is right before the webview
+      //and update the background color for the webview to prevent issues with non transparent webview
+      [self exchangeSubviewAtIndex:[self.subviews indexOfObject:self.webView]-1 withSubviewAtIndex:[self.subviews indexOfObject:self.pluginScrollView]];
+      self.webView.backgroundColor = [UIColor clearColor];
 
       // Add the mapView under the scroll view.
-      [self.pluginScrollView attachView:mapCtrl.view];
+      [pluginViewCtrl.view setTag:pluginViewCtrl.viewDepth];
+      [self.pluginScrollView attachView:pluginViewCtrl.view depth:pluginViewCtrl.viewDepth];
+      pluginViewCtrl.attached = YES;
 
-      [self updateViewPosition:mapCtrl];
-  });
+      [self updateViewPosition:pluginViewCtrl];
+  }];
 }
 
-- (void)removeMapView:(GoogleMapsViewController *)mapCtrl {
-  dispatch_async(dispatch_get_main_queue(), ^{
+- (void)removePluginOverlay:(PluginViewController *)pluginViewCtrl {
+  [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+      pluginViewCtrl.attached = NO;
 
       // Remove the mapCtrl instance with mapId.
-      [self.pluginScrollView.debugView.mapCtrls removeObjectForKey:mapCtrl.mapId];
+      [self.pluginScrollView.mapCtrls removeObjectForKey:pluginViewCtrl.overlayId];
 
       // Remove the mapView from the scroll view.
-      [mapCtrl.view removeFromSuperview];
+      [pluginViewCtrl willMoveToParentViewController:nil];
+      [pluginViewCtrl.view removeFromSuperview];
+      [pluginViewCtrl removeFromParentViewController];
+      [self.pluginScrollView detachView:pluginViewCtrl.view];
 
-      [mapCtrl.view setFrame:CGRectMake(0, -1000, mapCtrl.view.frame.size.width, mapCtrl.view.frame.size.height)];
-      [mapCtrl.view setNeedsDisplay];
-
-      if (self.pluginScrollView.debugView.debuggable) {
-          [self.pluginScrollView.debugView setNeedsDisplay];
-      }
-  });
+      //[pluginViewCtrl.view setFrame:CGRectMake(0, -pluginViewCtrl.view.frame.size.height, pluginViewCtrl.view.frame.size.width, pluginViewCtrl.view.frame.size.height)];
+      //[pluginViewCtrl.view setNeedsDisplay];
+  }];
 
 }
 
 - (void)resizeTask:(NSTimer *)timer {
-    if (self.isSuspended) {
-      // Assumes all touches for the browser
-      return;
-    }
-    if (self.stopFlag || self.pauseResize) {
-        return;
-    }
-    self.stopFlag = YES;
-    NSArray *keys=[self.pluginScrollView.debugView.mapCtrls allKeys];
+  dispatch_async(dispatch_get_main_queue(), ^{
+    NSArray *keys=[self.pluginScrollView.mapCtrls allKeys];
     NSString *mapId;
-    GoogleMapsViewController *mapCtrl;
+    PluginMapViewController *mapCtrl;
+
 
     for (int i = 0; i < [keys count]; i++) {
         mapId = [keys objectAtIndex:i];
-        mapCtrl = [self.pluginScrollView.debugView.mapCtrls objectForKey:mapId];
+        mapCtrl = [self.pluginScrollView.mapCtrls objectForKey:mapId];
         [self updateViewPosition:mapCtrl];
     }
-
-    if (self.pluginScrollView.debugView.debuggable == YES) {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^() {
-
-            [self.pluginScrollView.debugView setNeedsDisplay];
-        });
-    }
-    self.stopFlag = NO;
+  });
 }
 
-- (void)updateViewPosition:(GoogleMapsViewController *)mapCtrl {
-
+- (void)updateViewPosition:(PluginViewController *)pluginViewCtrl {
     CGFloat zoomScale = self.webView.scrollView.zoomScale;
     [self.pluginScrollView setFrame:self.webView.frame];
 
@@ -214,13 +234,13 @@ BOOL hasCordovaStatusBar = NO;  // YES if the app has cordova-plugin-statusbar
     offset.y *= zoomScale;
     [self.pluginScrollView setContentOffset:offset];
 
-    if (!mapCtrl.mapDivId) {
-        return;
+    if (!pluginViewCtrl.divId) {
+      return;
     }
 
     NSDictionary *domInfo = nil;
-    @synchronized(self.pluginScrollView.debugView.HTMLNodes) {
-      domInfo = [self.pluginScrollView.debugView.HTMLNodes objectForKey:mapCtrl.mapDivId];
+    @synchronized(self.pluginScrollView.HTMLNodes) {
+      domInfo = [self.pluginScrollView.HTMLNodes objectForKey:pluginViewCtrl.divId];
       if (domInfo == nil) {
           return;
       }
@@ -232,6 +252,12 @@ BOOL hasCordovaStatusBar = NO;  // YES if the app has cordova-plugin-statusbar
     }
 
     __block CGRect rect = CGRectFromString(rectStr);
+    if (rect.origin.x == 0 &&
+        rect.origin.y == 0 &&
+        rect.size.width == 0 &&
+        rect.size.height == 0) {
+      return;
+    }
     rect.origin.x *= zoomScale;
     rect.origin.y *= zoomScale;
     rect.size.width *= zoomScale;
@@ -244,46 +270,59 @@ BOOL hasCordovaStatusBar = NO;  // YES if the app has cordova-plugin-statusbar
 
 
     // Is the map is displayed?
-    if (rect.origin.y + rect.size.height >= offset.y &&
-        rect.origin.x + rect.size.width >= offset.x &&
-        rect.origin.y < offset.y + webviewHeight &&
-        rect.origin.x < offset.x + webviewWidth &&
-        mapCtrl.view.hidden == NO) {
+    if (pluginViewCtrl.view.hidden == NO) {
+      if (pluginViewCtrl.isRenderedAtOnce == YES ||
+          ([pluginViewCtrl.overlayId hasPrefix:@"panorama_"] ||
+            ([pluginViewCtrl.overlayId hasPrefix:@"map_"] &&
+            ((GMSMapView *)pluginViewCtrl.view).mapType != kGMSTypeSatellite &&
+            ((GMSMapView *)pluginViewCtrl.view).mapType != kGMSTypeHybrid)
+          )) {
 
-        // Attach the map view to the parent.
-        if (mapCtrl.isRenderedAtOnce == YES ||
-            (mapCtrl.map.mapType != kGMSTypeSatellite &&
-            mapCtrl.map.mapType != kGMSTypeHybrid)) {
-            [self.pluginScrollView attachView:mapCtrl.view];
-        }
+        if (rect.origin.y + rect.size.height >= offset.y &&
+            rect.origin.x + rect.size.width >= offset.x &&
+            rect.origin.y < offset.y + webviewHeight &&
+            rect.origin.x < offset.x + webviewWidth) {
 
-    } else {
-        // Detach from the parent view
-        if (mapCtrl.isRenderedAtOnce == YES ||
-            (mapCtrl.map.mapType != kGMSTypeSatellite &&
-            mapCtrl.map.mapType != kGMSTypeHybrid)) {
-            [mapCtrl.view removeFromSuperview];
+          // Attach the map view to the parent.
+          [pluginViewCtrl.view setTag:pluginViewCtrl.viewDepth];
+          [self.pluginScrollView attachView:pluginViewCtrl.view depth:pluginViewCtrl.viewDepth];
+
+        } else {
+
+          // Detach from the parent view
+          [pluginViewCtrl.view removeFromSuperview];
         }
+      }
     }
 
-    if (mapCtrl.isRenderedAtOnce == YES &&
-        rect.origin.x == mapCtrl.view.frame.origin.x &&
-        rect.origin.y == mapCtrl.view.frame.origin.y &&
-        rect.size.width == mapCtrl.view.frame.size.width &&
-        rect.size.height == mapCtrl.view.frame.size.height) {
+
+    if (pluginViewCtrl.isRenderedAtOnce == YES &&
+        rect.origin.x == pluginViewCtrl.view.frame.origin.x &&
+        rect.origin.y == pluginViewCtrl.view.frame.origin.y &&
+        rect.size.width == pluginViewCtrl.view.frame.size.width &&
+        rect.size.height == pluginViewCtrl.view.frame.size.height) {
         return;
     }
 
-    dispatch_async(dispatch_get_main_queue(), ^{
-      mapCtrl.isRenderedAtOnce = YES;
-
-        [mapCtrl.view setFrame:rect];
-
-        rect.origin.x = 0;
-        rect.origin.y = 0;
-      [mapCtrl.map setFrame:rect];
-
-    });
+    if (pluginViewCtrl.attached) {
+//      if (pluginViewCtrl.isRenderedAtOnce) {
+//
+//        __block int zPosition = pluginViewCtrl.view.layer.zPosition;
+//        [UIView animateWithDuration:0.075f animations:^{
+//          [pluginViewCtrl.view setFrame:rect];
+//          pluginViewCtrl.view.layer.zPosition = zPosition;
+//          //rect.origin.x = 0;
+//          //rect.origin.y = 0;
+//        }];
+//      } else {
+        [pluginViewCtrl.view setFrame:rect];
+        //rect.origin.x = 0;
+        //rect.origin.y = 0;
+        pluginViewCtrl.isRenderedAtOnce = YES;
+//      }
+    } else {
+      [pluginViewCtrl.view setFrame:CGRectMake(0, -pluginViewCtrl.view.frame.size.height, pluginViewCtrl.view.frame.size.width, pluginViewCtrl.view.frame.size.height)];
+    }
 
 }
 - (void)execJS: (NSString *)jsString {
@@ -294,140 +333,359 @@ BOOL hasCordovaStatusBar = NO;  // YES if the app has cordova-plugin-statusbar
     }
 }
 - (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
-    if (self.isSuspended || self.pluginScrollView.debugView.mapCtrls == nil || self.pluginScrollView.debugView.mapCtrls.count == 0) {
-      // Assumes all touches for the browser
-      [self execJS:@"javascript:if(window.cordova){cordova.fireDocumentEvent('plugin_touch', {});}"];
-      return [self.webView hitTest:point withEvent:event];
+  CGPoint browserClickPoint = CGPointMake(point.x - self.webView.frame.origin.x, point.y - self.webView.frame.origin.y);
+  //NSLog(@"-->zoomScale = %f", self.webView.scrollView.zoomScale);
+
+  [self.CACHE_FIND_DOM removeAllObjects];
+
+  // Check other views of other plugins before this plugin
+  // e.g. PhoneGap-Plugin-ListPicker, etc
+  UIView *subview;
+  NSArray *subviews = [self.webView.superview subviews];
+  //CGRect statusBarFrame = [UIApplication sharedApplication].statusBarFrame;
+  //CGPoint subviewPoint = CGPointMake(browserClickPoint.x, browserClickPoint.y - statusBarFrame.size.height);
+  CGPoint subviewPoint = CGPointMake(browserClickPoint.x, browserClickPoint.y );
+  for (int i = ((int)[subviews count] - 1); i >= 0; i--) {
+    subview = [subviews objectAtIndex: i];
+    //NSLog(@"--->subview[%d] = %@", i, subview);
+    // we only want to check against other views
+    if (subview == self.pluginScrollView) {
+      continue;
     }
 
-    float offsetX = self.webView.scrollView.contentOffset.x;
-    float offsetY = self.webView.scrollView.contentOffset.y;
-    float offsetX2 = self.webView.scrollView.contentOffset.x;
-    float offsetY2 = self.webView.scrollView.contentOffset.y;
-
-    float webviewWidth = self.webView.frame.size.width;
-    float webviewHeight = self.webView.frame.size.height;
-
-
-    CGRect rect, htmlElementRect= CGRectMake(0, 0, 0, 0);
-    NSEnumerator *mapIDs = [self.pluginScrollView.debugView.mapCtrls keyEnumerator];
-    GoogleMapsViewController *mapCtrl;
-    id mapId;
-    BOOL isMapAction = NO;
-    NSString *elementRect;
-
-    CGFloat zoomScale = self.webView.scrollView.zoomScale;
-    offsetY *= zoomScale;
-    offsetX *= zoomScale;
-    webviewWidth *= zoomScale;
-    webviewHeight *= zoomScale;
-
-    NSDictionary *domInfo, *mapDivInfo;
-    int domDepth, mapDivDepth;
-    if (hasCordovaStatusBar) {
-        UIApplication* app = [UIApplication sharedApplication];
-        if (app.isStatusBarHidden) {
-            point.y -= 20 * zoomScale;
-        }
+    if (subview.isHidden || !subview.isUserInteractionEnabled) {
+      continue;
     }
 
-    CGPoint clickPointAsHtml = CGPointMake(point.x * zoomScale, point.y * zoomScale);
-@synchronized(self.pluginScrollView.debugView.HTMLNodes) {
+    UIView *hit = [subview hitTest:subviewPoint withEvent:event];
+
+    if (hit) {
+      if (subview == self.webView) {
+        break;
+      }
+      return hit;
+    }
+  }
+  if (self.pluginScrollView.mapCtrls == nil || self.pluginScrollView.mapCtrls.count == 0) {
+    // Assumes all touches for the browser
+    //NSLog(@"--->browser!");
+    return [self.webView hitTest:browserClickPoint withEvent:event];
+  }
+
+  float offsetX = self.webView.scrollView.contentOffset.x;
+  float offsetY = self.webView.scrollView.contentOffset.y;
+
+  float webviewWidth = self.webView.frame.size.width;
+  float webviewHeight = self.webView.frame.size.height;
+
+
+  CGRect rect;
+  NSEnumerator *mapIDs = [self.pluginScrollView.mapCtrls keyEnumerator];
+  PluginMapViewController *mapCtrl;
+  id mapId;
+  NSString *clickedDomId;
+
+  CGFloat zoomScale = [[UIScreen mainScreen] scale];
+  offsetY *= zoomScale;
+  offsetX *= zoomScale;
+  webviewWidth *= zoomScale;
+  webviewHeight *= zoomScale;
+
+  NSDictionary *domInfo;
+
+  @synchronized(self.pluginScrollView.HTMLNodes) {
+    //NSLog(@"--->browserClickPoint = %f, %f", browserClickPoint.x, browserClickPoint.y);
+    clickedDomId = [self findClickedDom:@"root" withPoint:browserClickPoint isMapChild:NO overflow:nil];
+    //NSLog(@"--->clickedDomId = %@", clickedDomId);
+
     while(mapId = [mapIDs nextObject]) {
-        mapCtrl = [self.pluginScrollView.debugView.mapCtrls objectForKey:mapId];
-        if (!mapCtrl.mapDivId) {
-          continue;
-        }
-        domInfo =[self.pluginScrollView.debugView.HTMLNodes objectForKey:mapCtrl.mapDivId];
+      mapCtrl = [self.pluginScrollView.mapCtrls objectForKey:mapId];
+      if (!mapCtrl.divId) {
+        continue;
+      }
+      domInfo =[self.pluginScrollView.HTMLNodes objectForKey:mapCtrl.divId];
 
-        rect = CGRectFromString([domInfo objectForKey:@"size"]);
-        rect.origin.x += offsetX2;
-        rect.origin.y += offsetY2;
-        rect.origin.x *= zoomScale;
-        rect.origin.y *= zoomScale;
-        rect.size.width *= zoomScale;
-        rect.size.height *= zoomScale;
+      rect = CGRectFromString([domInfo objectForKey:@"size"]);
 
-        // Is the map clickable?
-        if (mapCtrl.clickable == NO) {
-            //NSLog(@"--> map (%@) is not clickable.", mapCtrl.mapId);
-            continue;
-        }
+      // Is the map clickable?
+      if (mapCtrl.clickable == NO) {
+        //NSLog(@"--> map (%@) is not clickable.", mapCtrl.overlayId);
+        continue;
+      }
 
-        // Is the map displayed?
-        if (rect.origin.y + rect.size.height < offsetY ||
-            rect.origin.x + rect.size.width < offsetX ||
-            rect.origin.y > offsetY + webviewHeight ||
-            rect.origin.x > offsetX + webviewWidth ||
-            mapCtrl.view.hidden == YES) {
-            //NSLog(@"--> map (%@) is not displayed.", mapCtrl.mapId);
-            continue;
-        }
+      // Is the map displayed?
+      if (rect.origin.y + rect.size.height < 0 ||
+          rect.origin.x + rect.size.width < 0 ||
+          rect.origin.y > offsetY + webviewHeight ||
+          rect.origin.x > offsetX + webviewWidth ||
+          mapCtrl.view.hidden == YES) {
+        //NSLog(@"--> map (%@) is not displayed.", mapCtrl.overlayId);
+        continue;
+      }
 
-        // Is the clicked point is in the map rectangle?
-        if ((point.x + offsetX2) >= rect.origin.x && (point.x + offsetX2) <= (rect.origin.x + rect.size.width) &&
-            (point.y + offsetY2) >= rect.origin.y && (point.y + offsetY2) <= (rect.origin.y + rect.size.height)) {
-            isMapAction = YES;
-        } else {
-            continue;
-        }
+      // Is the clicked point is in the map rectangle?
+      if (CGRectContainsPoint(rect, browserClickPoint)) {
+      //NSLog(@"--->in map");
 
-        // Is the clicked point is on the html elements in the map?
-        mapDivInfo = [self.pluginScrollView.debugView.HTMLNodes objectForKey:mapCtrl.mapDivId];
-
-        mapDivDepth = [[mapDivInfo objectForKey:@"depth"] intValue];
-        for (NSString *domId in self.pluginScrollView.debugView.HTMLNodes) {
-            if ([mapCtrl.mapDivId isEqualToString:domId]) {
-                continue;
-            }
-
-            domInfo = [self.pluginScrollView.debugView.HTMLNodes objectForKey:domId];
-            domDepth = [[domInfo objectForKey:@"depth"] intValue];
-            if (domDepth < mapDivDepth) {
-                continue;
-            }
-            elementRect = [domInfo objectForKey:@"size"];
-            htmlElementRect = CGRectFromString(elementRect);
-            if (htmlElementRect.size.width == 0 || htmlElementRect.size.height == 0) {
-                continue;
-            }
-
-            //NSLog(@"----> domId = %@, %f, %f - %f, %f (%@ : %@)",
-            //                domId,
-            //                htmlElementRect.origin.x, htmlElementRect.origin.y,
-            //                htmlElementRect.size.width, htmlElementRect.size.height,
-            //                [domInfo objectForKey:@"tagName"],
-            //              [domInfo objectForKey:@"position"]);
-            if (clickPointAsHtml.x >= htmlElementRect.origin.x && clickPointAsHtml.x <= (htmlElementRect.origin.x + htmlElementRect.size.width) &&
-                clickPointAsHtml.y >= htmlElementRect.origin.y && clickPointAsHtml.y <= (htmlElementRect.origin.y + htmlElementRect.size.height)) {
-                isMapAction = NO;
-                //NSLog(@"--> hit (%@) : (domId: %@, depth: %d) ", mapCtrl.mapId, domId, domDepth);
-                break;
-            }
-        }
-
-        if (isMapAction == YES) {
-
+        //NSLog(@"--->clickedDomId = %@, mapCtrl.divId = %@", clickedDomId, mapCtrl.divId);
+        if ([mapCtrl.divId isEqualToString:clickedDomId]) {
           // If user click on the map, return the mapCtrl.view.
-          offsetX = (mapCtrl.view.frame.origin.x * zoomScale) - offsetX;
-          offsetY = (mapCtrl.view.frame.origin.y * zoomScale) - offsetY;
-          CGPoint point2 = CGPointMake(point.x * zoomScale, point.y * zoomScale);
-          point2.x -= offsetX;
-          point2.y -= offsetY;
+          CGPoint mapPoint = CGPointMake(point.x - mapCtrl.view.frame.origin.x - self.webView.frame.origin.x, point.y - mapCtrl.view.frame.origin.y - self.webView.frame.origin.y);
 
-          UIView *hitView =[mapCtrl.view hitTest:point2 withEvent:event];
-          //NSLog(@"--> (hit test) point = %f, %f / hit = %@", clickPointAsHtml.x, clickPointAsHtml.y,  hitView.class);
+          UIView *hitView =[mapCtrl.view hitTest:mapPoint withEvent:event];
+          //[mapCtrl mapView:mapCtrl.map didTapAtPoint:point2];
 
           return hitView;
         }
+      }
+
     }
+  }
+
+    //NSLog(@"--->in browser!");
+    return [self.webView hitTest:browserClickPoint withEvent:event];
 }
 
-    UIView *hitView =[self.webView hitTest:point withEvent:event];
-    //NSLog(@"--> (hit test) hit = %@", hitView.class);
-    [self execJS:@"javascript:(cordova && cordova.fireDocumentEvent('plugin_touch', {}));"];
-    return hitView;
+- (NSString *)findClickedDom:(NSString *)domId withPoint:(CGPoint)clickPoint isMapChild:(BOOL)isMapChild overflow:(OverflowCSS *)overflow {
 
+  if ([self.CACHE_FIND_DOM objectForKey:domId]) {
+    NSString *cacheResult = [self.CACHE_FIND_DOM objectForKey:domId];
+    if ([@"(null)" isEqualToString:cacheResult]) {
+      cacheResult = nil;
+    }
+    return cacheResult;
+  }
+
+  OverflowCSS *overflow1 = nil;
+  if (overflow) {
+    overflow1 = [[OverflowCSS alloc] init];
+    overflow1.cropX = overflow.cropX;
+    overflow1.cropY = overflow.cropY;
+    overflow1.rect = CGRectMake(overflow.rect.origin.x, overflow.rect.origin.y, overflow.rect.size.width, overflow.rect.size.height);
+  }
+
+  NSDictionary *domInfo = [self.pluginScrollView.HTMLNodes objectForKey:domId];
+  NSDictionary *domInfoChild;
+  NSString *maxDomId = nil;
+  CGRect rect, tmpRect;
+  CGDOMRect *rect2, *rect3;
+  NSDictionary *zIndexProp;
+  unsigned long containMapCnt = 0;
+
+  domInfo = [self.pluginScrollView.HTMLNodes objectForKey:domId];
+  if ([domInfo objectForKey:@"containMapIDs"]) {
+    NSDictionary *containMapIDs = [domInfo objectForKey:@"containMapIDs"];
+    containMapCnt = [[containMapIDs allKeys] count];
+  }
+  isMapChild = isMapChild || [[domInfo objectForKey:@"isMap"] boolValue] || false;
+  //NSLog(@"---- domId = %@, containMapCnt = %ld, isMapChild = %@", domId, containMapCnt, isMapChild ? @"YES":@"NO");
+
+  NSString *pointerEvents = [domInfo objectForKey:@"pointerEvents"];
+  NSString *overflowX = [domInfo objectForKey:@"overflowX"];
+  NSString *overflowY = [domInfo objectForKey:@"overflowY"];
+  if ([@"hidden" isEqualToString:overflowX] || [@"scroll" isEqualToString:overflowX] ||
+    [@"hidden" isEqualToString:overflowY] || [@"scroll" isEqualToString:overflowY]) {
+    overflow1 = [[OverflowCSS alloc] init];
+    overflow1.cropX = [@"hidden" isEqualToString:overflowX] || [@"scroll" isEqualToString:overflowX];
+    overflow1.cropY = [@"hidden" isEqualToString:overflowY] || [@"scroll" isEqualToString:overflowY];
+    overflow1.rect = CGRectFromString([domInfo objectForKey:@"size"]);
+  } else if ([@"visible" isEqualToString:overflowX] || [@"visible" isEqualToString:overflowX]) {
+    if (overflow1 != nil) {
+      overflow1.cropX = ![@"visible" isEqualToString:overflowX];
+      overflow1.cropY = ![@"visible" isEqualToString:overflowY];
+    }
+  }
+
+  zIndexProp = [domInfo objectForKey:@"zIndex"];
+  NSArray *children = [domInfo objectForKey:@"children"];
+  int maxZIndex = -1215752192;  //  -1 * pow(2, 32) + 1;
+  if ((containMapCnt > 0 || isMapChild || [@"none" isEqualToString:pointerEvents] ||
+       [[zIndexProp objectForKey:@"isInherit"] boolValue]) && children != nil && children.count > 0) {
+
+    int zIndexValue;
+    NSString *childId, *grandChildId;
+    NSArray *grandChildren;
+
+    for (int i = (int)children.count - 1; i >= 0; i--) {
+      childId = [children objectAtIndex:i];
+      domInfo = [self.pluginScrollView.HTMLNodes objectForKey:childId];
+      if (!domInfo) {
+        continue;
+      }
+
+      zIndexProp = [domInfo objectForKey:@"zIndex"];
+      zIndexValue = [[zIndexProp objectForKey:@"z"] intValue];
+      if (maxZIndex < zIndexValue || [[zIndexProp objectForKey:@"isInherit"] boolValue]) {
+
+        grandChildren = [domInfo objectForKey:@"children"];
+        if (grandChildren == nil || grandChildren.count == 0) {
+          tmpRect = CGRectFromString([domInfo objectForKey:@"size"]);
+          rect2 = [[CGDOMRect alloc] init];
+          rect2.left = tmpRect.origin.x;
+          rect2.top = tmpRect.origin.y;
+          rect2.right = rect2.left + tmpRect.size.width;
+          rect2.bottom = rect2.top + tmpRect.size.height;
+
+          if (overflow1 && ![@"root" isEqualToString:domId]) {
+
+            overflow1.rect = CGRectFromString([domInfo objectForKey:@"size"]);
+            rect3 = [[CGDOMRect alloc] init];
+            rect3.left = overflow1.rect.origin.x;
+            rect3.top = overflow1.rect.origin.y;
+            rect3.right = rect3.left + overflow1.rect.size.width;
+            rect3.bottom = rect3.top + overflow1.rect.size.height;
+
+
+            if (overflow1.cropX) {
+              rect2.left = MAX(rect2.left, rect3.left);
+              rect2.right = MIN(rect2.right, rect3.right);
+            }
+            if (overflow1.cropY) {
+              rect2.top = MAX(rect2.top, rect3.top);
+              rect2.bottom = MIN(rect2.bottom, rect3.bottom);
+            }
+
+          }
+
+          if (clickPoint.x < rect2.left ||
+              clickPoint.y < rect2.top ||
+              clickPoint.x > rect2.right ||
+              clickPoint.y > rect2.bottom) {
+            continue;
+          }
+
+          if ([@"none" isEqualToString:[domInfo objectForKey:@"pointerEvents"]]) {
+            continue;
+          }
+
+          if (maxZIndex < zIndexValue) {
+            maxZIndex = zIndexValue;
+            maxDomId = childId;
+          }
+
+        } else {
+          if (zIndexValue < maxZIndex) {
+            continue;
+          }
+          grandChildId = [self findClickedDom:childId withPoint:clickPoint isMapChild: isMapChild overflow:overflow1];
+          //NSLog(@"-----[570] childId = %@ grandChildId = %@", childId, grandChildId);
+          if (grandChildId == nil) {
+            grandChildId = childId;
+          } else {
+            domInfoChild = [self.pluginScrollView.HTMLNodes objectForKey:grandChildId];
+            zIndexProp = [domInfoChild objectForKey:@"zIndex"];
+            zIndexValue = [[zIndexProp objectForKey:@"z"] intValue];
+          }
+          domInfoChild = [self.pluginScrollView.HTMLNodes objectForKey:grandChildId];
+          rect = CGRectFromString([domInfoChild objectForKey:@"size"]);
+
+
+          rect2 = [[CGDOMRect alloc] init];
+          rect2.left = rect.origin.x;
+          rect2.top = rect.origin.y;
+          rect2.right = rect2.left + rect.size.width;
+          rect2.bottom = rect2.top + rect.size.height;
+
+          /*
+          if (overflow1 && ![@"root" isEqualToString:domId]) {
+
+            NSLog(@"-----[519] grandChildId = %@, size = %@", grandChildId, [domInfo objectForKey:@"size"]);
+            overflow1.rect = CGRectFromString([domInfo objectForKey:@"size"]);
+            rect3 = [[CGDOMRect alloc] init];
+            rect3.left = overflow1.rect.origin.x;
+            rect3.top = overflow1.rect.origin.y;
+            rect3.right = rect3.left + overflow1.rect.size.width;
+            rect3.bottom = rect3.top + overflow1.rect.size.height;
+
+
+            if (overflow1.cropX) {
+              rect2.left = MAX(rect2.left, rect3.left);
+              rect2.right = MIN(rect2.right, rect3.right);
+            }
+            if (overflow1.cropY) {
+              rect2.top = MAX(rect2.top, rect3.top);
+              rect2.bottom = MIN(rect2.bottom, rect3.bottom);
+            }
+
+          }
+          */
+          if (clickPoint.x < rect2.left ||
+              clickPoint.y < rect2.top ||
+              clickPoint.x > rect2.right ||
+              clickPoint.y > rect2.bottom) {
+            continue;
+          }
+
+
+          if ([@"none" isEqualToString:[domInfoChild objectForKey:@"pointerEvents"]]) {
+            continue;
+          }
+          if (maxZIndex < zIndexValue) {
+            maxZIndex = zIndexValue;
+            maxDomId = grandChildId;
+          }
+        }
+
+      }
+    }
+  }
+
+  if (maxDomId == nil && ![@"root" isEqualToString:domId]) {
+    if ([@"none" isEqualToString:pointerEvents]) {
+      [self.CACHE_FIND_DOM setValue:@"(null)" forKey:domId];
+      return nil;
+    }
+
+    domInfo = [self.pluginScrollView.HTMLNodes objectForKey:domId];
+    rect = CGRectFromString([domInfo objectForKey:@"size"]);
+
+    rect2 = [[CGDOMRect alloc] init];
+    rect2.left = rect.origin.x;
+    rect2.top = rect.origin.y;
+    rect2.right = rect2.left + rect.size.width;
+    rect2.bottom = rect2.top + rect.size.height;
+
+
+//    if (overflow1) {
+//
+//      overflow1.rect = CGRectFromString([domInfo objectForKey:@"size"]);
+//      rect3 = [[CGDOMRect alloc] init];
+//      rect3.left = overflow1.rect.origin.x;
+//      rect3.top = overflow1.rect.origin.y;
+//      rect3.right = rect3.left + overflow1.rect.size.width;
+//      rect3.bottom = rect3.top + overflow1.rect.size.height;
+//
+//
+//      if (overflow1.cropX) {
+//        rect2.left = MAX(rect2.left, rect3.left);
+//        rect2.right = MIN(rect2.right, rect3.right);
+//      }
+//      if (overflow1.cropY) {
+//        rect2.top = MAX(rect2.top, rect3.top);
+//        rect2.bottom = MIN(rect2.bottom, rect3.bottom);
+//      }
+//
+//    }
+
+    if (clickPoint.x < rect2.left ||
+        clickPoint.y < rect2.top ||
+        clickPoint.x > rect2.right ||
+        clickPoint.y > rect2.bottom) {
+      [self.CACHE_FIND_DOM setValue:@"(null)" forKey:domId];
+      return nil;
+    }
+
+    maxDomId = domId;
+  }
+
+  if (!maxDomId) {
+    [self.CACHE_FIND_DOM setValue:@"(null)" forKey:domId];
+  } else {
+    [self.CACHE_FIND_DOM setValue:maxDomId forKey:domId];
+  }
+
+  return maxDomId;
 }
+
 
 @end

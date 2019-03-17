@@ -162,17 +162,18 @@ var options = {
   subject: 'the subject', // fi. for email
   files: ['', ''], // an array of filenames either locally or remotely
   url: 'https://www.website.com/foo/#bar?a=b',
-  chooserTitle: 'Pick an app' // Android only, you can override the default share sheet title
-}
+  chooserTitle: 'Pick an app' // Android only, you can override the default share sheet title,
+  appPackageName: 'com.apple.social.facebook' // Android only, you can provide id of the App you want to share with
+};
 
 var onSuccess = function(result) {
   console.log("Share completed? " + result.completed); // On Android apps mostly return false even while it's true
-  console.log("Shared to app: " + result.app); // On Android result.app is currently empty. On iOS it's empty when sharing is cancelled (result.completed=false)
-}
+  console.log("Shared to app: " + result.app); // On Android result.app since plugin version 5.4.0 this is no longer empty. On iOS it's empty when sharing is cancelled (result.completed=false)
+};
 
 var onError = function(msg) {
   console.log("Sharing failed with message: " + msg);
-}
+};
 
 window.plugins.socialsharing.shareWithOptions(options, onSuccess, onError);
 ```
@@ -504,14 +505,14 @@ window.plugins.socialsharing.share('Hello from iOS :)')
 
 ## 8. Whitelisting on iOS 9+
 
-On iOS 9 and newer you have to make sure to whitelist the applications you want to use for sharing. Without whitelisting "query schemes", you may get the error callback invoked when calling the `canShareVia` function (and possibly the `shareVia`). You can verify this is a permissions issue by observing the output in XCode for something like:
+On iOS 9 and newer you have to make sure to whitelist the applications you want to use for sharing. Without whitelisting "query schemes", you may get the error callback invoked when calling the `canShareVia` function (and possibly the `shareVia`). You can verify this is a permissions issue by observing the output in Xcode for something like:
 
 > -canOpenURL: failed for URL: "whatsapp://app" - error: "This app is not allowed to query for scheme whatsapp"
 
 You have a few options to prevent this by whitelisting the application you want to share via:
 
 ### Directly editing the .plist file
-This is a stright forward approach - you just manually edit the .plist file - either from within XCode or using a text editor. You can see example entries above (e.g. xyz). While this is simple to do, the changes may be lost when rebuilding the project or tweaking the platform (e.g. upgrading) and is less recomended.
+Manually edit the .plist file - either from within Xcode or using a text editor. You can see example entries above (look for `LSApplicationQueriesSchemes`). While this is simple to do, the changes may be lost when rebuilding the project or tweaking the platform (e.g. upgrading) and is less recommended.
 
 ### Use query schema plugin
 There is a plugin designed specifically to address query schema whitelisting. You can find the plugin and how to use it [here](https://www.npmjs.com/package/cordova-plugin-queries-schemes). In general, after installation, you can change plugin.xml file under the plugin subfolder within the plugins directory of your project to add the required schemas. Here again though, you have to edit an additional file and should take care not to overwrite it when making changes to your project.

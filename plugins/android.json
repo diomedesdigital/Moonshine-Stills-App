@@ -7,8 +7,8 @@
     "files": {}
   },
   "installed_plugins": {
-    "cordova-android-play-services-gradle-release": {
-      "PLAY_SERVICES_VERSION": "11.+",
+    "cordova-android-support-gradle-release": {
+      "ANDROID_SUPPORT_VERSION": "27.+",
       "PACKAGE_NAME": "com.moonshinestillsonline.moonshinestills2"
     },
     "cordova-custom-config": {
@@ -42,10 +42,7 @@
     },
     "cordova-plugin-facebook4": {
       "APP_ID": "217479888701670",
-      "APP_NAME": "“Moonshine",
-      "PACKAGE_NAME": "com.moonshinestillsonline.moonshinestills2"
-    },
-    "cordova-plugin-fcm": {
+      "APP_NAME": "“Moonshine Stills App",
       "PACKAGE_NAME": "com.moonshinestillsonline.moonshinestills2"
     },
     "cordova-plugin-file": {
@@ -56,9 +53,12 @@
     },
     "cordova-plugin-googlemaps": {
       "API_KEY_FOR_ANDROID": "AIzaSyAZlMfyET1XSW0IE2vnlGrgUQMjCcLl6QY",
+      "PLAY_SERVICES_VERSION": "15.0.1",
+      "ANDROID_SUPPORT_V4_VERSION": "27.+",
       "PACKAGE_NAME": "com.moonshinestillsonline.moonshinestills2"
     },
     "cordova-plugin-googleplus": {
+      "PLAY_SERVICES_VERSION": "11.8.0",
       "PACKAGE_NAME": "com.moonshinestillsonline.moonshinestills2"
     },
     "cordova-plugin-inappbrowser": {
@@ -86,6 +86,7 @@
       "PACKAGE_NAME": "com.moonshinestillsonline.moonshinestills2"
     },
     "cordova-plugin-x-socialsharing": {
+      "ANDROID_SUPPORT_V4_VERSION": "24.1.1+",
       "PACKAGE_NAME": "com.moonshinestillsonline.moonshinestills2"
     },
     "cordova-plugin-x-toast": {
@@ -107,13 +108,11 @@
       "PACKAGE_NAME": "com.moonshinestillsonline.moonshinestills2"
     },
     "phonegap-plugin-barcodescanner": {
+      "ANDROID_SUPPORT_V4_VERSION": "27.+",
       "PACKAGE_NAME": "com.moonshinestillsonline.moonshinestills2"
     }
   },
   "dependent_plugins": {
-    "com.googlemaps.ios": {
-      "PACKAGE_NAME": "com.moonshinestillsonline.moonshinestills2"
-    },
     "es6-promise-plugin": {
       "PACKAGE_NAME": "com.moonshinestillsonline.moonshinestills2"
     }

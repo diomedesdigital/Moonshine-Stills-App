@@ -1,19 +1,19 @@
 {
-  "_from": "cordova-plugin-console@1.1.0",
+  "_from": "cordova-plugin-console@^1.1.0",
   "_id": "cordova-plugin-console@1.1.0",
   "_inBundle": false,
   "_integrity": "sha1-4vusECkBeeRMtyxf28QQpTHBzW0=",
   "_location": "/cordova-plugin-console",
   "_phantomChildren": {},
   "_requested": {
-    "type": "version",
+    "type": "range",
     "registry": true,
-    "raw": "cordova-plugin-console@1.1.0",
+    "raw": "cordova-plugin-console@^1.1.0",
     "name": "cordova-plugin-console",
     "escapedName": "cordova-plugin-console",
-    "rawSpec": "1.1.0",
+    "rawSpec": "^1.1.0",
     "saveSpec": null,
-    "fetchSpec": "1.1.0"
+    "fetchSpec": "^1.1.0"
   },
   "_requiredBy": [
     "#USER",
@@ -21,8 +21,8 @@
   ],
   "_resolved": "https://registry.npmjs.org/cordova-plugin-console/-/cordova-plugin-console-1.1.0.tgz",
   "_shasum": "e2fbac10290179e44cb72c5fdbc410a531c1cd6d",
-  "_spec": "cordova-plugin-console@1.1.0",
-  "_where": "/Users/yomi/Desktop/Moonshine Project/ion2-FullApp_1.4 2",
+  "_spec": "cordova-plugin-console@^1.1.0",
+  "_where": "/Users/ahsankhan/Desktop/application",
   "author": {
     "name": "Apache Software Foundation"
   },

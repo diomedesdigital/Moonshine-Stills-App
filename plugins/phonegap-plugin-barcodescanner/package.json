@@ -1,28 +1,28 @@
 {
-  "_from": "phonegap-plugin-barcodescanner@7.0.2",
-  "_id": "phonegap-plugin-barcodescanner@7.0.2",
+  "_from": "phonegap-plugin-barcodescanner@^7.0.2",
+  "_id": "phonegap-plugin-barcodescanner@7.1.2",
   "_inBundle": false,
-  "_integrity": "sha1-SQOdo8JD0l0uLJm0isEHrAtSHYo=",
+  "_integrity": "sha512-9jxhXptCUPkD8dnNEjjQTClKrpXc4LjDOGpBuqwxJTSIiVsgv00P8pfmWGNYfyJD9N3yBYYra/X0UexbUKWxtw==",
   "_location": "/phonegap-plugin-barcodescanner",
   "_phantomChildren": {},
   "_requested": {
-    "type": "version",
+    "type": "range",
     "registry": true,
-    "raw": "phonegap-plugin-barcodescanner@7.0.2",
+    "raw": "phonegap-plugin-barcodescanner@^7.0.2",
     "name": "phonegap-plugin-barcodescanner",
     "escapedName": "phonegap-plugin-barcodescanner",
-    "rawSpec": "7.0.2",
+    "rawSpec": "^7.0.2",
     "saveSpec": null,
-    "fetchSpec": "7.0.2"
+    "fetchSpec": "^7.0.2"
   },
   "_requiredBy": [
     "#USER",
     "/"
   ],
-  "_resolved": "https://registry.npmjs.org/phonegap-plugin-barcodescanner/-/phonegap-plugin-barcodescanner-7.0.2.tgz",
-  "_shasum": "49039da3c243d25d2e2c99b48ac107ac0b521d8a",
-  "_spec": "phonegap-plugin-barcodescanner@7.0.2",
-  "_where": "/Users/yomi/Desktop/Moonshine Project/ion2-FullApp_1.4 2",
+  "_resolved": "https://registry.npmjs.org/phonegap-plugin-barcodescanner/-/phonegap-plugin-barcodescanner-7.1.2.tgz",
+  "_shasum": "100b909f2b2deeae96eb73b4f0dce19cb50cb3a3",
+  "_spec": "phonegap-plugin-barcodescanner@^7.0.2",
+  "_where": "/Users/ahsankhan/Desktop/application",
   "author": {
     "name": "Adobe PhoneGap Team"
   },
@@ -51,6 +51,10 @@
     "cordovaDependencies": {
       "7.0.0": {
         "cordova-android": ">=6.3.0"
+      },
+      "7.1.0": {
+        "cordova": ">=7.1.0",
+        "cordova-android": ">=6.3.0"
       }
     }
   },
@@ -75,5 +79,5 @@
   "scripts": {
     "test": "jasmine-node --color spec"
   },
-  "version": "7.0.2"
+  "version": "7.1.2"
 }

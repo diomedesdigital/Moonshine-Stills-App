@@ -2,7 +2,7 @@
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
         xmlns:android="http://schemas.android.com/apk/res/android"
         id="cordova-plugin-android-permissions"
-        version="1.0.0">
+        version="0.10.0">
 
   <name>Permissions</name>
 
@@ -27,20 +27,6 @@
     </config-file>
 
     <source-file src="src/android/com/android/plugins/Permissions.java" target-dir="src/com/android/plugins"/>
-  </platform>
-
-  <!-- browser -->
-  <platform name="browser">
-    <js-module src="www/permissions-dummy.js" name="Permissions">
-      <clobbers target="cordova.plugins.permissions" />
-    </js-module>
-  </platform>
-
-  <!-- ios -->
-  <platform name="ios">
-    <js-module src="www/permissions-dummy.js" name="Permissions">
-      <clobbers target="cordova.plugins.permissions" />
-    </js-module>
   </platform>
 
 </plugin>

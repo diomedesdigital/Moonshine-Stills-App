@@ -17,7 +17,8 @@
 //#import "MFGoogleMapAdditions/GMSCoordinateBounds+Geometry.h"
 #import "GMSCoordinateBounds+Geometry.h"
 #import <math.h>
-#import "MyPlgunProtocol.h"
+#import "IPluginProtocol.h"
+#import "PluginViewController.h"
 #import <Cordova/CDVCommandDelegate.h>
 #import <Cordova/CDVCommandDelegateImpl.h>
 
@@ -74,12 +75,13 @@ typedef void (^TIFAnimationGroupCompletionBlock)();
 
 @interface PluginUtil : NSObject
 + (BOOL)isPolygonContains:(GMSPath *)path coordinate:(CLLocationCoordinate2D)coordinate projection:(GMSProjection *)projection;
-+ (BOOL)isPointOnTheLine:(GMSPath *)path coordinate:(CLLocationCoordinate2D)coordinate projection:(GMSProjection *)projection;
-+ (BOOL)isPointOnTheGeodesicLine:(GMSPath *)path coordinate:(CLLocationCoordinate2D)coordinate threshold:(double)threshold;
++ (CLLocationCoordinate2D)isPointOnTheLine:(GMSPath *)path coordinate:(CLLocationCoordinate2D)coordinate projection:(GMSProjection *)projection;
++ (CLLocationCoordinate2D)isPointOnTheGeodesicLine:(GMSPath *)path coordinate:(CLLocationCoordinate2D)coordinate threshold:(double)threshold projection:(GMSProjection *)projection;
 + (BOOL)isCircleContains:(GMSCircle *)circle coordinate:(CLLocationCoordinate2D)point;
 + (BOOL)isInDebugMode;
 + (GMSMutablePath *)getMutablePathFromCircle:(CLLocationCoordinate2D)center radius:(double)radius;
 + (NSString *)getAbsolutePathFromCDVFilePath:(UIView*)theWebView cdvFilePath:(NSString *)cdvFilePath;
++ (NSString *)PGM_LOCALIZATION:(NSString *)key;
 @end
 
 
@@ -89,4 +91,10 @@ typedef void (^TIFAnimationGroupCompletionBlock)();
     self.enabled = NO;
     self.enabled = YES;
 }
+@end
+
+
+
+@interface CDVPlugin (GoogleMapsPlugin)
+- (void)setPluginViewController: (PluginViewController*)viewCtrl;
 @end
