@@ -48,6 +48,7 @@ import { ScheduleService } from '../pages/schedule/schedule.service';
 
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 
@@ -140,6 +141,14 @@ import { EmailService } from '../services/email.service';
 //Onesingal
 import { OneSignal } from '@ionic-native/onesignal';
 
+//RSS Feed
+import { RssService } from '../providers/rss-service/rss-service';
+//import { RssHomePage } from '../pages/rss/rss-home/rss-home';
+import { LoadingService } from '../providers/loading-service/loading-service';
+//import { RssPageModule } from '../pages/rss/rss.module';
+import { RssPage } from '../pages/rss/rss';
+
+
 
 firebase.initializeApp(Login.firebaseConfig);
 
@@ -172,8 +181,7 @@ firebase.initializeApp(Login.firebaseConfig);
     ArticlePage,
     LawPage,
     PostDetail,
-    CalculatorPage,
-
+    CalculatorPage,  
     PreloadImage,
     BackgroundImage,
     ShowHideContainer,
@@ -217,12 +225,15 @@ firebase.initializeApp(Login.firebaseConfig);
     CollectionsPage,
     OneProductPage,
     ProductListPage,
-    RewardPage,      
+    RewardPage,
+    //RssHomePage,
+    RssPage,      
   ],
   imports: [
     BrowserModule,
     YoutubeModule,      
     HttpModule,
+    HttpClientModule,    
     FeedsModule,
     IonicPageModule,
     SuperTabsModule.forRoot(),
@@ -237,6 +248,8 @@ firebase.initializeApp(Login.firebaseConfig);
     SharedModule,
     ContactModule,
     //PipesModule,
+    //RssPageModule,
+
         
   ],
   bootstrap: [IonicApp],
@@ -297,11 +310,13 @@ firebase.initializeApp(Login.firebaseConfig);
     OneProductPage,
     ProductListPage,
     RewardPage,
+    //RssHomePage,
+    RssPage,
 
   ],
   providers: [FeedService, EmailService, ListingService, SocialSharing, InAppBrowser, Facebook, OneSignal,  ProfileService, NotificationsService, List1Service, List2Service, ScheduleService, SplashScreen, StatusBar, Camera, 
     GooglePlus, Keyboard, Toast, GoogleMaps,Geolocation,{ provide: ErrorHandler, useClass: IonicErrorHandler }, LoginProvider,LogoutProvider, LoadingProvider, 
-    AlertProvider, ImageProvider, DataProvider, FirebaseProvider,NativeAudio, VideoProvider, ShopifyClientProvider ],
+    AlertProvider, ImageProvider, DataProvider, FirebaseProvider,NativeAudio, VideoProvider,  RssService, ShopifyClientProvider, LoadingService  ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
 export class AppModule {}

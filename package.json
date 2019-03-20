@@ -44,12 +44,13 @@
         "angularfire2": "^4.0.0-rc0",
         "autoprefixer": "^8.0.0",
         "bourbon": "4.3.4",
+        "cached-path-relative": "^1.0.2",
         "cordova": "^8.1.2",
         "cordova-android": "6.3.0",
         "cordova-android-play-services-gradle-release": "^1.2.0",
         "cordova-android-support-gradle-release": "^1.4.7",
         "cordova-browser": "5.0.3",
-        "cordova-custom-config": "^3.3.0",
+        "cordova-custom-config": "^5.0.3",
         "cordova-ios": "4.4.0",
         "cordova-plugin-android-permissions": "^0.10.0",
         "cordova-plugin-audioinput": "^0.3.0",
@@ -65,7 +66,7 @@
         "cordova-plugin-geolocation": "^2.4.3",
         "cordova-plugin-googlemaps": "^2.5.2",
         "cordova-plugin-googlemaps-sdk": "git+https://github.com/mapsplugin/cordova-plugin-googlemaps-sdk.git",
-        "cordova-plugin-googleplus": "git+https://github.com/EddyVerbruggen/cordova-plugin-googleplus.git",
+        "cordova-plugin-googleplus": "7.0.0",
         "cordova-plugin-inappbrowser": "^1.7.2",
         "cordova-plugin-ionic-webview": "^1.2.1",
         "cordova-plugin-media": "^3.0.1",
@@ -95,12 +96,13 @@
         "plugin": "^0.3.3",
         "rxjs": "5.1.1",
         "sw-toolbox": "3.6.0",
+        "xml2js": "^0.4.19",
         "zone.js": "0.8.10"
     },
     "devDependencies": {
-        "@ionic/app-scripts": "1.3.7",
+        "@ionic/app-scripts": "^3.2.3",
         "@ionic/lab": "1.0.23",
-        "@types/lodash": "^4.14.63",
+        "@types/lodash": "^4.14.112",
         "typescript": "2.3.3"
     },
     "cordovaPlugins": [
@@ -133,10 +135,6 @@
             "cordova.plugins.diagnostic": {},
             "cordova-plugin-geolocation": {
                 "GEOLOCATION_USAGE_DESCRIPTION": " "
-            },
-            "cordova-plugin-googleplus": {
-                "REVERSED_CLIENT_ID": "com.googleusercontent.apps.1024389242669-oh1rjpgv34d9j5b8jt3nl5likbl2ldqi",
-                "PLAY_SERVICES_VERSION": "11.8.0"
             },
             "ionic-plugin-keyboard": {},
             "cordova-plugin-nativeaudio": {},
@@ -188,6 +186,11 @@
             "cordova-sms-plugin": {},
             "cordova-android-support-gradle-release": {
                 "ANDROID_SUPPORT_VERSION": "27.+"
+            },
+            "cordova-plugin-googleplus": {
+                "REVERSED_CLIENT_ID": "com.googleusercontent.apps.1024389242669-oh1rjpgv34d9j5b8jt3nl5likbl2ldqi",
+                "WEB_APPLICATION_CLIENT_ID": "353306887381-3184ot2nujde50tkk87509709c69sjdf.apps.googleusercontent.com",
+                "PLAY_SERVICES_VERSION": "11.8.0"
             }
         },
         "platforms": [

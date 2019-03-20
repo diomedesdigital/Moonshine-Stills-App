@@ -26,7 +26,7 @@ export class FeedService {
 
 	public getFeeds(source) {
 		//let url = 'https://query.yahooapis.com/v1/public/yql?q=select * from xml where url ="' + encodeURIComponent(source) + '"&format=json';	
-		let url = 'https://rss2json.com/#rss_url='  + encodeURIComponent(source) + '&format=json';
+		let url = 'https://api.rss2json.com/v1/api.json?rss_url='  + encodeURIComponent(source) + '&format=json';
 		//let url = 'https://rss2json.com/#rss_url="' + encodeURIComponent(source) + '"&format=json';	
 		return this.http.get(url)
 	  	.map(result => {

@@ -33,17 +33,6 @@
       "GEOLOCATION_USAGE_DESCRIPTION": " "
     }
   },
-  "cordova-plugin-googleplus": {
-    "source": {
-      "type": "registry",
-      "id": "git+https://github.com/EddyVerbruggen/cordova-plugin-googleplus.git"
-    },
-    "is_top_level": true,
-    "variables": {
-      "REVERSED_CLIENT_ID": "com.googleusercontent.apps.1024389242669-oh1rjpgv34d9j5b8jt3nl5likbl2ldqi",
-      "PLAY_SERVICES_VERSION": "11.8.0"
-    }
-  },
   "ionic-plugin-keyboard": {
     "source": {
       "type": "registry",
@@ -283,6 +272,17 @@
     "is_top_level": true,
     "variables": {
       "ANDROID_SUPPORT_VERSION": "27.+"
+    }
+  },
+  "cordova-plugin-googleplus": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-googleplus"
+    },
+    "is_top_level": true,
+    "variables": {
+      "REVERSED_CLIENT_ID": "com.googleusercontent.apps.1024389242669-oh1rjpgv34d9j5b8jt3nl5likbl2ldqi",
+      "WEB_APPLICATION_CLIENT_ID": "353306887381-3184ot2nujde50tkk87509709c69sjdf.apps.googleusercontent.com"
     }
   }
 }

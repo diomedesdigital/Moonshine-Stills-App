@@ -57,10 +57,6 @@
       "ANDROID_SUPPORT_V4_VERSION": "27.+",
       "PACKAGE_NAME": "com.moonshinestillsonline.moonshinestills2"
     },
-    "cordova-plugin-googleplus": {
-      "PLAY_SERVICES_VERSION": "11.8.0",
-      "PACKAGE_NAME": "com.moonshinestillsonline.moonshinestills2"
-    },
     "cordova-plugin-inappbrowser": {
       "PACKAGE_NAME": "com.moonshinestillsonline.moonshinestills2"
     },
@@ -109,6 +105,10 @@
     },
     "phonegap-plugin-barcodescanner": {
       "ANDROID_SUPPORT_V4_VERSION": "27.+",
+      "PACKAGE_NAME": "com.moonshinestillsonline.moonshinestills2"
+    },
+    "cordova-plugin-googleplus": {
+      "PLAY_SERVICES_VERSION": "11.8.0",
       "PACKAGE_NAME": "com.moonshinestillsonline.moonshinestills2"
     }
   },

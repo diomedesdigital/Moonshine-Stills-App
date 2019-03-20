@@ -37,6 +37,11 @@ import { ContactPage } from '../pages/contact/contact.page';
 //Onesignal
 import { OneSignal } from '@ionic-native/onesignal';
 
+//RSS
+import { RssHomePage } from '../pages/rss/rss-home/rss-home';
+import { RssPage } from '../pages/rss/rss';
+
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.html'
@@ -96,6 +101,7 @@ export class MyApp {
     this.pages = [
       { title: 'Home', icon: 'home', component: TabsPage },
       { title: 'Forums', icon: 'create', component: GroupsPage },
+      { title: 'RSS', icon: 'create', component: RssPage },      
       { title: 'US State Laws', icon: 'book', component: LawPage },
       { title: 'Blog', icon: 'paper', component: ArticlePage },
       { title: 'Mash Calcuator', icon: 'calculator', component: CalculatorPage },

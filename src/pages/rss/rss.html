@@ -1,0 +1,31 @@
+<!--
+  Generated template for the RssPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>category</ion-title>
+        <ion-buttons right style="margin-right:10px">
+      <button ion-button icon-only (click)="rssService.goToFavoritePage(navCtrl)">
+      <ion-icon class="fs-24 text-grey-5" name="heart">
+      </ion-icon>
+    </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content class="white-1">
+  <ion-list class="lst-no-background">
+    <ion-item  *ngFor="let item of list_category">
+        <button (click)="rssService.goToHomePage(navCtrl,item)" class="fs-15">
+         {{item.title}}
+        </button>
+    </ion-item>
+  </ion-list>
+</ion-content>
