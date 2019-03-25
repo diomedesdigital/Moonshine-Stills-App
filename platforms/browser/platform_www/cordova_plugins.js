@@ -668,12 +668,6 @@ module.exports = [
         ]
     },
     {
-        "file": "plugins/es6-promise-plugin/www/promise.js",
-        "id": "es6-promise-plugin.Promise",
-        "pluginId": "es6-promise-plugin",
-        "runs": true
-    },
-    {
         "file": "plugins/cordova-plugin-x-socialsharing/www/SocialSharing.js",
         "id": "cordova-plugin-x-socialsharing.SocialSharing",
         "pluginId": "cordova-plugin-x-socialsharing",
@@ -735,6 +729,12 @@ module.exports = [
         "id": "phonegap-plugin-barcodescanner.BarcodeScannerProxy",
         "pluginId": "phonegap-plugin-barcodescanner",
         "runs": true
+    },
+    {
+        "file": "plugins/es6-promise-plugin/www/promise.js",
+        "id": "es6-promise-plugin.Promise",
+        "pluginId": "es6-promise-plugin",
+        "runs": true
     }
 ];
 module.exports.metadata = 
@@ -743,11 +743,9 @@ module.exports.metadata =
     "cordova-android-support-gradle-release": "1.4.7",
     "cordova-custom-config": "3.3.0",
     "cordova-plugin-android-permissions": "0.10.0",
-    "cordova-plugin-compat": "1.2.0",
     "cordova-plugin-audioinput": "0.3.0",
     "cordova-plugin-camera": "2.4.1",
     "cordova-plugin-console": "1.1.0",
-    "cordova-plugin-crosswalk-webview": "2.4.0",
     "cordova-plugin-device": "2.0.2",
     "cordova-plugin-email-composer": "0.8.15",
     "cordova-plugin-facebook4": "1.10.1",
@@ -763,7 +761,6 @@ module.exports.metadata =
     "cordova-plugin-statusbar": "2.4.2",
     "cordova-plugin-velda-devicefeedback": "0.0.2",
     "cordova-plugin-whitelist": "1.3.3",
-    "es6-promise-plugin": "4.2.2",
     "cordova-plugin-x-socialsharing": "5.4.4",
     "cordova-plugin-x-toast": "2.7.2",
     "cordova-sms-plugin": "0.1.13",
@@ -771,7 +768,9 @@ module.exports.metadata =
     "cordova.plugins.diagnostic": "3.9.2",
     "ionic-plugin-keyboard": "2.2.1",
     "onesignal-cordova-plugin": "2.4.6",
-    "phonegap-plugin-barcodescanner": "7.1.2"
+    "phonegap-plugin-barcodescanner": "7.1.2",
+    "cordova-plugin-compat": "1.2.0",
+    "es6-promise-plugin": "4.2.2"
 }
 // BOTTOM OF METADATA
 });

@@ -24,8 +24,8 @@
     </span>
 
     <ion-card-content class="card-content card-content-ios">
-      <ion-card-title class="fs-18 card-title card-title-ios">{{item.title}}</ion-card-title>
-      <p>{{item.description}}</p>
+      <ion-card-title [innerHTML]="item.title" class="fs-18 card-title card-title-ios">{{item.title}}</ion-card-title>
+      <p [innerHTML]="item.description">{{item.description}}</p>
     </ion-card-content>
 
     <ion-row class="row">

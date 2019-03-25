@@ -1,0 +1,119 @@
+{
+  "prepare_queue": {
+    "installed": [],
+    "uninstalled": []
+  },
+  "config_munge": {
+    "files": {}
+  },
+  "installed_plugins": {
+    "cordova-android-support-gradle-release": {
+      "PACKAGE_NAME": "com.moonshinestillsonline.moonshinestills2"
+    },
+    "cordova-custom-config": {
+      "PACKAGE_NAME": "com.moonshinestillsonline.moonshinestills2"
+    },
+    "cordova-plugin-android-permissions": {
+      "PACKAGE_NAME": "com.moonshinestillsonline.moonshinestills2"
+    },
+    "cordova-plugin-audioinput": {
+      "PACKAGE_NAME": "com.moonshinestillsonline.moonshinestills2"
+    },
+    "cordova-plugin-camera": {
+      "CAMERA_USAGE_DESCRIPTION": " ",
+      "PHOTOLIBRARY_USAGE_DESCRIPTION": " ",
+      "PACKAGE_NAME": "com.moonshinestillsonline.moonshinestills2"
+    },
+    "cordova-plugin-console": {
+      "PACKAGE_NAME": "com.moonshinestillsonline.moonshinestills2"
+    },
+    "cordova-plugin-crosswalk-webview": {
+      "PACKAGE_NAME": "com.moonshinestillsonline.moonshinestills2"
+    },
+    "cordova-plugin-device": {
+      "PACKAGE_NAME": "com.moonshinestillsonline.moonshinestills2"
+    },
+    "cordova-plugin-email-composer": {
+      "PACKAGE_NAME": "com.moonshinestillsonline.moonshinestills2"
+    },
+    "cordova-plugin-facebook4": {
+      "APP_ID": "217479888701670",
+      "APP_NAME": "“Moonshine Stills App",
+      "PACKAGE_NAME": "com.moonshinestillsonline.moonshinestills2"
+    },
+    "cordova-plugin-file": {
+      "PACKAGE_NAME": "com.moonshinestillsonline.moonshinestills2"
+    },
+    "cordova-plugin-geolocation": {
+      "GEOLOCATION_USAGE_DESCRIPTION": " ",
+      "PACKAGE_NAME": "com.moonshinestillsonline.moonshinestills2"
+    },
+    "cordova-plugin-googlemaps": {
+      "API_KEY_FOR_IOS": "AIzaSyCSgJsQqTCjleaCxElQylK5BD8vzu-0ldQ",
+      "LOCATION_WHEN_IN_USE_DESCRIPTION": "Show your location on the map",
+      "LOCATION_ALWAYS_USAGE_DESCRIPTION": "Trace your location on the map",
+      "PACKAGE_NAME": "com.moonshinestillsonline.moonshinestills2"
+    },
+    "cordova-plugin-googleplus": {
+      "REVERSED_CLIENT_ID": "com.googleusercontent.apps.1024389242669-oh1rjpgv34d9j5b8jt3nl5likbl2ldqi",
+      "PACKAGE_NAME": "com.moonshinestillsonline.moonshinestills2"
+    },
+    "cordova-plugin-inappbrowser": {
+      "PACKAGE_NAME": "com.moonshinestillsonline.moonshinestills2"
+    },
+    "cordova-plugin-ionic-webview": {
+      "PACKAGE_NAME": "com.moonshinestillsonline.moonshinestills2"
+    },
+    "cordova-plugin-media": {
+      "MICROPHONE_USAGE_DESCRIPTION": " ",
+      "PACKAGE_NAME": "com.moonshinestillsonline.moonshinestills2"
+    },
+    "cordova-plugin-nativeaudio": {
+      "PACKAGE_NAME": "com.moonshinestillsonline.moonshinestills2"
+    },
+    "cordova-plugin-splashscreen": {
+      "PACKAGE_NAME": "com.moonshinestillsonline.moonshinestills2"
+    },
+    "cordova-plugin-statusbar": {
+      "PACKAGE_NAME": "com.moonshinestillsonline.moonshinestills2"
+    },
+    "cordova-plugin-velda-devicefeedback": {
+      "PACKAGE_NAME": "com.moonshinestillsonline.moonshinestills2"
+    },
+    "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "com.moonshinestillsonline.moonshinestills2"
+    },
+    "cordova-plugin-x-socialsharing": {
+      "PACKAGE_NAME": "com.moonshinestillsonline.moonshinestills2"
+    },
+    "cordova-plugin-x-toast": {
+      "PACKAGE_NAME": "com.moonshinestillsonline.moonshinestills2"
+    },
+    "cordova-sms-plugin": {
+      "PACKAGE_NAME": "com.moonshinestillsonline.moonshinestills2"
+    },
+    "cordova-sqlite-storage": {
+      "PACKAGE_NAME": "com.moonshinestillsonline.moonshinestills2"
+    },
+    "cordova.plugins.diagnostic": {
+      "PACKAGE_NAME": "com.moonshinestillsonline.moonshinestills2"
+    },
+    "ionic-plugin-keyboard": {
+      "PACKAGE_NAME": "com.moonshinestillsonline.moonshinestills2"
+    },
+    "onesignal-cordova-plugin": {
+      "PACKAGE_NAME": "com.moonshinestillsonline.moonshinestills2"
+    },
+    "phonegap-plugin-barcodescanner": {
+      "PACKAGE_NAME": "com.moonshinestillsonline.moonshinestills2"
+    }
+  },
+  "dependent_plugins": {
+    "cordova-plugin-compat": {
+      "PACKAGE_NAME": "com.moonshinestillsonline.moonshinestills2"
+    },
+    "es6-promise-plugin": {
+      "PACKAGE_NAME": "com.moonshinestillsonline.moonshinestills2"
+    }
+  }
+}

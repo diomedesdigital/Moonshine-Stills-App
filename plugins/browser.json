@@ -25,9 +25,6 @@
     "cordova-plugin-console": {
       "PACKAGE_NAME": "com.moonshinestillsonline.moonshinestills2"
     },
-    "cordova-plugin-crosswalk-webview": {
-      "PACKAGE_NAME": "com.moonshinestillsonline.moonshinestills2"
-    },
     "cordova-plugin-device": {
       "PACKAGE_NAME": "com.moonshinestillsonline.moonshinestills2"
     },

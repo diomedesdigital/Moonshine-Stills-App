@@ -288,13 +288,13 @@ export class FirebaseProvider {
   }
   commentPost(key,comment){
     return new Promise((resolve,reject)=>{
-      this.dataProvider.getComments(key).take(1).subscribe((comments) => {
+      this.dataProvider.getComments(key).take(1).subscribe((comments:any[]) => {
         // console.log("commnets=======",comments)
         var comments = comments;
         if (!comments) {
           comments = [comment];
         } else {
-          comments.push(comment);
+          comment.push(comment);
         }
         // Add both users as friends.
         this.dataProvider.postComments(key).update(comments).then((success) => {

@@ -26,14 +26,6 @@
     "cordova-plugin-console": {
       "PACKAGE_NAME": "com.moonshinestillsonline.moonshinestills2"
     },
-    "cordova-plugin-crosswalk-webview": {
-      "XWALK_VERSION": "23+",
-      "XWALK_LITEVERSION": "xwalk_core_library_canary:17+",
-      "XWALK_COMMANDLINE": "--disable-pull-to-refresh-effect",
-      "XWALK_MODE": "embedded",
-      "XWALK_MULTIPLEAPK": "true",
-      "PACKAGE_NAME": "com.moonshinestillsonline.moonshinestills2"
-    },
     "cordova-plugin-device": {
       "PACKAGE_NAME": "com.moonshinestillsonline.moonshinestills2"
     },
@@ -55,6 +47,10 @@
       "API_KEY_FOR_ANDROID": "AIzaSyAZlMfyET1XSW0IE2vnlGrgUQMjCcLl6QY",
       "PLAY_SERVICES_VERSION": "15.0.1",
       "ANDROID_SUPPORT_V4_VERSION": "27.+",
+      "PACKAGE_NAME": "com.moonshinestillsonline.moonshinestills2"
+    },
+    "cordova-plugin-googleplus": {
+      "PLAY_SERVICES_VERSION": "11.8.0",
       "PACKAGE_NAME": "com.moonshinestillsonline.moonshinestills2"
     },
     "cordova-plugin-inappbrowser": {
@@ -105,10 +101,6 @@
     },
     "phonegap-plugin-barcodescanner": {
       "ANDROID_SUPPORT_V4_VERSION": "27.+",
-      "PACKAGE_NAME": "com.moonshinestillsonline.moonshinestills2"
-    },
-    "cordova-plugin-googleplus": {
-      "PLAY_SERVICES_VERSION": "11.8.0",
       "PACKAGE_NAME": "com.moonshinestillsonline.moonshinestills2"
     }
   },

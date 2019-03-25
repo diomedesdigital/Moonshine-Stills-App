@@ -490,6 +490,14 @@ module.exports = [
     "runs": true
   },
   {
+    "id": "cordova-plugin-googleplus.GooglePlus",
+    "file": "plugins/cordova-plugin-googleplus/www/GooglePlus.js",
+    "pluginId": "cordova-plugin-googleplus",
+    "clobbers": [
+      "window.plugins.googleplus"
+    ]
+  },
+  {
     "id": "cordova-plugin-inappbrowser.inappbrowser",
     "file": "plugins/cordova-plugin-inappbrowser/www/inappbrowser.js",
     "pluginId": "cordova-plugin-inappbrowser",
@@ -545,6 +553,12 @@ module.exports = [
     "clobbers": [
       "window.plugins.deviceFeedback"
     ]
+  },
+  {
+    "id": "es6-promise-plugin.Promise",
+    "file": "plugins/es6-promise-plugin/www/promise.js",
+    "pluginId": "es6-promise-plugin",
+    "runs": true
   },
   {
     "id": "cordova-plugin-x-socialsharing.SocialSharing",
@@ -610,20 +624,6 @@ module.exports = [
     "clobbers": [
       "cordova.plugins.barcodeScanner"
     ]
-  },
-  {
-    "id": "es6-promise-plugin.Promise",
-    "file": "plugins/es6-promise-plugin/www/promise.js",
-    "pluginId": "es6-promise-plugin",
-    "runs": true
-  },
-  {
-    "id": "cordova-plugin-googleplus.GooglePlus",
-    "file": "plugins/cordova-plugin-googleplus/www/GooglePlus.js",
-    "pluginId": "cordova-plugin-googleplus",
-    "clobbers": [
-      "window.plugins.googleplus"
-    ]
   }
 ];
 module.exports.metadata = 
@@ -635,13 +635,13 @@ module.exports.metadata =
   "cordova-plugin-audioinput": "0.3.0",
   "cordova-plugin-camera": "2.4.1",
   "cordova-plugin-console": "1.1.0",
-  "cordova-plugin-crosswalk-webview": "2.4.0",
   "cordova-plugin-device": "2.0.2",
   "cordova-plugin-email-composer": "0.8.15",
   "cordova-plugin-facebook4": "1.10.1",
   "cordova-plugin-file": "4.3.3",
   "cordova-plugin-geolocation": "2.4.3",
   "cordova-plugin-googlemaps": "2.5.2",
+  "cordova-plugin-googleplus": "7.0.0",
   "cordova-plugin-inappbrowser": "1.7.2",
   "cordova-plugin-ionic-webview": "1.2.1",
   "cordova-plugin-media": "3.0.1",
@@ -650,6 +650,7 @@ module.exports.metadata =
   "cordova-plugin-statusbar": "2.4.2",
   "cordova-plugin-velda-devicefeedback": "0.0.2",
   "cordova-plugin-whitelist": "1.3.3",
+  "es6-promise-plugin": "4.2.2",
   "cordova-plugin-x-socialsharing": "5.4.4",
   "cordova-plugin-x-toast": "2.7.2",
   "cordova-sms-plugin": "0.1.13",
@@ -657,9 +658,7 @@ module.exports.metadata =
   "cordova.plugins.diagnostic": "3.9.2",
   "ionic-plugin-keyboard": "2.2.1",
   "onesignal-cordova-plugin": "2.4.6",
-  "phonegap-plugin-barcodescanner": "7.1.2",
-  "es6-promise-plugin": "4.2.2",
-  "cordova-plugin-googleplus": "7.0.0"
+  "phonegap-plugin-barcodescanner": "7.1.2"
 };
 // BOTTOM OF METADATA
 });

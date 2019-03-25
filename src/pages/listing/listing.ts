@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, LoadingController } from 'ionic-angular';
 
 import { FeedCategoriesComponent } from '../feeds/feed-categories/feed-categories.component';
+import { RssPage } from '../rss/rss';
 
 //import { FeedPage } from '../feed/feed';
 import 'rxjs/Rx';
@@ -42,7 +43,7 @@ export class ListingPage {
 
 
   goToFeed(category: any) {
-    this.nav.push(FeedCategoriesComponent, {
+    this.nav.push(RssPage, {
       category: category
     });
   }

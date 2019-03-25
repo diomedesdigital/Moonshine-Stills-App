@@ -17,7 +17,7 @@ const STORAGE_KEY="rss_favorites";
   export class RssService{
     public category:any=[
       { 
-        'title':'Distilling',
+        'title':'Moonshine Distilling',
         'link':'https://feed.rssunify.com/5c9110e45af8f/rss.xml'
       },
       {
@@ -25,7 +25,7 @@ const STORAGE_KEY="rss_favorites";
         'link':'https://feed.rssunify.com/5c913911c449d/rss.xml'
       },
       {
-        'title':'Survivalism',
+        'title':'Survivalist News',
         'link':'https://feed.rssunify.com/5c9139b024fea/rss.xml'
       },
       {
@@ -33,11 +33,15 @@ const STORAGE_KEY="rss_favorites";
         'link':'https://feed.rssunify.com/5c913aabdd9eb/rss.xml'
       },
       {
+        'title':'Moonshine Recipes',
+        'link':'https://feed.rssunify.com/5c98e4b560897/rss.xml'
+      },      
+      {
         'title':'Moonshine Culture',
         'link':'https://feed.rssunify.com/5c913bfd4fa1a/rss.xml'
       }, 
       {
-        'title':'Podcasts',
+        'title':'Moonshine Podcasts',
         'link':'https://feed.rssunify.com/5c913d97e1baa/rss.xml'
       }           
     ];

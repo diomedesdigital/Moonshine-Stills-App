@@ -1,6 +1,6 @@
 webpackJsonp([0],{
 
-/***/ 936:
+/***/ 1047:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8,7 +8,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RssHomePageModule", function() { return RssHomePageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__rss_home__ = __webpack_require__(940);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__rss_home__ = __webpack_require__(1051);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,35 +18,35 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var RssHomePageModule = (function () {
+var RssHomePageModule = /** @class */ (function () {
     function RssHomePageModule() {
     }
+    RssHomePageModule = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["L" /* NgModule */])({
+            declarations: [
+                __WEBPACK_IMPORTED_MODULE_2__rss_home__["a" /* RssHomePage */],
+            ],
+            imports: [
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__rss_home__["a" /* RssHomePage */]),
+            ],
+        })
+    ], RssHomePageModule);
     return RssHomePageModule;
 }());
-RssHomePageModule = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["L" /* NgModule */])({
-        declarations: [
-            __WEBPACK_IMPORTED_MODULE_2__rss_home__["a" /* RssHomePage */],
-        ],
-        imports: [
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__rss_home__["a" /* RssHomePage */]),
-        ],
-    })
-], RssHomePageModule);
 
 //# sourceMappingURL=rss-home.module.js.map
 
 /***/ }),
 
-/***/ 940:
+/***/ 1051:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return RssHomePage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_rss_service_rss_service__ = __webpack_require__(227);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_loading_service_loading_service__ = __webpack_require__(563);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_rss_service_rss_service__ = __webpack_require__(246);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_loading_service_loading_service__ = __webpack_require__(657);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -66,7 +66,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
-var RssHomePage = (function () {
+var RssHomePage = /** @class */ (function () {
     function RssHomePage(navCtrl, navParams, rssService, loadingService) {
         var _this = this;
         this.navCtrl = navCtrl;
@@ -97,17 +97,17 @@ var RssHomePage = (function () {
             }
         }
     };
+    RssHomePage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+            selector: 'page-rss-home',template:/*ion-inline-start:"/Users/yomi/Documents/Github Projects/Moonshine-Stills-App/src/pages/rss/rss-home/rss-home.html"*/'<!--\n  Generated template for the RssHomePage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>{{item.title}}</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content class="white-1">\n   <ion-spinner class="indicator" [ngClass]="spnState"></ion-spinner>\n	<ion-card class="bdra-5 card card-ios" *ngFor="let item of data">\n    <span *ngIf="item[\'media:content\']!=undefined">\n        <img [src]="item[\'media:content\'][\'$\'][\'url\']">\n    </span>\n\n    <ion-card-content class="card-content card-content-ios">\n      <ion-card-title [innerHTML]="item.title" class="fs-18 card-title card-title-ios">{{item.title}}</ion-card-title>\n      <p [innerHTML]="item.description">{{item.description}}</p>\n    </ion-card-content>\n\n    <ion-row class="row">\n      <ion-col>\n        <button (click)="rssService.doFavorite(item)" ion-button icon-left clear small class="text-black favorite">\n          <ion-icon  [name]="item.isFavorite == true ? \'heart\' : \'heart-outline\'"></ion-icon>\n        </button>\n      </ion-col>\n\n      <ion-col center text-center>\n         <button (click)="rssService.doShare(item)" ion-button icon-left clear small class="text-black">\n             <ion-icon name="share"></ion-icon>\n        </button>\n      </ion-col>\n\n      <ion-col right text-right>\n        <button (click)="rssService.doOpen(item)" ion-button icon-left clear small class="text-black">\n          <ion-icon name="open"></ion-icon>\n        </button>\n      </ion-col>\n\n    </ion-row>\n  </ion-card>\n\n</ion-content>\n'/*ion-inline-end:"/Users/yomi/Documents/Github Projects/Moonshine-Stills-App/src/pages/rss/rss-home/rss-home.html"*/,
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["s" /* NavParams */],
+            __WEBPACK_IMPORTED_MODULE_2__providers_rss_service_rss_service__["a" /* RssService */],
+            __WEBPACK_IMPORTED_MODULE_3__providers_loading_service_loading_service__["a" /* LoadingService */]])
+    ], RssHomePage);
     return RssHomePage;
 }());
-RssHomePage = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'page-rss-home',template:/*ion-inline-start:"/Users/yomi/Documents/Github Projects/Moonshine-Stills-App/src/pages/rss/rss-home/rss-home.html"*/'<!--\n  Generated template for the RssHomePage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>{{item.title}}</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content class="white-1">\n   <ion-spinner class="indicator" [ngClass]="spnState"></ion-spinner>\n	<ion-card class="bdra-5 card card-ios" *ngFor="let item of data">\n    <span *ngIf="item[\'media:content\']!=undefined">\n        <img [src]="item[\'media:content\'][\'$\'][\'url\']">\n    </span>\n\n    <ion-card-content class="card-content card-content-ios">\n      <ion-card-title class="fs-18 card-title card-title-ios">{{item.title}}</ion-card-title>\n      <p>{{item.description}}</p>\n    </ion-card-content>\n\n    <ion-row class="row">\n      <ion-col>\n        <button (click)="rssService.doFavorite(item)" ion-button icon-left clear small class="text-black favorite">\n          <ion-icon  [name]="item.isFavorite == true ? \'heart\' : \'heart-outline\'"></ion-icon>\n        </button>\n      </ion-col>\n\n      <ion-col center text-center>\n         <button (click)="rssService.doShare(item)" ion-button icon-left clear small class="text-black">\n             <ion-icon name="share"></ion-icon>\n        </button>\n      </ion-col>\n\n      <ion-col right text-right>\n        <button (click)="rssService.doOpen(item)" ion-button icon-left clear small class="text-black">\n          <ion-icon name="open"></ion-icon>\n        </button>\n      </ion-col>\n\n    </ion-row>\n  </ion-card>\n\n</ion-content>\n'/*ion-inline-end:"/Users/yomi/Documents/Github Projects/Moonshine-Stills-App/src/pages/rss/rss-home/rss-home.html"*/,
-    }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavController */],
-        __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["s" /* NavParams */],
-        __WEBPACK_IMPORTED_MODULE_2__providers_rss_service_rss_service__["a" /* RssService */],
-        __WEBPACK_IMPORTED_MODULE_3__providers_loading_service_loading_service__["a" /* LoadingService */]])
-], RssHomePage);
 
 //# sourceMappingURL=rss-home.js.map
 

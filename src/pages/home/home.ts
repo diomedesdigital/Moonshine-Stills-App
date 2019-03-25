@@ -37,7 +37,7 @@ export class HomePage {
     this.dataProvider.getCurrentUser().subscribe((user) => {
       this.loadingProvider.hide();
       this.user = <any>user;
-      
+
     });
   }
   sendfeedback(){
@@ -164,7 +164,7 @@ export class HomePage {
             let username = data["username"];
             // Check if entered username is different from the current username
             if (this.user.username != username) {
-              this.dataProvider.getUserWithUsername(username).take(1).subscribe((userList) => {
+              this.dataProvider.getUserWithUsername(username).take(1).subscribe((userList:any) => {
                 if (userList.length > 0) {
                   this.alertProvider.showErrorMessage('profile/error-same-username');
                 } else {

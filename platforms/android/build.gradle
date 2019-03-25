@@ -32,7 +32,7 @@ buildscript {
     // http://tools.android.com/tech-docs/new-build-system/version-compatibility
     // and https://issues.apache.org/jira/browse/CB-8143
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.2.3'
+        classpath 'com.android.tools.build:gradle:3.0.0'
     }
 }
 
@@ -47,7 +47,7 @@ allprojects {
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '2.14.1'
+    gradleVersion = '4.1.0'
 }
 
 // Configuration properties. Set these via environment variables, build-extras.gradle, or gradle.properties.
@@ -92,7 +92,6 @@ ext {
 }
 
 // PLUGIN GRADLE EXTENSIONS START
-apply from: "cordova-plugin-crosswalk-webview/moonshinestills2-xwalk.gradle"
 apply from: "cordova-plugin-googlemaps/moonshinestills2-tbxml-android.gradle"
 apply from: "onesignal-cordova-plugin/moonshinestills2-build-extras-onesignal.gradle"
 apply from: "phonegap-plugin-barcodescanner/moonshinestills2-barcodescanner.gradle"
@@ -170,33 +169,30 @@ android {
             jniLibs.srcDirs = ['libs']
         }
     }
-
     defaultConfig {
-        versionCode cdvVersionCode ?: new BigInteger("" + privateHelpers.extractIntFromManifest("versionCode"))
         applicationId privateHelpers.extractStringFromManifest("package")
-
         if (cdvMinSdkVersion != null) {
             minSdkVersion cdvMinSdkVersion
         }
+        versionName '300000991'
+        targetSdkVersion 26
+        minSdkVersion 24
     }
-
     lintOptions {
-      abortOnError false;
+        abortOnError false;
     }
-
-    compileSdkVersion cdvCompileSdkVersion
+    compileSdkVersion 23
     buildToolsVersion cdvBuildToolsVersion
-
     if (Boolean.valueOf(cdvBuildMultipleApks)) {
         productFlavors {
             armv7 {
-                versionCode defaultConfig.versionCode*10 + 2
+                versionCode defaultConfig.versionCode * 10 + 2
                 ndk {
                     abiFilters "armeabi-v7a", ""
                 }
             }
             x86 {
-                versionCode defaultConfig.versionCode*10 + 4
+                versionCode defaultConfig.versionCode * 10 + 4
                 ndk {
                     abiFilters "x86", ""
                 }
@@ -224,18 +220,17 @@ android {
       }
     }
     */
-
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_6
         targetCompatibility JavaVersion.VERSION_1_6
     }
-
     if (cdvReleaseSigningPropertiesFile) {
         signingConfigs {
             release {
                 // These must be set or Gradle will complain (even if they are overridden).
                 keyAlias = ""
-                keyPassword = "__unset" // And these must be set to non-empty in order to have the signing step added to the task graph.
+                keyPassword = "__unset"
+                // And these must be set to non-empty in order to have the signing step added to the task graph.
                 storeFile = null
                 storePassword = "__unset"
             }
@@ -250,24 +245,53 @@ android {
     if (cdvDebugSigningPropertiesFile) {
         addSigningProps(cdvDebugSigningPropertiesFile, signingConfigs.debug)
     }
+
+    flavorDimensions "version"
+    productFlavors {
+        armv7 {
+            ndk {
+                abiFilters "armeabi-v7a"
+            }
+            versionCode 300000991
+        }
+        x86 {
+            ndk {
+                abiFilters "x86"
+            }
+            versionCode 300000991
+        }
+        demo {
+            // Assigns this product flavor to the "version" flavor dimension.
+            // This property is optional if you are using only one dimension.
+            dimension "version"
+            applicationIdSuffix ".demo"
+            versionNameSuffix "-demo"
+            versionCode 300000991
+        }
+        full {
+            dimension "version"
+            applicationIdSuffix ".full"
+            versionNameSuffix "-full"
+            versionCode 300000991
+        }
+    }
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: '*.jar')
+    implementation fileTree(include: '*.jar', dir: 'libs')
     // SUB-PROJECT DEPENDENCIES START
-    debugCompile(project(path: "CordovaLib", configuration: "debug"))
-    releaseCompile(project(path: "CordovaLib", configuration: "release"))
-    compile "com.facebook.android:facebook-android-sdk:4.25.0"
-    compile "com.google.android.gms:play-services-maps:15.0.1"
-    compile "com.google.android.gms:play-services-location:15.0.1"
-    compile "com.android.support:support-core-utils:27.+"
-    compile "com.android.support:support-v4:24.1.1+"
-    compile "com.android.support:support-v4:26.+"
-    compile "com.android.support:appcompat-v7:26.+"
-    compile "com.onesignal:OneSignal:3.10.5"
-    compile "com.android.support:support-v4:27.+"
-    compile "com.google.android.gms:play-services-auth:11.8.0"
-    compile "com.google.android.gms:play-services-identity:11.8.0"
+    implementation project(path: 'CordovaLib')
+    compile 'com.android.support:support-v4:27.+'
+    compile 'com.facebook.android:facebook-android-sdk:4.25.0'
+    compile 'com.google.android.gms:play-services-maps:15.0.1'
+    compile 'com.google.android.gms:play-services-location:15.0.1'
+    compile 'com.android.support:support-core-utils:27.+'
+    compile 'com.google.android.gms:play-services-auth:11.8.0'
+    compile 'com.google.android.gms:play-services-identity:11.8.0'
+    compile 'com.android.support:support-v4:27.+'
+    compile 'com.android.support:appcompat-v7:27.+'
+    compile 'com.onesignal:OneSignal:3.10.5'
+    compile 'com.android.support:support-v4:27.+'
     // SUB-PROJECT DEPENDENCIES END
 }
 
@@ -285,7 +309,7 @@ def promptForReleaseKeyPassword() {
 
 gradle.taskGraph.whenReady { taskGraph ->
     taskGraph.getAllTasks().each() { task ->
-        if (task.name == 'validateReleaseSigning' || task.name == 'validateSigningRelease') {
+        if (['validateReleaseSigning', 'validateSigningRelease', 'validateSigningArmv7Release', 'validateSigningX86Release'].contains(task.name)) {
             promptForReleaseKeyPassword()
         }
     }
