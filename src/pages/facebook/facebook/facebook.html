@@ -1,0 +1,67 @@
+<!--
+  Generated template for the Facebook page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+    <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Facebook</ion-title>
+    </ion-navbar>
+    </ion-header>
+    
+    <ion-content class="white-1">
+    <ion-spinner class="indicator" [ngClass]="spnState"></ion-spinner>
+    <ion-card *ngFor="let item of list" class="bdra-5 mgb-10">
+    <ion-item>
+    <ion-avatar item-start class="mgt-6 mgb-6">
+    <img src="{{page.picture.data.url}}">
+    </ion-avatar>
+    <h2 class="fs-14">{{page.name}}</h2>
+    <p class="fs-10 text-grey-4">{{item.updated_time | timeAgo}}</p> 
+    </ion-item>
+    
+    <img [src]="item.full_picture"/>
+    <ion-card-content>
+    <ion-card-title class="pd-0 fs-15 fw-600">{{item.name}}</ion-card-title>
+    <p class="mgt-10">{{item.message}}</p>
+    </ion-card-content>
+    
+    <ion-row>
+    <ion-col>
+    <button ion-button icon-left clear small class="text-black">
+    <ion-icon name="thumbs-up"></ion-icon>
+      <div>{{item.likes.summary.total_count}}</div>
+    </button>
+    </ion-col>
+    
+    <ion-col center text-center>
+    <button ion-button icon-left clear small class="text-black" (click)="fbService.goToComment(item,navCtrl)">
+      <ion-icon name="chatbubbles"></ion-icon>
+      <div>{{item.comments.summary.total_count}}</div>
+    </button>
+    </ion-col>
+    
+    <ion-col right text-right>
+    <button ion-button icon-left clear small class="text-black" (click)="fbService.doOpen(item)">
+      <ion-icon name="open"></ion-icon>
+    </button>
+    </ion-col>
+    
+    <ion-col right text-right>
+    <button (click)="fbService.doShare(navCtrl,item)" ion-button icon-left clear small class="text-black">
+      <ion-icon name="share"></ion-icon>
+    </button>
+    </ion-col>
+    
+    </ion-row>
+    </ion-card>
+    
+    <ion-infinite-scroll (ionInfinite)="loadMore($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+    </ion-content>
+    

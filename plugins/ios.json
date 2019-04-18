@@ -27,9 +27,6 @@
     "cordova-plugin-console": {
       "PACKAGE_NAME": "com.moonshinestillsonline.moonshinestills2"
     },
-    "cordova-plugin-crosswalk-webview": {
-      "PACKAGE_NAME": "com.moonshinestillsonline.moonshinestills2"
-    },
     "cordova-plugin-device": {
       "PACKAGE_NAME": "com.moonshinestillsonline.moonshinestills2"
     },
@@ -54,10 +51,6 @@
       "LOCATION_ALWAYS_USAGE_DESCRIPTION": "Trace your location on the map",
       "PACKAGE_NAME": "com.moonshinestillsonline.moonshinestills2"
     },
-    "cordova-plugin-googleplus": {
-      "REVERSED_CLIENT_ID": "com.googleusercontent.apps.1024389242669-oh1rjpgv34d9j5b8jt3nl5likbl2ldqi",
-      "PACKAGE_NAME": "com.moonshinestillsonline.moonshinestills2"
-    },
     "cordova-plugin-inappbrowser": {
       "PACKAGE_NAME": "com.moonshinestillsonline.moonshinestills2"
     },
@@ -69,6 +62,9 @@
       "PACKAGE_NAME": "com.moonshinestillsonline.moonshinestills2"
     },
     "cordova-plugin-nativeaudio": {
+      "PACKAGE_NAME": "com.moonshinestillsonline.moonshinestills2"
+    },
+    "cordova-plugin-secure-storage": {
       "PACKAGE_NAME": "com.moonshinestillsonline.moonshinestills2"
     },
     "cordova-plugin-splashscreen": {

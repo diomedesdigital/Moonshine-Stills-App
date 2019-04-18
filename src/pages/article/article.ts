@@ -10,7 +10,7 @@ import 'rxjs/add/operator/map';
   templateUrl: 'article.html'
 })
 export class ArticlePage {
-	url: string = 'http://35.193.180.66/wp-json/wp/v2/posts';
+	url: string = 'https://moonshine-stills.com/wp-json/wp/v2/posts';
 	items: any;
 	page: any;
 

@@ -34,9 +34,9 @@ export class SignupPage {
     this.nav.setRoot(this.main_page.component);
   }
 
-  doGoogleSignup() {
+  /**doGoogleSignup() {
     this.nav.setRoot(this.main_page.component);
-  }
+  }**/
 
   showTermsModal() {
     let modal = this.modal.create(TermsOfServicePage);

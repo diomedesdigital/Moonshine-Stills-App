@@ -1,14 +1,14 @@
 webpackJsonp([5],{
 
-/***/ 1044:
+/***/ 1053:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AddPostPageModule", function() { return AddPostPageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RssPageModule", function() { return RssPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__add_post__ = __webpack_require__(247);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__rss__ = __webpack_require__(248);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,26 +18,23 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var AddPostPageModule = /** @class */ (function () {
-    function AddPostPageModule() {
+var RssPageModule = /** @class */ (function () {
+    function RssPageModule() {
     }
-    AddPostPageModule = __decorate([
+    RssPageModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["L" /* NgModule */])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__add_post__["a" /* AddPostPage */],
+                __WEBPACK_IMPORTED_MODULE_2__rss__["a" /* RssPage */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__add_post__["a" /* AddPostPage */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__rss__["a" /* RssPage */]),
             ],
-            exports: [
-                __WEBPACK_IMPORTED_MODULE_2__add_post__["a" /* AddPostPage */]
-            ]
         })
-    ], AddPostPageModule);
-    return AddPostPageModule;
+    ], RssPageModule);
+    return RssPageModule;
 }());
 
-//# sourceMappingURL=add-post.module.js.map
+//# sourceMappingURL=rss.module.js.map
 
 /***/ })
 

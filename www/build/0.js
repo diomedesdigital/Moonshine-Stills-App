@@ -1,14 +1,15 @@
 webpackJsonp([0],{
 
-/***/ 1047:
+/***/ 1050:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RssHomePageModule", function() { return RssHomePageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FacebookPageModule", function() { return FacebookPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__rss_home__ = __webpack_require__(1051);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__facebook__ = __webpack_require__(250);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pipes_pipes_module__ = __webpack_require__(1056);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,98 +19,140 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var RssHomePageModule = /** @class */ (function () {
-    function RssHomePageModule() {
+
+var FacebookPageModule = /** @class */ (function () {
+    function FacebookPageModule() {
     }
-    RssHomePageModule = __decorate([
+    FacebookPageModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["L" /* NgModule */])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__rss_home__["a" /* RssHomePage */],
+                __WEBPACK_IMPORTED_MODULE_2__facebook__["a" /* FacebookPage */]
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__rss_home__["a" /* RssHomePage */]),
-            ],
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__facebook__["a" /* FacebookPage */]),
+                __WEBPACK_IMPORTED_MODULE_3__pipes_pipes_module__["a" /* PipesModule */]
+            ]
         })
-    ], RssHomePageModule);
-    return RssHomePageModule;
+    ], FacebookPageModule);
+    return FacebookPageModule;
 }());
 
-//# sourceMappingURL=rss-home.module.js.map
+//# sourceMappingURL=facebook.module.js.map
 
 /***/ }),
 
-/***/ 1051:
+/***/ 1056:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return RssHomePage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PipesModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_rss_service_rss_service__ = __webpack_require__(246);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_loading_service_loading_service__ = __webpack_require__(657);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__pipes_pipes_safe_safe__ = __webpack_require__(654);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__pipes_friend__ = __webpack_require__(655);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pipes_search__ = __webpack_require__(656);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pipes_conversation__ = __webpack_require__(657);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pipes_date__ = __webpack_require__(658);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pipes_group__ = __webpack_require__(659);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pipes_time_ago_time_ago__ = __webpack_require__(660);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pipes_time_ago_iso_8061_time_ago_iso_8061__ = __webpack_require__(1057);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
+
+
+
+
+
 
 
 
 
 /**
- * Generated class for the RssHomePage page.
+ * Generated class for the PipesModulePipe pipe.
  *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
+ * See https://angular.io/docs/ts/latest/guide/pipes.html for more info on
+ * Angular Pipes.
  */
-var RssHomePage = /** @class */ (function () {
-    function RssHomePage(navCtrl, navParams, rssService, loadingService) {
-        var _this = this;
-        this.navCtrl = navCtrl;
-        this.navParams = navParams;
-        this.rssService = rssService;
-        this.loadingService = loadingService;
-        this.data = new Array();
-        this.spnState = 'show';
-        this.item = this.navParams.get('item');
-        this.rssService.getPosts(this.item.link).subscribe(function (data) {
-            var json = _this.rssService.convertToJson(data);
-            json = json.rss.channel.item;
-            _this.data = json;
-            _this.spnState = 'hide';
-        });
+var PipesModule = /** @class */ (function () {
+    function PipesModule() {
     }
-    RssHomePage.prototype.ionViewDidEnter = function () {
-        var _this = this;
-        if (this.data.length != 0) {
-            var _loop_1 = function (i) {
-                this_1.rssService.isFavorite(this_1.data[i]).then(function (result) {
-                    _this.data[i].isFavorite = result;
-                });
-            };
-            var this_1 = this;
-            for (var i = 0; i < this.data.length; i++) {
-                _loop_1(i);
-            }
-        }
-    };
-    RssHomePage = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-            selector: 'page-rss-home',template:/*ion-inline-start:"/Users/yomi/Documents/Github Projects/Moonshine-Stills-App/src/pages/rss/rss-home/rss-home.html"*/'<!--\n  Generated template for the RssHomePage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>{{item.title}}</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content class="white-1">\n   <ion-spinner class="indicator" [ngClass]="spnState"></ion-spinner>\n	<ion-card class="bdra-5 card card-ios" *ngFor="let item of data">\n    <span *ngIf="item[\'media:content\']!=undefined">\n        <img [src]="item[\'media:content\'][\'$\'][\'url\']">\n    </span>\n\n    <ion-card-content class="card-content card-content-ios">\n      <ion-card-title [innerHTML]="item.title" class="fs-18 card-title card-title-ios">{{item.title}}</ion-card-title>\n      <p [innerHTML]="item.description">{{item.description}}</p>\n    </ion-card-content>\n\n    <ion-row class="row">\n      <ion-col>\n        <button (click)="rssService.doFavorite(item)" ion-button icon-left clear small class="text-black favorite">\n          <ion-icon  [name]="item.isFavorite == true ? \'heart\' : \'heart-outline\'"></ion-icon>\n        </button>\n      </ion-col>\n\n      <ion-col center text-center>\n         <button (click)="rssService.doShare(item)" ion-button icon-left clear small class="text-black">\n             <ion-icon name="share"></ion-icon>\n        </button>\n      </ion-col>\n\n      <ion-col right text-right>\n        <button (click)="rssService.doOpen(item)" ion-button icon-left clear small class="text-black">\n          <ion-icon name="open"></ion-icon>\n        </button>\n      </ion-col>\n\n    </ion-row>\n  </ion-card>\n\n</ion-content>\n'/*ion-inline-end:"/Users/yomi/Documents/Github Projects/Moonshine-Stills-App/src/pages/rss/rss-home/rss-home.html"*/,
-        }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["q" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["s" /* NavParams */],
-            __WEBPACK_IMPORTED_MODULE_2__providers_rss_service_rss_service__["a" /* RssService */],
-            __WEBPACK_IMPORTED_MODULE_3__providers_loading_service_loading_service__["a" /* LoadingService */]])
-    ], RssHomePage);
-    return RssHomePage;
+    PipesModule = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["L" /* NgModule */])({
+            declarations: [
+                __WEBPACK_IMPORTED_MODULE_1__pipes_pipes_safe_safe__["a" /* SafePipe */],
+                __WEBPACK_IMPORTED_MODULE_2__pipes_friend__["a" /* FriendPipe */],
+                __WEBPACK_IMPORTED_MODULE_3__pipes_search__["a" /* SearchPipe */],
+                __WEBPACK_IMPORTED_MODULE_4__pipes_conversation__["a" /* ConversationPipe */],
+                __WEBPACK_IMPORTED_MODULE_5__pipes_date__["a" /* DateFormatPipe */],
+                __WEBPACK_IMPORTED_MODULE_6__pipes_group__["a" /* GroupPipe */],
+                __WEBPACK_IMPORTED_MODULE_7__pipes_time_ago_time_ago__["a" /* TimeAgoPipe */],
+                __WEBPACK_IMPORTED_MODULE_8__pipes_time_ago_iso_8061_time_ago_iso_8061__["a" /* TimeAgoIso_8061Pipe */],
+            ],
+            imports: [],
+            exports: [
+                __WEBPACK_IMPORTED_MODULE_1__pipes_pipes_safe_safe__["a" /* SafePipe */],
+                __WEBPACK_IMPORTED_MODULE_2__pipes_friend__["a" /* FriendPipe */],
+                __WEBPACK_IMPORTED_MODULE_3__pipes_search__["a" /* SearchPipe */],
+                __WEBPACK_IMPORTED_MODULE_4__pipes_conversation__["a" /* ConversationPipe */],
+                __WEBPACK_IMPORTED_MODULE_5__pipes_date__["a" /* DateFormatPipe */],
+                __WEBPACK_IMPORTED_MODULE_6__pipes_group__["a" /* GroupPipe */],
+                __WEBPACK_IMPORTED_MODULE_7__pipes_time_ago_time_ago__["a" /* TimeAgoPipe */],
+                __WEBPACK_IMPORTED_MODULE_8__pipes_time_ago_iso_8061_time_ago_iso_8061__["a" /* TimeAgoIso_8061Pipe */],
+            ]
+        })
+    ], PipesModule);
+    return PipesModule;
 }());
 
-//# sourceMappingURL=rss-home.js.map
+//# sourceMappingURL=pipes.module.js.map
+
+/***/ }),
+
+/***/ 1057:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TimeAgoIso_8061Pipe; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+/**
+ * Generated class for the TimeAgoIso_8061Pipe pipe.
+ *
+ * See https://angular.io/api/core/Pipe for more info on Angular Pipes.
+ */
+var TimeAgoIso_8061Pipe = /** @class */ (function () {
+    function TimeAgoIso_8061Pipe() {
+    }
+    /**
+     * Takes a value and makes it lowercase.
+     */
+    TimeAgoIso_8061Pipe.prototype.transform = function (time) {
+        var args = [];
+        for (var _i = 1; _i < arguments.length; _i++) {
+            args[_i - 1] = arguments[_i];
+        }
+        var date = new Date(time);
+        var myDate = date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear();
+        return myDate;
+    };
+    TimeAgoIso_8061Pipe = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["W" /* Pipe */])({
+            name: 'timeAgoIso_8061',
+        })
+    ], TimeAgoIso_8061Pipe);
+    return TimeAgoIso_8061Pipe;
+}());
+
+//# sourceMappingURL=time-ago-iso-8061.js.map
 
 /***/ })
 

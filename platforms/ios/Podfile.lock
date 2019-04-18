@@ -1,0 +1,19 @@
+PODS:
+  - GoogleMaps (2.7.0):
+    - GoogleMaps/Maps (= 2.7.0)
+  - GoogleMaps/Base (2.7.0)
+  - GoogleMaps/Maps (2.7.0):
+    - GoogleMaps/Base
+  - OneSignal (2.9.4)
+
+DEPENDENCIES:
+  - GoogleMaps (~> 2.7.0)
+  - OneSignal (= 2.9.4)
+
+SPEC CHECKSUMS:
+  GoogleMaps: f79af95cb24d869457b1f961c93d3ce8b2f3b848
+  OneSignal: a41f5a896177275662da07e23d6a809c0e105a89
+
+PODFILE CHECKSUM: 422ab43ec9c3a62bfaf14ce57632bc7228e12fa4
+
+COCOAPODS: 1.4.0

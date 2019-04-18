@@ -5,6 +5,8 @@ import { SearchPipe } from '../pipes/search';
 import { ConversationPipe } from '../pipes/conversation';
 import { DateFormatPipe } from '../pipes/date';
 import { GroupPipe } from '../pipes/group';
+import { TimeAgoPipe } from '../pipes/time-ago/time-ago';
+import { TimeAgoIso_8061Pipe } from '../pipes/time-ago-iso-8061/time-ago-iso-8061';
 
 /**
  * Generated class for the PipesModulePipe pipe.
@@ -20,6 +22,8 @@ import { GroupPipe } from '../pipes/group';
     ConversationPipe,
     DateFormatPipe,
     GroupPipe,
+    TimeAgoPipe,
+    TimeAgoIso_8061Pipe,
   ],
   imports:[],
 
@@ -30,6 +34,8 @@ import { GroupPipe } from '../pipes/group';
   ConversationPipe,
   DateFormatPipe,
   GroupPipe,
+  TimeAgoPipe,
+  TimeAgoIso_8061Pipe,
 ]
 
 })

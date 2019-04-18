@@ -7,7 +7,7 @@
     <div class="buttons" *ngIf="mode == 'main'">
       <div>
         <button ion-button icon-left class="facebook" tappable (click)="loginProvider.facebookLogin()"><ion-icon name="logo-facebook"></ion-icon>Continue with Facebook</button>
-        <button ion-button icon-left class="google" tappable (click)="loginProvider.googleLogin()"><ion-icon name="logo-google"></ion-icon>Continue with Google</button>
+        <!--<button ion-button icon-left class="google" tappable (click)="loginProvider.googleLogin()"><ion-icon name="logo-google"></ion-icon>Continue with Google</button>-->
         <!--<button ion-button icon-left class="secondary" tappable (click)="loginProvider.guestLogin()"><ion-icon name="happy"></ion-icon>Continue as Guest</button>-->
         <button ion-button icon-left class="dark" tappable (click)="clearForms(); mode = 'register'"><ion-icon name="md-mail-open"></ion-icon>Signup with Email</button>
         <button ion-button icon-left class class="secondary" tappable (click)="clearForms(); mode = 'login'">Already Registered?</button>

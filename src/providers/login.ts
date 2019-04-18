@@ -6,7 +6,7 @@ import { Login } from '../login';
 import { NavController } from 'ionic-angular';
 import { LoadingProvider } from './loading';
 import { AlertProvider } from './alert';
-import { GooglePlus } from '@ionic-native/google-plus';
+//import { GooglePlus } from '@ionic-native/google-plus';
 import {AngularFireDatabase} from 'angularfire2/database';
 // import { Diagnostic } from '@ionic-native/diagnostic';
 
@@ -30,7 +30,7 @@ export class LoginProvider {
   constructor(public loadingProvider: LoadingProvider,
     public alertProvider: AlertProvider,
     public zone: NgZone,
-    public googlePlus: GooglePlus,
+    //public googlePlus: GooglePlus,
     public angularDb:AngularFireDatabase) {
     console.log("Initializing Login Provider");
     this.oauth = new OauthCordova();
@@ -116,7 +116,7 @@ export class LoginProvider {
   // Google Login, after successful authentication, triggers firebase.auth().onAuthStateChanged((user) on top and
   // redirects the user to its respective views. Make sure to set your GoogleWebClient Id on login.ts
   // and enabled Google Login on Firebase app authentication console.
-  googleLogin() {
+  /** googleLogin() {
     this.loadingProvider.show();
     this.googlePlus.login({
       'webClientId': Login.googleClientId
@@ -135,7 +135,7 @@ export class LoginProvider {
           this.alertProvider.showErrorMessage(code);
         });
     }, error => { this.loadingProvider.hide(); });
-  }
+  }**/
 
   // Anonymous Login, after successful authentication, triggers firebase.auth().onAuthStateChanged((user) on top and
   // redirects the user to its respective views. Make sure to enable Anonymous login on Firebase app authentication console.

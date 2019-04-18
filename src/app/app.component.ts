@@ -40,6 +40,10 @@ import { OneSignal } from '@ionic-native/onesignal';
 //RSS
 import { RssHomePage } from '../pages/rss/rss-home/rss-home';
 //import { RssPage } from '../pages/rss/rss';
+import {FacebookPage} from '../pages/facebook/facebook/facebook';
+
+
+
 
 
 @Component({
@@ -100,19 +104,19 @@ export class MyApp {
 
     this.pages = [
       { title: 'Home', icon: 'home', component: TabsPage },
-      { title: 'Forums', icon: 'create', component: GroupsPage },
-      //{ title: 'RSS', icon: 'create', component: RssPage },      
+      //{ title: 'RSS', icon: 'create', component: RssPage },
+      { title: 'Groups', icon: 'grid', component: GroupsPage },      
       { title: 'US State Laws', icon: 'book', component: LawPage },
       { title: 'Blog', icon: 'paper', component: ArticlePage },
       { title: 'Mash Calcuator', icon: 'calculator', component: CalculatorPage },
       { title: 'TDN Videos', icon: 'videocam', component: YoutubeChannelComponent},
-      { title: 'Contact Us', icon: 'send', component: ContactPage },                         
+      { title: 'Contact Us', icon: 'send', component: ContactPage }, 
+      { title: 'TDN Facebook', icon: 'logo-facebook', component: FacebookPage },                               
     ];
 
     this.pushPages = [
-      //{ title: 'Layouts', icon: 'grid', component: LayoutsPage },
+      //{ title: 'Discussions', icon: 'grid', component: LayoutsPage },
       //{ title: 'Settings', icon: 'settings', component: SettingsPage },
-      //{ title: 'Timeline', icon: 'list-box', component: TimelinePage }
     ];
     this.chatPages = [
       //{ title: 'Layouts', icon: 'grid', component: LayoutsPage },

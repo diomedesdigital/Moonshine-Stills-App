@@ -1,0 +1,14 @@
+{
+    "GoogleMaps": {
+        "name": "GoogleMaps",
+        "type": "podspec",
+        "spec": "~> 2.7.0",
+        "count": 1
+    },
+    "OneSignal": {
+        "name": "OneSignal",
+        "type": "podspec",
+        "spec": "2.9.4",
+        "count": 1
+    }
+}

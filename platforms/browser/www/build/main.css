@@ -79285,7 +79285,7 @@ page-groups div.group img {
 
 page-groups div.group img.activated,
 page-groups div.group img:active {
-  opacity: 0.5;
+  opacity: 0;
 }
 
 page-groups div.group ion-badge {
@@ -80231,7 +80231,7 @@ page-new-group img:active {
 }
 
 page-new-group div.form {
-  background: rgba(0, 0, 0, 0.3) !important;
+  background: white !important;
 }
 
 page-new-group .form ion-list ion-item ion-input,
@@ -80251,6 +80251,20 @@ page-new-group .form ion-list ion-item {
 
 page-new-group .form ion-list ion-item ion-label {
   width: 28vw;
+}
+
+page-new-group ion-fab[middle] {
+  top: 30%;
+  opacity: 0.7;
+}
+
+page-new-group ion-fab[center] {
+  left: 50%;
+  opacity: 0.7;
+}
+
+page-new-group body {
+  background: white;
 }
 
 page-new-group .members {

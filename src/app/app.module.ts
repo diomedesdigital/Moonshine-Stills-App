@@ -1,4 +1,4 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA, ErrorHandler } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA, ErrorHandler, Pipe, PipeTransform } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler, IonicPageModule } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { SocialSharing } from '@ionic-native/social-sharing';
@@ -81,7 +81,7 @@ import { SuperTabsModule } from 'ionic2-super-tabs';
 
 //Facebook Imports
 import { Camera } from '@ionic-native/camera';
-import { GooglePlus } from '@ionic-native/google-plus';
+//import { GooglePlus } from '@ionic-native/google-plus';
 import { Keyboard } from '@ionic-native/keyboard';
 import { Toast } from '@ionic-native/toast';
 import { GoogleMaps } from '@ionic-native/google-maps';
@@ -148,7 +148,10 @@ import { LoadingService } from '../providers/loading-service/loading-service';
 //import { RssPageModule } from '../pages/rss/rss.module';
 import { RssPage } from '../pages/rss/rss';
 
-
+//facebook
+import { FacebookService } from '../providers/facebook/facebook';
+import {FacebookPage} from '../pages/facebook/facebook/facebook';
+import {TimeAgoPipe} from '../pipes/time-ago/time-ago'
 
 firebase.initializeApp(Login.firebaseConfig);
 
@@ -212,7 +215,7 @@ firebase.initializeApp(Login.firebaseConfig);
     SearchPipe,
     DateFormatPipe,
     GroupPipe,
-    TimelinePage,
+    TimelinePage,        
     AddPostPage,
     CommentsPage,
     VideoCallPage,
@@ -227,7 +230,9 @@ firebase.initializeApp(Login.firebaseConfig);
     ProductListPage,
     RewardPage,
     //RssHomePage,
-    RssPage,      
+    RssPage,
+    FacebookPage,
+    TimeAgoPipe,      
   ],
   imports: [
     BrowserModule,
@@ -298,7 +303,7 @@ firebase.initializeApp(Login.firebaseConfig);
     GroupInfoPage,
     AddMembersPage,
     ImageModalPage,
-    TimelinePage,
+    TimelinePage,                 
     AddPostPage,
     CommentsPage,
     VideoCallPage,
@@ -312,11 +317,12 @@ firebase.initializeApp(Login.firebaseConfig);
     RewardPage,
     //RssHomePage,
     RssPage,
+    FacebookPage,
 
   ],
   providers: [FeedService, EmailService, ListingService, SocialSharing, InAppBrowser, Facebook, OneSignal,  ProfileService, NotificationsService, List1Service, List2Service, ScheduleService, SplashScreen, StatusBar, Camera, 
-    GooglePlus, Keyboard, Toast, GoogleMaps,Geolocation,{ provide: ErrorHandler, useClass: IonicErrorHandler }, LoginProvider,LogoutProvider, LoadingProvider, 
-    AlertProvider, ImageProvider, DataProvider, FirebaseProvider,NativeAudio, VideoProvider,  RssService, ShopifyClientProvider, LoadingService  ],
+    Keyboard, Toast, GoogleMaps,Geolocation,{ provide: ErrorHandler, useClass: IonicErrorHandler }, LoginProvider,LogoutProvider, LoadingProvider, 
+    AlertProvider, ImageProvider, DataProvider, FirebaseProvider,NativeAudio, VideoProvider,  RssService, ShopifyClientProvider, LoadingService, FacebookService, ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
 export class AppModule {}
