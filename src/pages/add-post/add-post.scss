@@ -6,4 +6,10 @@ page-add-post {
   ion-header button, ion-header ion-title p{
     background: transparent;
   }
+
+  img {
+    width: 10vw;
+    height: 10vw;
+    object-fit: cover;        
+  }
 }

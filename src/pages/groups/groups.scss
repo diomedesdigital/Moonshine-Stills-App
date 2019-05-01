@@ -9,7 +9,7 @@ page-groups {
 
   div.group {
     text-align: center;
-    background: rgba(0, 0, 0, 0.3);
+    background: rgba(133, 131, 131, 0.3);
     position: relative;
     border-radius: 1em;
 
@@ -52,7 +52,7 @@ page-groups {
     }
 
     span {
-      color: $gray;
+      //color: $gray;
       font-size: 90%;
       display: block;
       padding-bottom: 1.25em;
@@ -61,6 +61,6 @@ page-groups {
 
   div.group.activated,
   div.group:active {
-    opacity: 0.5;
+    opacity: 0.9;
   }
 }

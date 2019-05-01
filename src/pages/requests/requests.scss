@@ -1,1 +1,11 @@
-page-requests {}
+page-requests {
+    //ion fab css
+  ion-fab[middle] {
+    top: 30%;
+    opacity: 0.7;
+  }
+  ion-fab[center] {
+    left: 50%;
+    opacity: 0.7;
+  }
+}

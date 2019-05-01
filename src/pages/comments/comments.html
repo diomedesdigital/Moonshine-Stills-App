@@ -40,24 +40,19 @@
 
 </ion-content>
 <ion-footer >
-  <ion-grid>
-    <ion-row>
-        <!--<ion-col col-12>
-       <button ion-button icon-only color="custom" (click)="imageShare()">
-          <ion-icon name='camera'></ion-icon>
-        </button>
-      </ion-col>-->
-      <ion-col col-10>
-        <ion-textarea  placeholder="Enter your comment" [(ngModel)]="commentText"></ion-textarea>
+    <ion-toolbar>
 
-      </ion-col>
-      <ion-col col-2>
-        <button ion-button icon-only  color="custom" (click)="postComment()" [disabled]="!commentText">
-          <ion-icon name='send'></ion-icon>
+      <ion-input type="text" placeholder="  Type your message" [(ngModel)]="message" (ionfocus)="scrollBottom()" (keypress)="onType($event.keyCode)"></ion-input>
+    <ion-buttons end>
+      <button ion-button  (click)="send()" [disabled]="!message">
+        <ion-icon slot="icon-only" name="md-send"></ion-icon>
+      </button>
+    </ion-buttons>
 
-        </button>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+    <!--Main Message-->
+
+    
+
+  </ion-toolbar>
 
 </ion-footer>

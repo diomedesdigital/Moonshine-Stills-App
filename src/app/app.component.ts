@@ -105,7 +105,7 @@ export class MyApp {
     this.pages = [
       { title: 'Home', icon: 'home', component: TabsPage },
       //{ title: 'RSS', icon: 'create', component: RssPage },
-      { title: 'Groups', icon: 'grid', component: GroupsPage },      
+      { title: 'Forums', icon: 'grid', component: GroupsPage },      
       { title: 'US State Laws', icon: 'book', component: LawPage },
       { title: 'Blog', icon: 'paper', component: ArticlePage },
       { title: 'Mash Calcuator', icon: 'calculator', component: CalculatorPage },

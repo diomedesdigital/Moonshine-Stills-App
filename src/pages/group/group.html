@@ -10,7 +10,7 @@
     </ion-buttons>
   </ion-navbar>
 </ion-header>
-<ion-content has-footer>
+<ion-content class="white-1" padding>
   <!-- Messages -->
   <div class="messages">
     <p class="center" *ngIf="startIndex > 0"><span tappable (click)="loadPreviousMessages()">Load previous messages</span></p>
@@ -60,18 +60,37 @@
 </ion-content>
 <!-- Message Box -->
 <ion-footer>
-  <div class="bottom_bar">
     <!--<ion-col>
     <ion-fab middle left>
       <button ion-fab mini tappable (click)="sendPhoto()"><ion-icon name="md-camera"></ion-icon></button>
     </ion-fab>
     </ion-col>-->
-    <ion-input type="text" placeholder="  Type your message" [(ngModel)]="message" (ionfocus)="scrollBottom()" (keypress)="onType($event.keyCode)"></ion-input>
-    <!--<ion-fab middle right>-->
+    <!--<ion-input type="text" placeholder="  Type your message" [(ngModel)]="message" (ionfocus)="scrollBottom()" (keypress)="onType($event.keyCode)"></ion-input>-->
+    <!--<ion-fab middle right>
       <ion-buttons>
       <button ion-button icon-right (click)="send()" [disabled]="!message"><ion-icon name="md-send"></ion-icon></button>
       <button ion-button icon-left (click)="sendPhoto()"><ion-icon name="md-camera"></ion-icon></button>
-      </ion-buttons>
+      </ion-buttons>-->
+      <!--New Buttons for sending messages-->
+    <ion-toolbar>
+
+      <ion-input type="text" placeholder="  Type your message" [(ngModel)]="message" (ionfocus)="scrollBottom()" (keypress)="onType($event.keyCode)"></ion-input>
+    <ion-buttons end>
+      <button ion-button  (click)="send()" [disabled]="!message">
+        <ion-icon slot="icon-only" name="md-send"></ion-icon>
+      </button>
+    </ion-buttons>
+
+    <ion-buttons start>
+      <button ion-button  (click)="sendPhoto()">
+        <ion-icon slot="icon-only" name="md-camera"></ion-icon>
+      </button>
+    </ion-buttons>
+    <!--Main Message-->
+
+    
+
+  </ion-toolbar>
+      
     <!--</ion-fab>-->
-  </div>
 </ion-footer>

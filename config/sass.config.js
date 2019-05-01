@@ -43,7 +43,8 @@ module.exports = {
   includePaths: [
     'node_modules/ionic-angular/themes',
     'node_modules/ionicons/dist/scss',
-    'node_modules/bourbon/app/assets/stylesheets'
+    'node_modules/bourbon/app/assets/stylesheets',
+    'node_modules/bootstrap/scss',
   ],
 
   /**
