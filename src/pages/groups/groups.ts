@@ -25,7 +25,7 @@ export class GroupsPage {
     // Get groups
     this.dataProvider.getGroups().subscribe((groupIds) => {
       if (groupIds.length > 0) {
-        if(this.groups && this.groups.length > groupIds.length) {
+        if (this.groups && this.groups.length > groupIds.length) {
           // User left/deleted a group, clear the list and add or update each group again.
           this.groups = [];
         }
@@ -50,7 +50,7 @@ export class GroupsPage {
     // Update groups' last active date time elapsed every minute based on Moment.js.
     var that = this;
     if (!that.updateDateTime) {
-      that.updateDateTime = setInterval(function() {
+      that.updateDateTime = setInterval(function () {
         if (that.groups) {
           that.groups.forEach((group) => {
             let date = group.date;

@@ -7,10 +7,11 @@ import { DataProvider } from '../../providers/data';
 import { AlertProvider } from '../../providers/alert';
 import { Validator } from '../../validator';
 import { Camera } from '@ionic-native/camera';
-import {AngularFireDatabase} from 'angularfire2/database';
+import { AngularFireDatabase } from 'angularfire2/database';
 import { GroupPage } from '../group/group';
 import * as firebase from 'firebase';
 import { SearchPeoplePage } from '../search-people/search-people';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'page-new-group',
@@ -23,10 +24,11 @@ export class NewGroupPage {
   private searchFriend: any;
   private groupMembers: any;
   private alert: any;
+  private getUserSubscription: Subscription;
   // NewGroupPage
   // This is the page where the user can start a new group chat with their friends.
   constructor(public navCtrl: NavController, public navParams: NavParams, public imageProvider: ImageProvider, public dataProvider: DataProvider, public formBuilder: FormBuilder,
-    public alertProvider: AlertProvider, public alertCtrl: AlertController, public angularDb:AngularFireDatabase, public app: App, public loadingProvider: LoadingProvider, public camera: Camera) {
+    public alertProvider: AlertProvider, public alertCtrl: AlertController, public angularDb: AngularFireDatabase, public app: App, public loadingProvider: LoadingProvider, public camera: Camera) {
     // Create our groupForm based on Validator.ts
     this.groupForm = formBuilder.group({
       name: Validator.groupNameValidator,
@@ -35,6 +37,9 @@ export class NewGroupPage {
   }
 
   ionViewDidLoad() {
+
+
+
     // Initialize
     this.group = {
       img: ''
@@ -46,7 +51,16 @@ export class NewGroupPage {
       if (!this.groupMembers) {
         this.groupMembers = [account]
       }
-      if (account.friends) {
+
+      this.getUserSubscription = this.dataProvider.getAllUser().subscribe(data => {
+        console.log(data);
+        this.getUserSubscription.unsubscribe()
+        data.forEach(member => {
+          this.addOrUpdateFriend(member);
+          this.groupMembers.push(member)
+        })
+      })
+      /* if (account.friends) {
         for (var i = 0; i < account.friends.length; i++) {
           this.dataProvider.getUser(account.friends[i]).subscribe((friend) => {
             this.addOrUpdateFriend(friend);
@@ -54,7 +68,7 @@ export class NewGroupPage {
         }
       } else {
         this.friends = [];
-      }
+      } */
     });
   }
 
@@ -115,15 +129,19 @@ export class NewGroupPage {
         messagesRead: 1
       });
       for (var i = 1; i < this.groupMembers.length; i++) {
+        if (i === this.groupMembers.length - 1) this.loadingProvider.hide();
         this.angularDb.object('/accounts/' + this.groupMembers[i].$key + '/groups/' + groupId).update({
           messagesRead: 0
+
         });
       }
       // Open the group chat of the just created group.
       this.navCtrl.popToRoot().then(() => {
-        this.loadingProvider.hide();
+        //this.loadingProvider.hide();
         this.app.getRootNav().push(GroupPage, { groupId: groupId });
       });
+    }).catch(err => {
+      alert(JSON.stringify(err))
     });
   }
 

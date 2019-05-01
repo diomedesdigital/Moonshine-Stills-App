@@ -63,6 +63,11 @@ export class DataProvider {
     return this.angularDb.object('/accounts/' + userId);
   }
 
+  // Get all user
+  getAllUser() {
+    return this.angularDb.list('/accounts');
+  }
+
   // Get requests given the userId.
   getRequests(userId) {
     return this.angularDb.object('/requests/' + userId);
