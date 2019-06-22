@@ -4,6 +4,7 @@ import { NewGroupPage } from '../new-group/new-group';
 import { DataProvider } from '../../providers/data';
 import { LoadingProvider } from '../../providers/loading';
 import { GroupPage } from '../group/group';
+import { UserInfoPage } from '../user-info/user-info';
 
 @Component({
   selector: 'page-groups',
@@ -104,6 +105,12 @@ export class GroupsPage {
   viewGroup(groupId) {
     this.app.getRootNav().push(GroupPage, { groupId: groupId });
   }
+
+    // View user info.
+    viewUser(userId) {
+      if (firebase.auth().currentUser.uid != userId)
+        this.navCtrl.push(UserInfoPage, { userId: userId });
+    }
 
   // Return class based if group has unreadMessages or not.
   hasUnreadMessages(group) {
