@@ -87,7 +87,7 @@
         "ionic-plugin-keyboard": "^2.2.1",
         "ionic2-super-tabs": "^2.6.2",
         "ionicons": "3.0.0",
-        "jquery": "^1.9.1",
+        "jquery": "^3.5.0",
         "lodash": "^4.14.59",
         "moment": "^2.18.1",
         "ng2-cordova-oauth": "0.0.8",
